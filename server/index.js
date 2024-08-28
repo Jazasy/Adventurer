@@ -3,6 +3,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const { mongoose } = require("mongoose");
 const dotenv = require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const User = require("./models/user");
 
@@ -18,6 +19,14 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+}
+
+function generateRefreshToken(user) {
+    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+}
 
 app.get("/test", (req, res) => {
     res.json("server is responsing");
@@ -50,8 +59,27 @@ app.post("/register", async (req, res) => {
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
         res.status(201).send();
-    } catch (error){
+    } catch (error) {
         res.status(500).send(error);
+    }
+})
+
+app.post('/login', async (req, res) => {
+    const { username, email, password } = req.body;
+    const foundUser = await User.findOne({ $or: [{ username }, { email }] })
+    if (foundUser == null) {
+        return res.status(400).send('User is not found')
+    }
+    try {
+        if (await bcrypt.compare(req.body.password, foundUser.password)) {
+            const accessToken = generateAccessToken({ foundUser });
+            const refreshToken = generateRefreshToken({ foundUser });
+            res.send('Success').json({ accessToken, refreshToken });
+        } else {
+            res.send('Invalid password')
+        }
+    } catch {
+        res.status(500).send()
     }
 })
 
