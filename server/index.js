@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const { mongoose } = require("mongoose");
 const dotenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const User = require("./models/user");
 
@@ -19,14 +20,17 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+function generateAccessToken(data) {
+    return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60s' })
 }
 
-function generateRefreshToken(user) {
-    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+function generateRefreshToken(data) {
+    return jwt.sign(data, process.env.REFRESH_TOKEN_SECRET)
 }
+
+let refreshTokens = [];
 
 app.get("/test", (req, res) => {
     res.json("server is responsing");
@@ -64,6 +68,17 @@ app.post("/register", async (req, res) => {
     }
 })
 
+app.post('/token', async (req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    if (refreshToken == null) return res.sendStatus(401)
+    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, data) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = generateAccessToken({ userId: data.userId });
+        res.json({ accessToken });
+    })
+})
+
 app.post('/login', async (req, res) => {
     const { username, email, password } = req.body;
     const foundUser = await User.findOne({ $or: [{ username }, { email }] })
@@ -72,15 +87,38 @@ app.post('/login', async (req, res) => {
     }
     try {
         if (await bcrypt.compare(req.body.password, foundUser.password)) {
-            const accessToken = generateAccessToken({ foundUser });
-            const refreshToken = generateRefreshToken({ foundUser });
-            res.send('Success').json({ accessToken, refreshToken });
+            const accessToken = generateAccessToken({ userId: foundUser._id });
+            const refreshToken = generateRefreshToken({ userId: foundUser._id });
+            refreshTokens.push(refreshToken);
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: true,
+                maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 7 days
+                sameSite: 'Strict'
+            }).json({ accessToken }).send('Success');
         } else {
             res.send('Invalid password')
         }
     } catch {
-        res.status(500).send()
+        res.status(500).send();
     }
+})
+
+app.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken);
+    res.sendStatus(204)
+})
+
+app.get("/user", (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.sendStatus(401);
+    const accessToken = authHeader.split(' ')[1];
+    if (!accessToken) return res.sendStatus(401);
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, data) => {
+        if (err) return res.sendStatus(403);
+        const foundUser = await User.findOne({ _id: data.userId });
+        res.json(foundUser);
+    })
 })
 
 const port = 8000;
