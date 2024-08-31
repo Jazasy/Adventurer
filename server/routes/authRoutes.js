@@ -4,12 +4,12 @@ const catchAsync = require("../helpers/catchAsync");
 
 const router = express.Router();
 
-router.post("/register", catchAsync( registerUser ));
+router.post("/register", catchAsync(registerUser));
 
-router.post('/token',giveNewToken);
+router.post('/token', catchAsync(giveNewToken));
 
-router.post('/login',  catchAsync( loginUser ));
+router.post('/login', catchAsync(loginUser));
 
-router.delete('/logout', logoutUser);
+router.delete('/logout', catchAsync(logoutUser));
 
 module.exports = router;
