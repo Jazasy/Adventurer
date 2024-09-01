@@ -1,0 +1,25 @@
+.adventure-board {
+    margin: 0 auto;
+    columns: 4;
+    column-gap: 2%;
+}
+
+@media screen and (min-width: 400px) {
+    .adventure-board {
+        width: 100%;
+        columns: 2;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .adventure-board {
+        columns: 3;
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .adventure-board {
+        columns: 4;
+    }
+}
