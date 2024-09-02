@@ -1,7 +1,7 @@
 const Adventure = require("../models/adventure");
 
 const giveAdventures = async (req, res) => {
-    const adventures = await Adventure.find();
+    const adventures = await Adventure.find().populate("leader");
     res.json(adventures);
 }
 
