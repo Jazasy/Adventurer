@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
+const adventureRoutes = require("./routes/adventureRoutes");
 
 const User = require("./models/user");
 const catchAsync = require("./helpers/catchAsync");
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", authRoutes);
+app.use("/adventures", adventureRoutes);
 
 app.get("/test", (req, res) => {
     res.json("server is responsing");

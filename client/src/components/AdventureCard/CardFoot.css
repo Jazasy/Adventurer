@@ -1,0 +1,7 @@
+.card-foot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.2rem;
+    font-weight: 700;
+}

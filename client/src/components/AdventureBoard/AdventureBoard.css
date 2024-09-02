@@ -1,25 +1,28 @@
 .adventure-board {
     margin: 0 auto;
-    columns: 4;
-    column-gap: 2%;
+    padding: 0 0.5rem ;
 }
 
 @media screen and (min-width: 400px) {
     .adventure-board {
         width: 100%;
         columns: 2;
+        column-gap: 0.5rem;
     }
 }
 
 @media screen and (min-width: 1000px) {
     .adventure-board {
-        columns: 3;
         width: 80%;
+        columns: 3;
+        column-gap: 1rem;
     }
 }
 
 @media screen and (min-width: 1500px) {
     .adventure-board {
+        width: 75%;
         columns: 4;
+        column-gap: 1.5rem;
     }
 }

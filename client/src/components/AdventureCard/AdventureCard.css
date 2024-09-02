@@ -1,9 +1,10 @@
 .adventure-card {
-    margin-bottom: 20px;
+    margin-bottom: 3rem;
     break-inside: avoid;
 }
 
 .adventure-card img {
     width: 100%;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
+    display: block;
 }
