@@ -11,7 +11,6 @@ export default function AdventureBoard() {
 		if (adventures.length === 0) {
 			axios.get("/adventures").then((res) => {
 				setAdventures(res.data);
-				console.log("changed");
 			});
 		}
 	}, [adventures, setAdventures]);
@@ -24,6 +23,7 @@ export default function AdventureBoard() {
 			console.log("changed");
 		})
 	},[]) */
+	
 	return (
 		<div className="adventure-board">
 			{adventures.map((adventure, index) => {
