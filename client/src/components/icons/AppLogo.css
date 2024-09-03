@@ -1,0 +1,7 @@
+.app-logo {
+	font-size: 2rem;
+	font-family: "Lobster", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	color: var(--primary-color);
+}

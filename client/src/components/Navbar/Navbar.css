@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+}
+
+.nav-items {
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.nav-logo, .nav-item {
+    cursor: pointer;
+}
+
+
+

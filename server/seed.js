@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
+const bcrypt = require("bcrypt");
+const {hashPassword} = require("./helpers/auth")
 
 const Adventure = require("./models/adventure");
 const User = require("./models/user");
@@ -146,13 +148,13 @@ const setDatabase = async () => {
     await User.deleteMany({});
     const admin = new User({
         username: "admin",
-        password: "admin",
+        password: await hashPassword("admin"),
         email: "admin@gmail.com",
         role: "admin"
     });
     const user = new User({
         username: "user",
-        password: "password",
+        password: await hashPassword("password"),
         email: "user@gmail.com",
         role: "user"
     });

@@ -1,7 +1,7 @@
 import "./AdventureBoard.css";
 import AdventureCard from "../AdventureCard/AdventureCard";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAdventures } from "../../contexts/useAdventures";
 
 export default function AdventureBoard() {
@@ -23,7 +23,7 @@ export default function AdventureBoard() {
 			console.log("changed");
 		})
 	},[]) */
-	
+
 	return (
 		<div className="adventure-board">
 			{adventures.map((adventure, index) => {

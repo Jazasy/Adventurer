@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const redisClient = require("../helpers/redisClient");
 
-const { generateAccessToken, generateRefreshToken } = require("../helpers/auth");
+const { generateAccessToken, generateRefreshToken, hashPassword } = require("../helpers/auth");
 
 const User = require("../models/user");
 
@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
             })
         }
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    const hashedPassword = await hashPassword(password);
     const newUser = new User({ username, email, password: hashedPassword, role });
     await newUser.save();
     res.status(201).send();
