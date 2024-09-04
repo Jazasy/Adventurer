@@ -16,10 +16,42 @@
 .nav-item {
     margin-right: 1rem;
     font-size: 1.2rem;
+    border-bottom: 2px solid transparent;
+    color: var(--secondary-text-color);
+}
+
+.nav-item:hover {
+    /* border-bottom: 2px solid var(--primary-color); */
+    color: var(--primary-text-color)
+}
+
+.selected {
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-text-color)
 }
 
 .nav-logo, .nav-item {
     cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .navbar, .nav-items {
+        flex-direction: column;
+    }
+
+    .nav-logo {
+        align-self: flex-start;
+    }
+
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    .nav-items {
+        display: none;
+        margin-top: 1rem;
+        text-align: center;
+    }
 }
 
 

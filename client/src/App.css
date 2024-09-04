@@ -8,6 +8,8 @@
   font-family: "Roboto", sans-serif;
 
   --primary-color: #38b000;
+  --primary-text-color: black;
+  --secondary-text-color: rgba(0, 0, 0, 0.4);
   --border-radius: 15px;
 
 }
