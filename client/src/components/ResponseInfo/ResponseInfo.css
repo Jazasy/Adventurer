@@ -1,0 +1,12 @@
+.response-info {
+    background-color: white;
+    position: fixed;
+    bottom: 1rem;
+    left: 50vw;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    padding: 1em;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px var(--primary-color);
+    opacity: 0.75;
+}

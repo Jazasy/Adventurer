@@ -1,7 +1,10 @@
+import LoginCard from "../components/LoginCard/LoginCard";
+import "./Login.css";
+
 export default function Login() {
-    return (
-        <div>
-            <h1>Login</h1>
+	return (
+		<div className="login-container">
+            <LoginCard />
         </div>
-    )
+	);
 }

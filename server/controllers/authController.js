@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     const { username, email, password } = req.body;
     const foundUser = await User.findOne({ $or: [{ username }, { email }] })
-    if (foundUser == null) return res.status(400).send('User is not found');
+    if (foundUser == null) return res.status(404).json({ error: "User not found" });
     if (await bcrypt.compare(password, foundUser.password)) {
         let refreshToken = req.cookies.refreshToken;
         if (refreshToken) await redisClient.del(refreshToken);

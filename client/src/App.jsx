@@ -6,6 +6,7 @@ import Show from "./pages/Show";
 import Navbar from "./components/Navbar/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ResponseInfo from "./components/ResponseInfo/ResponseInfo";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -14,6 +15,7 @@ export default function App() {
 	return (
 		<>
 			<Navbar />
+			<ResponseInfo />
 			<Routes>
 				<Route path="/home" element={<Home />} />
 				<Route path="/adventures/:id" element={<Show />} />
