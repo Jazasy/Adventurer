@@ -1,12 +1,19 @@
 .response-info {
-    background-color: white;
-    position: fixed;
+    background-color: var(--background-color);
+    /* position: fixed;
     bottom: 1rem;
     left: 50vw;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
     font-size: 1.5rem;
     padding: 1em;
+    margin: 0 0.5rem;
+    margin-bottom: 0.5rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 0 15px var(--primary-color);
-    opacity: 0.75;
+    border: 3px solid var(--primary-color);
+    
+    opacity: 0.6;
+}
+
+@media screen and (max-width: ) {
+    
 }
