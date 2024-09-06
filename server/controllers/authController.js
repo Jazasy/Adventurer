@@ -53,7 +53,7 @@ const loginUser = async (req, res) => {
             sameSite: 'Strict'
         }).json({ accessToken });
     } else {
-        res.json({ message: "Invalid password" })
+        res.status(401).json({ error: "Invalid password" })
     }
 }
 

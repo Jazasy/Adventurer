@@ -12,7 +12,7 @@ export default function ResponseInfo({ info }) {
 			);
 		}, 5000);
 		return () => clearTimeout(timer);
-	}, []);
+	}, [resInfos, setResInfos, info]);
 
 	return (
 		<div className="response-info">

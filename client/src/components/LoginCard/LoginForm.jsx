@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 
 export default function LoginForm() {
-	const { resInfos, setResInfos } = useAdventures(null)
+	const { resInfos, setResInfos } = useAdventures(null);
 	const [formData, setFormData] = useState({
 		username_email: "",
 		password: "",
@@ -24,11 +24,17 @@ export default function LoginForm() {
 				[loginKeyType]: formData.username_email,
 				password: formData.password,
 			});
-            setResInfos(oldResInfos => [...oldResInfos, "You've successfully logged in!"]);
+			setResInfos((oldResInfos) => [
+				...oldResInfos,
+				"You've successfully logged in!",
+			]);
 		} catch (error) {
-			if(error.response.data){
-                setResInfos(oldResInfos => [...oldResInfos, error.response.data.error]);
-            }
+			if (error.response.data) {
+				setResInfos((oldResInfos) => [
+					...oldResInfos,
+					error.response.data.error,
+				]);
+			}
 		}
 	};
 	return (
