@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./ResponseInfo.css";
 import { useAdventures } from "../../contexts/useAdventures";
+import ResInfoX from "./ResInfoX";
 
 export default function ResponseInfo({ info }) {
 	const { resInfos, setResInfos } = useAdventures();
@@ -17,6 +18,7 @@ export default function ResponseInfo({ info }) {
 	return (
 		<div className="response-info">
 			<h1>{info}</h1>
+			<ResInfoX info={info}/>
 		</div>
 	);
 }

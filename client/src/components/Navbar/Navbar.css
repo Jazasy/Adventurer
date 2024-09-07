@@ -49,7 +49,7 @@
     padding-right: 0.5rem;
 }
 
-.fa-solid:active {
+.fa-solid.fa-bars:active {
     color: var(--primary-color);
 }
 

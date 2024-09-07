@@ -1,0 +1,20 @@
+.pass-input-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.fa-regular.fa-eye,
+.fa-regular.fa-eye-slash {
+	align-self: flex-end;
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	color: var(--secondary-text-color);
+	font-size: 1.3rem;
+	cursor: pointer;
+}
+
+.fa-regular.fa-eye-slash {
+    right: 0.91rem;
+}

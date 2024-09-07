@@ -1,0 +1,9 @@
+.fa-solid.fa-x {
+	display: block;
+	font-size: 1rem;
+	pointer-events: all;
+}
+
+.fa-solid.fa-x:active{
+    color: var(--primary-color);
+}

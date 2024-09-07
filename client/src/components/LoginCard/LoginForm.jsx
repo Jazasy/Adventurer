@@ -2,6 +2,9 @@ import "./LoginForm.css";
 import { useState } from "react";
 import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
+import Button1 from "../Buttons/Button1";
+import TextInput from "../Inputs/TextInput";
+import PassInput from "../Inputs/PassInput";
 
 export default function LoginForm() {
 	const { resInfos, setResInfos } = useAdventures(null);
@@ -9,25 +12,33 @@ export default function LoginForm() {
 		username_email: "",
 		password: "",
 	});
+
 	const handleChange = (event) => {
 		setFormData((oldFormData) => {
 			return { ...oldFormData, [event.target.name]: event.target.value };
 		});
 	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
 		const loginKeyType = formData.username_email.includes("@")
 			? "email"
 			: "username";
+
 		try {
 			const result = await axios.post("/login", {
 				[loginKeyType]: formData.username_email,
 				password: formData.password,
 			});
+
 			setResInfos((oldResInfos) => [
 				...oldResInfos,
 				"You've successfully logged in!",
 			]);
+
+			setFormData({username_email: "", password: ""});
+			/* localStorage.setItem("token", result.data.token); */
 		} catch (error) {
 			if (error.response.data) {
 				setResInfos((oldResInfos) => [
@@ -37,21 +48,22 @@ export default function LoginForm() {
 			}
 		}
 	};
+
 	return (
-		<form className="login-form" onSubmit={handleSubmit}>
-			<input
-				type="text"
-				value={formData.username}
-				onChange={handleChange}
+		<form className="login-form">
+			<TextInput
+				value={formData.username_email}
+				handleChange={handleChange}
 				name="username_email"
+				placeholder="Username or Email"
 			/>
-			<input
-				type="password"
+			<PassInput
 				value={formData.password}
-				onChange={handleChange}
+				handleChange={handleChange}
 				name="password"
+				placeholder="Password"
 			/>
-			<button>Login</button>
+			<Button1 text="Login" action={handleSubmit} />
 		</form>
 	);
 }
