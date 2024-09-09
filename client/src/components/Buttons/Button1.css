@@ -10,16 +10,21 @@
     text-align: center;
 }
 
-.button1.button-fit-content {
+.button1.btn-fit-content {
     width: fit-content;
 }
 
-.button1.button-small {
+.button1.btn-small {
     font-size: 0.8rem;
 }
 
-.button1.button-big {
+.button1.btn-big {
     font-size: 1.5rem;
+}
+
+.button1.btn-info {
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: none;
 }
 
 .button1:hover {

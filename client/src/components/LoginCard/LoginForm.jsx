@@ -67,9 +67,11 @@ export default function LoginForm() {
 				name="password"
 				placeholder="Password"
 			/>
-			<button className="fake-button">submit</button>
+			<button className="fake-button" type="submit">
+				submit
+			</button>
 			<Button1
-				className="login-button button-fit-content button-big"
+				className="login-button btn-fit-content btn-big"
 				text="Log in"
 				action={handleSubmit}
 			/>
