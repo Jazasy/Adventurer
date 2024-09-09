@@ -13,12 +13,12 @@ export default function Navbar() {
 		setIsMenuOpen(false);
 	};
 	const handleMenuClick = () => {
-		setIsMenuOpen(oldIsMenuOpen => !oldIsMenuOpen);
-	}
+		setIsMenuOpen((oldIsMenuOpen) => !oldIsMenuOpen);
+	};
 	return (
 		<div className="navbar">
 			<div className="nav-head">
-				<div className="nav-logo">
+				<div className="nav-logo" onClick={() => navigate("/home")}>
 					<AppLogo />
 				</div>
 				<i className="fa-solid fa-bars" onClick={handleMenuClick}></i>
