@@ -32,13 +32,17 @@ export default function LoginForm() {
 				password: formData.password,
 			});
 
+			/* const accessToken = result.data.accessToken;
+			localStorage.setItem("accessToken", accessToken);
+
+			console.log(localStorage.getItem("accessToken")); */
+
 			setResInfos((oldResInfos) => [
 				...oldResInfos,
 				"You've successfully logged in!",
 			]);
 
-			setFormData({username_email: "", password: ""});
-			/* localStorage.setItem("token", result.data.token); */
+			setFormData({ username_email: "", password: "" });
 		} catch (error) {
 			if (error.response.data) {
 				setResInfos((oldResInfos) => [
@@ -63,7 +67,11 @@ export default function LoginForm() {
 				name="password"
 				placeholder="Password"
 			/>
-			<Button1 text="Login" action={handleSubmit} />
+			<Button1
+				className="login-button button-fit-content button-big"
+				text="Log in"
+				action={handleSubmit}
+			/>
 		</form>
 	);
 }

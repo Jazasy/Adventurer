@@ -7,7 +7,19 @@
     padding: 0.5em 1em;
     border-radius: 999px;
     box-shadow: 0 0 20px var(--primary-color);
+    text-align: center;
+}
+
+.button1.button-fit-content {
     width: fit-content;
+}
+
+.button1.button-small {
+    font-size: 0.8rem;
+}
+
+.button1.button-big {
+    font-size: 1.5rem;
 }
 
 .button1:hover {
