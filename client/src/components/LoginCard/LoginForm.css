@@ -6,3 +6,7 @@
 .login-button {
     margin-top: 1em;
 }
+
+.fake-button {
+    display: none;
+}

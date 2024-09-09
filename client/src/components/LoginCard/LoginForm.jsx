@@ -54,7 +54,7 @@ export default function LoginForm() {
 	};
 
 	return (
-		<form className="login-form">
+		<form className="login-form" onSubmit={handleSubmit}>
 			<TextInput
 				value={formData.username_email}
 				handleChange={handleChange}
@@ -67,6 +67,7 @@ export default function LoginForm() {
 				name="password"
 				placeholder="Password"
 			/>
+			<button className="fake-button">submit</button>
 			<Button1
 				className="login-button button-fit-content button-big"
 				text="Log in"
