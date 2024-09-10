@@ -1,7 +1,7 @@
 const express = require("express");
 const { registerUser, loginUser, giveNewToken, logoutUser, giveUser } = require("../controllers/authController");
 const catchAsync = require("../helpers/catchAsync");
-const { hasToken } = require("../helpers/midlewares");
+const { hasToken, validateRefreshToken, validateAccessToken, refreshAccessToken } = require("../helpers/midlewares");
 
 const router = express.Router();
 
@@ -13,6 +13,12 @@ router.post('/login', catchAsync(loginUser));
 
 router.delete('/logout', catchAsync(logoutUser));
 
-router.get("/user", hasToken, catchAsync(giveUser))
+router.get("/user",
+    hasToken,
+    validateRefreshToken,
+    validateAccessToken,
+    refreshAccessToken,
+    validateAccessToken,
+    catchAsync(giveUser));
 
 module.exports = router;

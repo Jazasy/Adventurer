@@ -5,6 +5,7 @@ import { useAdventures } from "../../contexts/useAdventures";
 import Button1 from "../Buttons/Button1";
 import TextInput from "../Inputs/TextInput";
 import PassInput from "../Inputs/PassInput";
+import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 
 export default function LoginForm() {
 	const { resInfos, setResInfos } = useAdventures(null);
@@ -19,6 +20,15 @@ export default function LoginForm() {
 			return { ...oldFormData, [event.target.name]: event.target.value };
 		});
 	};
+
+	const getUser = async () => {
+		try {
+			const fetchedUser = await axios.get("/user");
+			console.log(fetchedUser);
+		} catch (error) {
+			resInfoError(error, setResInfos);
+		}
+	}
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -40,15 +50,11 @@ export default function LoginForm() {
 					...oldResInfos,
 					"You've successfully logged in!",
 				]);
+				getUser();
 			}
 
 		} catch (error) {
-			if (error.response.data) {
-				setResInfos((oldResInfos) => [
-					...oldResInfos,
-					error.response.data.message,
-				]);
-			}
+			resInfoError(error, setResInfos);
 		}
 
 		setFormData({ username_email: "", password: "" });
