@@ -49,6 +49,15 @@ export default function Navbar() {
 				>
 					Login
 				</li>
+				<li
+					className={
+						currentPath === "/profile" ? "nav-item selected" : "nav-item"
+					}
+					onClick={handleClick}
+					path="profile"
+				>
+					Profile
+				</li>
 			</ul>
 		</div>
 	);

@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     const { username, email, password } = req.body;
     const foundUser = await User.findOne({ $or: [{ username }, { email }] })
-    if (foundUser == null) return res.status(404).json({ error: "User not found" });
+    if (foundUser == null) return res.status(404).json({ message: "User not found" });
     if (await bcrypt.compare(password, foundUser.password)) {
         let refreshToken = req.cookies.refreshToken;
         if (refreshToken) await redisClient.del(refreshToken);
@@ -53,7 +53,7 @@ const loginUser = async (req, res) => {
             sameSite: 'Strict'
         }).json({ accessToken });
     } else {
-        res.status(401).json({ error: "Invalid password" })
+        res.status(401).json({ message: "Invalid password" })
     }
 }
 
@@ -76,9 +76,14 @@ const giveNewToken = async (req, res) => {
     })
 }
 
+const giveUser = async (req, res) => {
+    console.log(req.headers);
+}
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
     giveNewToken,
+    giveUser,
 }

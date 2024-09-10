@@ -8,6 +8,7 @@ import PassInput from "../Inputs/PassInput";
 
 export default function LoginForm() {
 	const { resInfos, setResInfos } = useAdventures(null);
+	const { user, setUser } = useAdventures(null);
 	const [formData, setFormData] = useState({
 		username_email: "",
 		password: "",
@@ -32,25 +33,25 @@ export default function LoginForm() {
 				password: formData.password,
 			});
 
-			/* const accessToken = result.data.accessToken;
-			localStorage.setItem("accessToken", accessToken);
+			const accessToken = result.data.accessToken;
+			if (accessToken) {
+				localStorage.setItem("accessToken", accessToken);
+				setResInfos((oldResInfos) => [
+					...oldResInfos,
+					"You've successfully logged in!",
+				]);
+			}
 
-			console.log(localStorage.getItem("accessToken")); */
-
-			setResInfos((oldResInfos) => [
-				...oldResInfos,
-				"You've successfully logged in!",
-			]);
-
-			setFormData({ username_email: "", password: "" });
 		} catch (error) {
 			if (error.response.data) {
 				setResInfos((oldResInfos) => [
 					...oldResInfos,
-					error.response.data.error,
+					error.response.data.message,
 				]);
 			}
 		}
+
+		setFormData({ username_email: "", password: "" });
 	};
 
 	return (

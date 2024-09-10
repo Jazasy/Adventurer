@@ -7,9 +7,22 @@ import Navbar from "./components/Navbar/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ResponseInfoContainer from "./components/ResponseInfo/ResponseInfoContainer";
+import Profile from "./pages/Profile";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
+axios.interceptors.request.use(
+	(config) => {
+		const token = localStorage.getItem("accessToken");
+		if( token ) {
+			config.headers.authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+)
 
 export default function App() {
 	return (
@@ -21,6 +34,7 @@ export default function App() {
 				<Route path="/adventures/:id" element={<Show />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/profile" element={<Profile />} />
 			</Routes>
 		</>
 	);

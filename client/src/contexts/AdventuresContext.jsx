@@ -6,6 +6,7 @@ export const AdventuresProvider = ({ children }) => {
 	const [adventures, setAdventures] = useState([]);
 	const [selectedAdventure, setSelectedAdventure] = useState(null);
 	const [resInfos, setResInfos] =useState([]);
+	const [user, setUser] = useState(null);
 
 	return (
 		<AdventuresContext.Provider
@@ -16,6 +17,8 @@ export const AdventuresProvider = ({ children }) => {
 				setSelectedAdventure,
 				resInfos,
 				setResInfos,
+				user, 
+				setUser,
 			}}
 		>
 			{children}
