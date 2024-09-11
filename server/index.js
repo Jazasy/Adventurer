@@ -63,6 +63,7 @@ app.get("/user", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+    console.error("*************************ERROR*************************");
     console.error(err.stack);
     res.status(500).json({ message: "An internal server error occurred" });
 });

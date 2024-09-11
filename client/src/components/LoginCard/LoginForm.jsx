@@ -24,7 +24,7 @@ export default function LoginForm() {
 	const getUser = async () => {
 		try {
 			const fetchedUser = await axios.get("/user");
-			console.log(fetchedUser);
+			setUser(fetchedUser.data);
 		} catch (error) {
 			resInfoError(error, setResInfos);
 		}

@@ -11,10 +11,11 @@ import Profile from "./pages/Profile";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
+
 axios.interceptors.request.use(
 	(config) => {
 		const token = localStorage.getItem("accessToken");
-		if( token ) {
+		if (token) {
 			config.headers.authorization = `Bearer ${token}`;
 		}
 		return config;
@@ -22,7 +23,29 @@ axios.interceptors.request.use(
 	(error) => {
 		return Promise.reject(error);
 	}
-)
+);
+
+axios.interceptors.response.use(
+	(response) => response,
+	async (error) => {
+		const originalRequest = error.config;
+		if (
+			error.response.data.message === "invalid accesstoken" &&
+			!originalRequest._retry
+		) {
+			originalRequest._retry = true;
+			try {
+				const response = await axios.post("/token");
+				const newAccessToken = response.data.accessToken;
+				localStorage.setItem("accessToken", newAccessToken);
+				return await axios(originalRequest);
+			} catch (tokenError) {
+				return Promise.reject(tokenError);
+			}
+		}
+		return Promise.reject(error);
+	}
+);
 
 export default function App() {
 	return (

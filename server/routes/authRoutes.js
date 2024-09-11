@@ -17,8 +17,6 @@ router.get("/user",
     hasToken,
     validateRefreshToken,
     validateAccessToken,
-    refreshAccessToken,
-    validateAccessToken,
     catchAsync(giveUser));
 
 module.exports = router;

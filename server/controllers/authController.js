@@ -83,7 +83,9 @@ const giveNewToken = async (req, res) => {
 }
 
 const giveUser = async (req, res) => {
-    console.log(req.headers);
+    const foundUser = await User.findById(req.userId).lean();
+    delete foundUser.password;
+    res.json(foundUser);
 }
 
 module.exports = {
