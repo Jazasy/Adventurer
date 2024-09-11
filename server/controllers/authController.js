@@ -64,7 +64,12 @@ const loginUser = async (req, res) => {
 const logoutUser = async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
     if (refreshToken) await redisClient.del(refreshToken);
-    res.sendStatus(204);
+    res.status(204).cookie('refreshToken', "", {
+        httpOnly: true,
+        secure: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 7 days
+        sameSite: 'Strict'
+    }).send();
 }
 
 const giveNewToken = async (req, res) => {

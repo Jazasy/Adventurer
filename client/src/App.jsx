@@ -8,6 +8,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ResponseInfoContainer from "./components/ResponseInfo/ResponseInfoContainer";
 import Profile from "./pages/Profile";
+import { useAdventures } from "./contexts/useAdventures";
+import { useEffect } from "react";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -48,6 +50,16 @@ axios.interceptors.response.use(
 );
 
 export default function App() {
+	const {user, setUser} = useAdventures();
+
+	useEffect(() => {
+		if(!user) {
+			axios.get("user")
+				.then(res => setUser(res.data))
+				.catch(err => console.error(err));
+		}
+	}, [user, setUser]);
+
 	return (
 		<>
 			<ResponseInfoContainer />

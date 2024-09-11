@@ -1,16 +1,8 @@
 import { useAdventures } from "../contexts/useAdventures";
 import "./Profile.css";
-import { useEffect } from "react";
-import axios from "axios";
 
 export default function Profile() {
-	const { user, setUser } = useAdventures(null);
-
-	useEffect(() => {
-        axios.get("/user")
-            .then(res => setUser(res.data))
-            .catch( err => console.log(err));
-	}, [setUser]);
+	const { user } = useAdventures();
 
 	return (
 		<div>

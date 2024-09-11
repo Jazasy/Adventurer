@@ -6,14 +6,17 @@ import Button1 from "../Buttons/Button1";
 import TextInput from "../Inputs/TextInput";
 import PassInput from "../Inputs/PassInput";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-	const { resInfos, setResInfos } = useAdventures(null);
-	const { user, setUser } = useAdventures(null);
+	const { setResInfos } = useAdventures(null);
+	const { setUser } = useAdventures(null);
 	const [formData, setFormData] = useState({
 		username_email: "",
 		password: "",
 	});
+
+	const navigate = useNavigate();
 
 	const handleChange = (event) => {
 		setFormData((oldFormData) => {
@@ -28,7 +31,7 @@ export default function LoginForm() {
 		} catch (error) {
 			resInfoError(error, setResInfos);
 		}
-	}
+	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -52,12 +55,12 @@ export default function LoginForm() {
 				]);
 				getUser();
 			}
-
 		} catch (error) {
 			resInfoError(error, setResInfos);
 		}
 
 		setFormData({ username_email: "", password: "" });
+		navigate("/home");
 	};
 
 	return (
