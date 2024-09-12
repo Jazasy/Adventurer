@@ -1,0 +1,28 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-button {
+    margin-top: 1em;
+}
+
+.passwords {
+    display: flex;
+    gap: 1rem;
+}
+
+.login-button {
+    margin-top: 1em;
+}
+
+.fake-button {
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .passwords {
+        flex-direction: column;
+        gap: 0;
+    }
+}

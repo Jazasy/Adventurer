@@ -3,8 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import Button1 from "../Buttons/Button1";
-import TextInput from "../Inputs/TextInput";
-import PassInput from "../Inputs/PassInput";
+import TextInput from "../inputs/TextInput";
+import PassInput from "../inputs/PassInput";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useNavigate } from "react-router-dom";
 
@@ -54,13 +54,13 @@ export default function LoginForm() {
 					"You've successfully logged in!",
 				]);
 				getUser();
+				navigate("/home");
 			}
 		} catch (error) {
 			resInfoError(error, setResInfos);
 		}
 
 		setFormData({ username_email: "", password: "" });
-		navigate("/home");
 	};
 
 	return (
