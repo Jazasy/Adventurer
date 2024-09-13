@@ -1,8 +1,8 @@
 const resInfoError = (error, setResInfos) => {
-    if (error.response.data) {
+    if (error) {
         setResInfos((oldResInfos) => [
             ...oldResInfos,
-            error.response.data.message,
+            error,
         ]);
     }
 }

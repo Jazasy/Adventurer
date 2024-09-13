@@ -7,11 +7,16 @@
 #root {
   font-family: "Roboto", sans-serif;
 
+  --border-radius: 15px;
+
   --primary-color: #38b000;
   --primary-text-color: black;
   --secondary-text-color: rgba(0, 0, 0, 0.4);
-  --border-radius: 15px;
   --background-color: white;
+
+  --danger-color: red;
+  --warning-color: orange;
+  --success-color: green;
 }
 
 /* #root {

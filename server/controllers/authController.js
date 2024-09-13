@@ -7,13 +7,13 @@ const { generateAccessToken, generateRefreshToken, hashPassword } = require("../
 const User = require("../models/user");
 
 const registerUser = async (req, res) => {
-    const { username, email, password, role } = req.body;
+    const { username, email, password } = req.body;
     //check if username/email/password is given
     const regDatas = { username, email, password };
     for (let [key, value] of Object.entries(regDatas)) {
         if (!value) {
-            return res.json({
-                error: `${key} is required`
+            return res.status(403).json({
+                message: `${key} is required`
             })
         }
     }
@@ -23,12 +23,13 @@ const registerUser = async (req, res) => {
         const query = { [key]: value };
         const exist = await User.findOne(query);
         if (exist) {
-            return res.json({
-                error: `${key} is already taken`
+            return res.status(403).json({
+                message: `${key} is already taken`
             })
         }
     }
     const hashedPassword = await hashPassword(password);
+    const role = "user";
     const newUser = new User({ username, email, password: hashedPassword, role });
     await newUser.save();
     res.status(201).send();

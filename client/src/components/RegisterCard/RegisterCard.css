@@ -17,3 +17,9 @@
     }
 }
 
+@media screen and (min-width: 1300px) {
+    .register-card {
+        width: 35vw;
+    }
+}
+

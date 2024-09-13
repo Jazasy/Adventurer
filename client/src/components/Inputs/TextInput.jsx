@@ -8,7 +8,7 @@ export default function TextInput({ value, handleChange, name, placeholder }) {
 			value={value}
 			onChange={handleChange}
 			name={name}
-            placeholder={placeholder}
+			placeholder={placeholder}
 		/>
 	);
 }

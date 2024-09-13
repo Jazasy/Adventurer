@@ -29,7 +29,7 @@ export default function LoginForm() {
 			const fetchedUser = await axios.get("/user");
 			setUser(fetchedUser.data);
 		} catch (error) {
-			resInfoError(error, setResInfos);
+			resInfoError(error.response.data.message, setResInfos);
 		}
 	};
 
@@ -57,7 +57,7 @@ export default function LoginForm() {
 				navigate("/home");
 			}
 		} catch (error) {
-			resInfoError(error, setResInfos);
+			resInfoError(error.response.data.message, setResInfos);
 		}
 
 		setFormData({ username_email: "", password: "" });

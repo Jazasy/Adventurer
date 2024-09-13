@@ -1,86 +1,84 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	position: sticky;
+	top: 0;
+	background-color: white;
+	z-index: 1000;
 }
 
 .nav-items {
-    display: flex;
+	display: flex;
 }
 
 .nav-item {
-    margin-right: 1rem;
-    font-size: 1.2rem;
-    border-bottom: 2px solid transparent;
-    color: var(--secondary-text-color);
+	margin-right: 1rem;
+	font-size: 1.2rem;
+	border-bottom: 2px solid transparent;
+	color: var(--secondary-text-color);
 }
 
 .nav-item:hover {
-    /* border-bottom: 2px solid var(--primary-color); */
-    color: var(--primary-text-color)
+	/* border-bottom: 2px solid var(--primary-color); */
+	color: var(--primary-text-color);
 }
 
 .selected {
-    border-bottom: 2px solid var(--primary-color);
-    color: var(--primary-text-color)
+	border-bottom: 2px solid var(--primary-color);
+	color: var(--primary-text-color);
 }
 
-.nav-logo, .nav-item {
-    cursor: pointer;
+.nav-logo,
+.nav-item {
+	cursor: pointer;
 }
 
 .nav-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-    width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
+	width: 100%;
 }
 
-.fa-solid {
-    display: none;
-    color: var(--secondary-text-color);
-    font-size: 1.7rem;
-    padding-right: 0.5rem;
+.fa-solid.fa-bars {
+	display: none;
+	color: var(--secondary-text-color);
+	font-size: 1.7rem;
+	padding-right: 0.5rem;
 }
 
 .fa-solid.fa-bars:active {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 @media screen and (max-width: 1000px) {
-    .navbar, .nav-items {
-        flex-direction: column;
-    }
+	.navbar,
+	.nav-items {
+		flex-direction: column;
+	}
 
-    .nav-logo {
-        align-self: flex-start;
-    }
+	.nav-logo {
+		align-self: flex-start;
+	}
 
-    .nav-item {
-        margin: 0.5rem 0;
-    }
+	.nav-item {
+		margin: 0.5rem 0;
+	}
 
-    .nav-items {
-        display: none;
-        margin-top: 1rem;
-        text-align: center;
-    }
+	.nav-items {
+		display: none;
+		margin-top: 1rem;
+		text-align: center;
+	}
 
-    .nav-items-open {
-        display: flex;
-    }    
+	.nav-items-open {
+		display: flex;
+	}
 
-    .fa-solid {
-        display: block;
-    }
+	.fa-solid.fa-bars {
+		display: block;
+	}
 }
-
-
-
-

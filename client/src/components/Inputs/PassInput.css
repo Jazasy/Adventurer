@@ -5,6 +5,32 @@
 	width: 100%; 			/* This is some new change */
 }
 
+.pass-info, .fa-solid.fa-check {
+	align-self: flex-end;
+	position: absolute;
+	right: 2rem;
+	top: 2.7rem;
+	background-color: var(--background-color);
+	padding: 0 0.3rem;
+	border-radius: 999px;
+}
+
+.pass-info {
+	font-weight: 500;
+}
+
+.pass-info-danger {
+	color: var(--danger-color);
+}
+
+.pass-info-warning {
+	color: var(--warning-color);
+}
+
+.pass-info-success {
+	color: var(--success-color);
+}
+
 .fa-regular.fa-eye,
 .fa-regular.fa-eye-slash {
 	align-self: flex-end;
@@ -18,4 +44,10 @@
 
 .fa-regular.fa-eye-slash {
     right: 0.91rem;
+}
+
+.fa-solid.fa-check {
+	font-size: 1.3rem;
+	top: 2.5rem;
+	color: var(--success-color)
 }
