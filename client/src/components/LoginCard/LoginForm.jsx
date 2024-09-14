@@ -1,12 +1,11 @@
 import "./LoginForm.css";
 import { useState } from "react";
-import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import Button1 from "../Buttons/Button1";
 import TextInput from "../inputs/TextInput";
 import PassInput from "../inputs/PassInput";
-import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "./loginHelpers";
 
 export default function LoginForm() {
 	const { setResInfos } = useAdventures(null);
@@ -24,43 +23,10 @@ export default function LoginForm() {
 		});
 	};
 
-	const getUser = async () => {
-		try {
-			const fetchedUser = await axios.get("/user");
-			setUser(fetchedUser.data);
-		} catch (error) {
-			resInfoError(error.response.data.message, setResInfos);
-		}
-	};
-
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-
-		const loginKeyType = formData.username_email.includes("@")
-			? "email"
-			: "username";
-
-		try {
-			const result = await axios.post("/login", {
-				[loginKeyType]: formData.username_email,
-				password: formData.password,
-			});
-
-			const accessToken = result.data.accessToken;
-			if (accessToken) {
-				localStorage.setItem("accessToken", accessToken);
-				setResInfos((oldResInfos) => [
-					...oldResInfos,
-					"You've successfully logged in!",
-				]);
-				getUser();
-				navigate("/home");
-			}
-		} catch (error) {
-			resInfoError(error.response.data.message, setResInfos);
-		}
-
-		setFormData({ username_email: "", password: "" });
+		loginUser(formData, setResInfos, navigate, setUser);
+		setFormData({ username_email: "", password: "" }) 
 	};
 
 	return (

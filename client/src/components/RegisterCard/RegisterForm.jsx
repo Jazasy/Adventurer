@@ -7,6 +7,8 @@ import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { passCheck, passStrength } from "./registerHelpers";
+import { loginUser } from "../LoginCard/loginHelpers";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
 	const [formData, setFormData] = useState({
@@ -16,6 +18,9 @@ export default function RegisterForm() {
 		verifyPassword: "",
 	});
 	const { setResInfos } = useAdventures();
+	const { setUser } = useAdventures();
+
+	const navigate = useNavigate();
 
 	const handleChange = (event) => {
 		setFormData((oldFormData) => {
@@ -24,12 +29,19 @@ export default function RegisterForm() {
 	};
 
 	const handleSubmit = async () => {
-		try {	
+		try {
 			await axios.post("/register", {
 				username: formData.username,
 				email: formData.email,
 				password: formData.password,
 			});
+
+			setResInfos((oldResInfos) => [
+				...oldResInfos,
+				"Your account has been created!",
+			]);
+
+			loginUser(formData, setResInfos, navigate, setUser);
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
 		}
