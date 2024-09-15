@@ -28,8 +28,10 @@ export default function RegisterForm() {
 		});
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (event) => {
 		try {
+			event.preventDefault();
+
 			await axios.post("/register", {
 				username: formData.username,
 				email: formData.email,
@@ -48,7 +50,7 @@ export default function RegisterForm() {
 	};
 
 	return (
-		<form className="register-form">
+		<form className="register-form" onSubmit={handleSubmit}>
 			<TextInput
 				value={formData.username}
 				handleChange={handleChange}
@@ -85,8 +87,11 @@ export default function RegisterForm() {
 					name="verifyPassword"
 				/>
 			</section>
+			<button className="fake-button" type="submit">
+				submit
+			</button>
 			<Button1
-				className="login-button btn-fit-content btn-big"
+				className="register-button btn-fit-content btn-big"
 				text="Sign up"
 				action={handleSubmit}
 			/>
