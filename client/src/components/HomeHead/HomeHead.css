@@ -1,0 +1,45 @@
+.home-head {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.home-title, .home-paragraph {
+    text-align: center;
+    margin-bottom: 0.4em;
+}
+
+.home-title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.home-paragraph {
+    font-size: 1rem;
+    max-width: 40ch;
+}
+
+@media screen and (min-width: 700px) {
+    .home-title {
+        font-size: 3rem;
+    }
+
+    .home-paragraph {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .home-title {
+        font-size: 4rem;
+    }
+
+    .home-paragraph {
+        font-size: 1.5rem;
+    }
+}

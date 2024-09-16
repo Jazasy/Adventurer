@@ -4,6 +4,7 @@ const { mongoose } = require("mongoose");
 const dotenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 
 const authRoutes = require("./routes/authRoutes");
 const adventureRoutes = require("./routes/adventureRoutes");
@@ -12,6 +13,8 @@ const User = require("./models/user");
 const catchAsync = require("./helpers/catchAsync");
 
 const app = express();
+
+app.use(helmet());
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Database Connected"))
