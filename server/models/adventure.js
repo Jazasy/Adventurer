@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const User = require("./user");
+const Post = require("./post");
 
 const AdventureSchema = new Schema({
     title: {
@@ -8,8 +9,7 @@ const AdventureSchema = new Schema({
         required: true
     },
     images: {
-        type: [String],
-        required: true
+        type: [String]
     },
     description: {
         type: String,
@@ -23,7 +23,11 @@ const AdventureSchema = new Schema({
     leader: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    }, 
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }]
 });
 
 const AdventureModel = mongoose.model("Adventure", AdventureSchema);

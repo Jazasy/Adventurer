@@ -6,8 +6,8 @@ import { useAdventures } from "../contexts/useAdventures";
 export default function Show() {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { id } = useParams();
-	useEffect(()=>{
-		if(!selectedAdventure) {
+	useEffect(() => {
+		if (!selectedAdventure) {
 			axios.get(`/adventures/${id}`).then((res) => setSelectedAdventure(res.data));
 		}
 	}, [id, selectedAdventure, setSelectedAdventure]);
@@ -24,6 +24,17 @@ export default function Show() {
 				<div>
 					<p>{selectedAdventure.title}</p>
 					<p>{selectedAdventure.leader.username}</p>
+					<p>{selectedAdventure.description}</p>
+					<p>{selectedAdventure.date}</p>
+					<p>{selectedAdventure.location}</p>
+					{selectedAdventure.posts.map(post => {
+						return (
+							<div key={post}>
+								<p>{post.content}</p>
+								<img src={post.image} />
+							</div>
+						)
+					})}
 				</div>
 			) : (
 				<p>Loading...</p>
