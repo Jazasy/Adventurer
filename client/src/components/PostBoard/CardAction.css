@@ -1,0 +1,14 @@
+.card-action {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* .post-like-icon,
+.post-comment-icon,
+.post-share-icon {
+	font-size: 2rem;
+	color: var(--secondary-text-color);
+} */

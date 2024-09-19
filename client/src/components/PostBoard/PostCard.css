@@ -1,6 +1,4 @@
-.post-image {
-    display: block;
-    width: 100%;
-    border-radius: var(--border-radius);
+.post-card {
     margin-bottom: 2rem;
+    display: flex;
 }

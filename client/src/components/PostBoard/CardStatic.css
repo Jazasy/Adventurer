@@ -1,0 +1,11 @@
+.post-image {
+    display: block;
+    width: 100%;
+    border-radius: var(--border-radius);
+}
+
+.post-content {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-break: anywhere;
+}
