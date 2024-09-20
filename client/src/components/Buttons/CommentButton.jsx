@@ -13,12 +13,12 @@ export default function CommentButton({action}) {
         {isCommentActive ? (
         <i
             className="fa-solid fa-comment comment-icon"
-            onClick={clickComment}
+            onMouseDown={clickComment}
         ></i>
     ) : (
         <i
             className="fa-regular fa-comment comment-icon"
-            onClick={clickComment}
+            onMouseDown={clickComment}
         ></i>
     )}
     </div>

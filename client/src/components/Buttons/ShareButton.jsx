@@ -14,12 +14,12 @@ export default function ShareButton() {
 			{isShareActive ? (
 				<i
 					className="fa-solid fa-share-from-square share-icon"
-					onClick={clickShare}
+					onMouseDown={clickShare}
 				></i>
 			) : (
 				<i
 					className="fa-regular fa-share-from-square share-icon"
-					onClick={clickShare}
+					onMouseDown={clickShare}
 				></i>
 			)}
 		</div>
