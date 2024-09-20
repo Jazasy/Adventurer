@@ -1,14 +1,14 @@
 import "./LikeButton.css";
 import { useState } from "react";
 
-export default function LikeButton({ action, post = {} }) {
+export default function LikeButton({ action }) {
 	const [isLikeActive, setIsLikeActive] = useState(false);
 
 	//if there is a post object, I would use useEffect to set the default value of isLikeActive
 
 	const clickLike = () => {
 		setIsLikeActive((oldIsLikeActive) => !oldIsLikeActive);
-		//action();
+		action();
 	};
 
 	return (

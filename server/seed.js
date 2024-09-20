@@ -6,6 +6,7 @@ const { hashPassword } = require("./helpers/auth")
 const Adventure = require("./models/adventure");
 const User = require("./models/user");
 const Post = require("./models/post");
+const Like = require("./models/like");
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Database Connected"))
@@ -208,6 +209,7 @@ const adventures = [
 const setDatabase = async () => {
     await Adventure.deleteMany({});
     await User.deleteMany({});
+    await Like.deleteMany({});
     const admin = new User({
         username: "admin",
         password: await hashPassword("admin"),
