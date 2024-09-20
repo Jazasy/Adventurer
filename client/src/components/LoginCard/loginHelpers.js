@@ -42,7 +42,6 @@ const loginUser = async (formData, setResInfos, navigate, setUser) => {
             resInfoError("Invalid credentials", setResInfos);
         }
     } catch (error) {
-        console.log(error);
         resInfoError(error.response.data.message, setResInfos);
     }
 };

@@ -1,8 +1,7 @@
 const express = require("express");
-const Post = require("../models/post");
-const Like = require("../models/like");
-const User = require("../models/user");
 const catchAsync = require("../helpers/catchAsync");
+const { giveIsliked, giveLikeCount, like, unlike } = require("../controllers/postController");
+const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 
 
 const router = express.Router();
@@ -11,17 +10,12 @@ router.get("/", (req, res) => {
     res.send("adventures");
 });
 
-router.get("/:id/likes", async (req, res) => {
-    const { id } = req.params;
-    const likes = await Post.findById(id);
-    res.json(likes.length);
-})
+router.get("/:id/:userId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(giveIsliked))
 
-router.put("/:id/likes", async (req, res) => {
-    const { id } = req.params;
-    const newLike = new Like({ user: req.body.userId, post: id });
-    await newLike.save();
-    res.status(201).send();
-})
+router.get("/:id/likes", catchAsync(giveLikeCount))
+
+router.put("/:id/likes", hasToken, validateRefreshToken, validateAccessToken, catchAsync(like))
+
+router.delete("/:id/likes", hasToken, validateRefreshToken, validateAccessToken, catchAsync(unlike))
 
 module.exports = router;
