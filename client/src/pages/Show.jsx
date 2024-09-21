@@ -19,11 +19,11 @@ export default function Show() {
 	}, [id, selectedAdventure, setSelectedAdventure]);
 
 	useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "auto"
-        });
-    }, []);
+		window.scrollTo({
+			top: 0,
+			behavior: "auto",
+		});
+	}, []);
 
 	return (
 		<>
@@ -31,7 +31,7 @@ export default function Show() {
 				<div className="show-container">
 					<ShowHead adventure={selectedAdventure} />
 					<div className="show-main-content">
-						<PostBoard posts={selectedAdventure.posts} />
+						<PostBoard adventureId={id} />
 					</div>
 				</div>
 			) : (

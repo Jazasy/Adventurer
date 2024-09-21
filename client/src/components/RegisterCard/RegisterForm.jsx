@@ -52,12 +52,14 @@ export default function RegisterForm() {
 	return (
 		<form className="register-form" onSubmit={handleSubmit}>
 			<TextInput
+				className="mb-1"
 				value={formData.username}
 				handleChange={handleChange}
 				placeholder="Username"
 				name="username"
 			/>
 			<TextInput
+				className="mb-1"
 				value={formData.email}
 				handleChange={handleChange}
 				placeholder="Email address"

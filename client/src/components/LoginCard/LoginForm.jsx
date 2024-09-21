@@ -32,6 +32,7 @@ export default function LoginForm() {
 	return (
 		<form className="login-form" onSubmit={handleSubmit}>
 			<TextInput
+			className="mb-1"
 				value={formData.username_email}
 				handleChange={handleChange}
 				name="username_email"

@@ -13,10 +13,6 @@ const UserSchema = new Schema({
     },
     password: String,
     role: String, 
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: "Post"
-    }]
 })
 
 const UserModel = mongoose.model("User", UserSchema);

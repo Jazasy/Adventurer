@@ -2,3 +2,7 @@
 	font-size: 2rem;
 	color: var(--secondary-text-color);
 }
+
+.comment-icon:active {
+	font-weight: 700;
+}

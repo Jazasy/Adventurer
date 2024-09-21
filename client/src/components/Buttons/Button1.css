@@ -12,6 +12,7 @@
 
 .button1.btn-fit-content {
     width: fit-content;
+    height: fit-content;
 }
 
 .button1.btn-small {

@@ -7,7 +7,7 @@ import axios from "axios";
 export default function LikeButton({ postId, likeAction, unlikeAction }) {
 	const [isLikeActive, setIsLikeActive] = useState(false);
 	const { user } = useAdventures();
-	const userId = user ? user._id : null;
+	const userId = user ? user._id : "";
 
 	//if there is a post object, I would use useEffect to set the default value of isLikeActive
 	useEffect(() => {

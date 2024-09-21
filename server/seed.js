@@ -210,6 +210,7 @@ const setDatabase = async () => {
     await Adventure.deleteMany({});
     await User.deleteMany({});
     await Like.deleteMany({});
+    await Post.deleteMany({});
     const admin = new User({
         username: "admin",
         password: await hashPassword("admin"),
@@ -229,35 +230,32 @@ const setDatabase = async () => {
         });
         const newPost = new Post({
             author: admin._id,
+            adventure: newAdventure._id,
             content: "This is a sample post",
             image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
         })
         const newPost1 = new Post({
             author: admin._id,
+            adventure: newAdventure._id,
             content: "This is a sample post",
             image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
         })
         const newPost2 = new Post({
             author: admin._id,
+            adventure: newAdventure._id,
             content: "This is a sample post",
             image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
         })
-        newAdventure.posts.push(newPost);
-        newAdventure.posts.push(newPost1);
-        newAdventure.posts.push(newPost2);
-        admin.posts.push(newPost);
-        admin.posts.push(newPost1);
-        admin.posts.push(newPost2);
-        await admin.save();
-        await user.save();
         await newPost.save();
         await newPost1.save();
         await newPost2.save();
         await newAdventure.save();
     }
+    await admin.save();
+    await user.save();
 }
 
 setDatabase().then(() => {
