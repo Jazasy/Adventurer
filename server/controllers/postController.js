@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Like = require('../models/like');
+const Comment = require('../models/comment');
 
 const givePosts = async (req, res) => {
     const foundPosts = await Post.find();
@@ -47,6 +48,14 @@ const unlike = async (req, res) => {
     res.status(204).send();
 }
 
+const comment = async (req, res) => {
+    const { id } = req.params;
+    const { userId, comment } = req.body;
+    const newComment = new Comment({ author: userId, content: comment, post: id });
+    newComment.save();
+    res.status(201).send();
+}
+
 module.exports = {
     givePosts,
     givePostsByAdventure,
@@ -55,4 +64,5 @@ module.exports = {
     giveLikeCount,
     like,
     unlike,
+    comment,
 }

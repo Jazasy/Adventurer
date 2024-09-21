@@ -2,7 +2,7 @@ import "./CommentSection.css";
 import { useAdventures } from "../../contexts/useAdventures";
 import CommentBar from "./CommentBar";
 
-export default function CommentSection(){
+export default function CommentSection({ postId }) {
     const { setShowCommentSection } = useAdventures();
 
     const closeCommentSection = () => {
@@ -12,7 +12,7 @@ export default function CommentSection(){
     return (
         <div className="comment-section">
             <i onClick={closeCommentSection} className="fa-solid fa-xmark comment-section-x"></i>
-            <CommentBar />
+            <CommentBar postId={postId}/>
         </div>
     )
 }

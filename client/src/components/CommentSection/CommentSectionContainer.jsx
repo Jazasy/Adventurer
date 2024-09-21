@@ -13,7 +13,7 @@ export default function CommentSectionContainer({ postId }) {
 		<>
 			{showCommentSection ? (
 				<div className="comment-section-container">
-					<CommentSection />
+					<CommentSection postId={postId}/>
 				</div>
 			) : null}
 		</>
