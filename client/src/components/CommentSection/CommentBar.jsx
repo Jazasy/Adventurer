@@ -6,7 +6,7 @@ import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useAdventures } from "../../contexts/useAdventures";
 
-export default function CommentBar({postId}) {
+export default function CommentBar({postId, action}) {
     const [comment, setComment] = useState("");
     const { setResInfos } = useAdventures();
     const { user } = useAdventures();
@@ -19,6 +19,7 @@ export default function CommentBar({postId}) {
     const postComment = async () => {
         try {
             await axios.post(`/posts/${postId}/comments`, {userId, comment});
+            action();
         } catch (error) {
             if(!error.response) return console.log(error);
             resInfoError(error.response.data.message, setResInfos);   

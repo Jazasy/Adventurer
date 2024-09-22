@@ -56,6 +56,12 @@ const comment = async (req, res) => {
     res.status(201).send();
 }
 
+const giveComments = async (req, res) => {
+    const { id } = req.params;
+    const foundComments = await Comment.find({ post: id});
+    res.json(foundComments);
+}
+
 module.exports = {
     givePosts,
     givePostsByAdventure,
@@ -65,4 +71,5 @@ module.exports = {
     like,
     unlike,
     comment,
+    giveComments,
 }
