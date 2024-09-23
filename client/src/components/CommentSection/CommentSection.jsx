@@ -7,26 +7,26 @@ import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 
 export default function CommentSection({ postId }) {
 	const { setShowCommentSection } = useAdventures();
-    const { setResInfos } = useAdventures();
+	const { setResInfos } = useAdventures();
 	const [comments, setComments] = useState([]);
 
-    const getComments = async () => {
-        try {
-            const fetchedComments = await axios.get(`/posts/${postId}/comments`);
-            setComments(fetchedComments.data);
-        } catch (error) {
-            resInfoError(error.response.data.message, setResInfos);
-        }
-    }
+	const getComments = async () => {
+		try {
+			const fetchedComments = await axios.get(`/posts/${postId}/comments`);
+			setComments(fetchedComments.data.reverse());
+		} catch (error) {
+			resInfoError(error.response.data.message, setResInfos);
+		}
+	}
 
-    const addComment = (newComment) => {                                //If I use this instead of getComments, I can skip a request, and make the comment appear instantly
-        setComments(oldComments => [...oldComments, newComment]);
-    }
+	const addComment = (newComment) => {                                //If I use this instead of getComments, I can skip a request, and make the comment appear instantly
+		setComments(oldComments => [newComment, ...oldComments]);
+	}
 
 	useEffect(() => {
 		axios
 			.get(`/posts/${postId}/comments`)
-			.then((res) => setComments(res.data))
+			.then((res) => setComments(res.data.reverse()))
 			.catch((error) => resInfoError(error.response.data.message, setResInfos));
 	}, [postId, setResInfos]);
 
@@ -40,12 +40,14 @@ export default function CommentSection({ postId }) {
 				onClick={closeCommentSection}
 				className="fa-solid fa-xmark comment-section-x"
 			></i>
-			<ul>
+			<ul className="comments">
 				{comments.map((comment) => (
-					<li key={comment._id}>{comment.content}</li>
+					<li className="comment" key={comment._id}>
+						<span className="comment-author">{comment.author}</span>{comment.content}
+					</li>
 				))}
 			</ul>
-			<CommentBar postId={postId} action={getComments}/>
+			<CommentBar postId={postId} action={getComments} />
 		</div>
 	);
 }
