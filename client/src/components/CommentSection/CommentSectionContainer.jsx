@@ -1,19 +1,15 @@
 import "./CommentSectionContainer.css";
 import { useAdventures } from "../../contexts/useAdventures";
-import { useState, useEffect } from "react";
 import CommentSection from "./CommentSection";
 
-export default function CommentSectionContainer({ postId }) {
-	const [comments, setComments] = useState([]);
-	const { showCommentSection } = useAdventures();
-
-	// UseEffect to fetch comments
+export default function CommentSectionContainer() {
+	const { postIdForComments } = useAdventures();;
 
 	return (
 		<>
-			{showCommentSection ? (
+			{postIdForComments ? (
 				<div className="comment-section-container">
-					<CommentSection postId={postId}/>
+					<CommentSection/>
 				</div>
 			) : null}
 		</>

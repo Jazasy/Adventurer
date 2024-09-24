@@ -7,8 +7,6 @@
     margin-top: 1em;
 }
 
-
-
 .passwords {
     display: flex;
     gap: 1rem;
@@ -18,7 +16,7 @@
     margin-top: 1em;
 }
 
-.fake-button {
+.reg-fake-button {
     display: none;
 }
 

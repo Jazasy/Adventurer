@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import {useLocation} from "react-router-dom";
 
 export const AdventuresContext = createContext();
 
@@ -7,15 +8,21 @@ export const AdventuresProvider = ({ children }) => {
 	const [selectedAdventure, setSelectedAdventure] = useState(null);
 	const [resInfos, setResInfos] =useState([]);
 	const [user, setUser] = useState(null);
-	const [showCommentSection, setShowCommentSection] = useState(false);
+	const [postIdForComments, setPostIdForComments] = useState(null);
+
+	const location = useLocation();
 
 	useEffect(() => {
-        if (showCommentSection) {
+        if (postIdForComments) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
         }
-    }, [showCommentSection]);
+    }, [postIdForComments]);
+
+	useEffect(() => {
+		setPostIdForComments(null);
+	}, [location]);
 
 	return (
 		<AdventuresContext.Provider
@@ -28,8 +35,8 @@ export const AdventuresProvider = ({ children }) => {
 				setResInfos,
 				user, 
 				setUser,
-				showCommentSection,
-				setShowCommentSection
+				postIdForComments,
+				setPostIdForComments,
 			}}
 		>
 			{children}

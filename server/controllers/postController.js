@@ -51,6 +51,7 @@ const unlike = async (req, res) => {
 const comment = async (req, res) => {
     const { id } = req.params;
     const { userId, comment } = req.body;
+    if (!comment) return res.status(400).json({ message: "Comment can not be empty" });
     const newComment = new Comment({ author: userId, content: comment, post: id });
     newComment.save();
     res.status(201).send();
@@ -58,7 +59,7 @@ const comment = async (req, res) => {
 
 const giveComments = async (req, res) => {
     const { id } = req.params;
-    const foundComments = await Comment.find({ post: id});
+    const foundComments = await Comment.find({ post: id }).populate("author");
     res.json(foundComments);
 }
 

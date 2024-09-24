@@ -1,5 +1,6 @@
 import "./PostBoard.css";
 import Post from "./Post";
+import CommentSectionContainer from "../CommentSection/CommentSectionContainer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -17,6 +18,7 @@ export default function PostBoard({ adventureId }) {
 					{posts.map((post) => {
 						return <Post key={post._id} post={post} />;
 					})}
+					<CommentSectionContainer/>
 				</section>
 			) : (
 				<p>Loading...</p>

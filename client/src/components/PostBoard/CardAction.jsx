@@ -32,7 +32,7 @@ export default function CardAction({ post }) {
 	return (
 		<div className="card-action">
 			<LikeButton postId={post._id} likeAction={like} unlikeAction={unLike} />
-			<CommentButton />
+			<CommentButton postId={post._id}/>
 			<ShareButton />
 		</div>
 	);

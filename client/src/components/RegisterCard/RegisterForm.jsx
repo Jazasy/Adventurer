@@ -89,7 +89,7 @@ export default function RegisterForm() {
 					name="verifyPassword"
 				/>
 			</section>
-			<button className="fake-button" type="submit">
+			<button className="reg-fake-button" type="submit">
 				submit
 			</button>
 			<Button1

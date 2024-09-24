@@ -1,11 +1,11 @@
 import "./CommentButton.css";
 import { useAdventures } from "../../contexts/useAdventures";
 
-export default function CommentButton({ action }) {
-	const { setShowCommentSection } = useAdventures();
+export default function CommentButton({ action, postId }) {
+	const { setPostIdForComments } = useAdventures();
 
 	const clickComment = () => {
-		setShowCommentSection((oldShowCommentSection) => !oldShowCommentSection);
+		setPostIdForComments(postId);
 		//action();
 	};
 

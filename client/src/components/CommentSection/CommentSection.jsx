@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 
-export default function CommentSection({ postId }) {
-	const { setShowCommentSection } = useAdventures();
+export default function CommentSection() {
+	const { postIdForComments, setPostIdForComments } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const [comments, setComments] = useState([]);
 
 	const getComments = async () => {
 		try {
-			const fetchedComments = await axios.get(`/posts/${postId}/comments`);
+			const fetchedComments = await axios.get(`/posts/${postIdForComments}/comments`);
 			setComments(fetchedComments.data.reverse());
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
@@ -25,13 +25,13 @@ export default function CommentSection({ postId }) {
 
 	useEffect(() => {
 		axios
-			.get(`/posts/${postId}/comments`)
+			.get(`/posts/${postIdForComments}/comments`)
 			.then((res) => setComments(res.data.reverse()))
 			.catch((error) => resInfoError(error.response.data.message, setResInfos));
-	}, [postId, setResInfos]);
+	}, [postIdForComments, setResInfos]);
 
 	const closeCommentSection = () => {
-		setShowCommentSection(false);
+		setPostIdForComments(null);
 	};
 
 	return (
@@ -43,11 +43,11 @@ export default function CommentSection({ postId }) {
 			<ul className="comments">
 				{comments.map((comment) => (
 					<li className="comment" key={comment._id}>
-						<span className="comment-author">{comment.author}</span>{comment.content}
+						<span className="comment-author">{comment.author.username}: </span>{comment.content}
 					</li>
 				))}
 			</ul>
-			<CommentBar postId={postId} action={getComments} />
+			<CommentBar action={getComments} />
 		</div>
 	);
 }

@@ -44,7 +44,7 @@ export default function LoginForm() {
 				name="password"
 				placeholder="Password"
 			/>
-			<button className="fake-button" type="submit">
+			<button className="log-fake-button" type="submit">
 				submit
 			</button>
 			<Button1
