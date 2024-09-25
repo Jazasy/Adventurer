@@ -1,0 +1,21 @@
+.show-main-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.show-main-action-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.desc-button, .members-button {
+    display: none;
+}
+
+@media screen and (max-width: 1500px) {
+    .desc-button, .members-button {
+        display: block;
+    }
+}

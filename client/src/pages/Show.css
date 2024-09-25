@@ -5,9 +5,41 @@
 .show-main-content {
     background-color: white;
     width: 100%;
-    padding-top: 2rem;
+    padding: 1rem;
     box-shadow: 0 -10px 30px -17px rgba(0, 0, 0, 0.25);
     scroll-behavior: smooth;
     position: relative;
-    top: var(--show-head-height)
+    top: var(--show-head-height);
 }
+
+.show-main-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding-top: 1rem;
+}
+
+@media screen and (max-width: 1500px) {
+    .show-main-grid {
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .show-main-grid {
+        grid-template-columns: 1fr; 
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .show-main-grid > :nth-child(1),
+    .show-main-grid > :nth-child(3) {
+        display: none; 
+    }   
+}
+
+@media screen and (max-width: 1000px){
+    .show-main-grid {
+        width: 100%
+    }
+} 

@@ -28,6 +28,14 @@
     box-shadow: none;
 }
 
+.button1.btn-disp-none {
+    display: none;
+}
+
+.button1.btn-disp-block {
+    display: block;
+}
+
 .button1:hover {
     cursor: pointer;
 }

@@ -9,10 +9,13 @@
 
   --border-radius: 15px;
 
-  --primary-color: #38b000;
+  --primary-color: rgb(56, 176, 0);
+  --primary-color-light:rgba(56, 176, 0, 0.5);
   --primary-text-color: black;
-  --secondary-text-color: rgba(0, 0, 0, 0.4);
+  --secondary-text-color: rgba(0, 0, 0, 0.5);
+  --light-gray: rgba(0,0,0,0.3);
   --background-color: white;
+  --disabled-background-color: rgba(0,0,0,0.5);
 
   --danger-color: red;
   --warning-color: orange;

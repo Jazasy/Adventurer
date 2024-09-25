@@ -3,6 +3,10 @@
 	color: var(--secondary-text-color);
 }
 
+.like-icon:active, .like-icon-clicked:active {
+	transform: scale(1.1);
+}
+
 .like-icon-clicked {
     color: red;
 }
