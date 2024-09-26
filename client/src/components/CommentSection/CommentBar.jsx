@@ -40,7 +40,7 @@ export default function CommentBar({ action }) {
 			</button>
 			<Button1
 				action={postComment}
-				text="post"
+				text="Post"
 				className="btn-fit-content btn-big"
 			/>
 		</form>

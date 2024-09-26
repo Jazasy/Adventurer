@@ -14,6 +14,7 @@
   --primary-text-color: black;
   --secondary-text-color: rgba(0, 0, 0, 0.5);
   --light-gray: rgba(0,0,0,0.3);
+  --extra-light-gray: rgba(0,0,0,0.1);
   --background-color: white;
   --disabled-background-color: rgba(0,0,0,0.5);
 

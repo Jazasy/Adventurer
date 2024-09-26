@@ -9,6 +9,9 @@ export const AdventuresProvider = ({ children }) => {
 	const [resInfos, setResInfos] =useState([]);
 	const [user, setUser] = useState(null);
 	const [postIdForComments, setPostIdForComments] = useState(null);
+	const [adventurersByAdventure, setAdventurersByAventure] = useState([]);
+	const [refreshAdvByAdv, setRefreshAdvByAdv] = useState(true);
+	const [showInfo, setShowInfo] = useState(null);
 
 	const location = useLocation();
 
@@ -37,6 +40,12 @@ export const AdventuresProvider = ({ children }) => {
 				setUser,
 				postIdForComments,
 				setPostIdForComments,
+				adventurersByAdventure,
+				setAdventurersByAventure,
+				refreshAdvByAdv,
+				setRefreshAdvByAdv,
+				showInfo,
+				setShowInfo,
 			}}
 		>
 			{children}

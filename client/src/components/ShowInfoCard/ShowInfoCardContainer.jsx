@@ -1,10 +1,18 @@
+import AdventurersCard from "../AdventurersCard/AdventurersCard";
 import DescriptionCard from "../DescriptionCard/DescriptionCard";
 import "./ShowInfoCardContainer.css";
+import { useAdventures } from "../../contexts/useAdventures";
 
-export default function ShowInfoCardContainer({ description, members, setVisibility }) {
+export default function ShowInfoCardContainer({ description }) {
+	const { showInfo } = useAdventures();
+
 	return (
 		<div className="show-info-card-container">
-			<DescriptionCard description={description} setVisibility={setVisibility}/>
+			{showInfo === "description" ? (
+				<DescriptionCard description={description} />
+			) : (
+				<AdventurersCard />
+			)}
 		</div>
 	);
 }

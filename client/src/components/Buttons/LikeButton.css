@@ -1,6 +1,7 @@
 .like-icon {
 	font-size: 2rem;
 	color: var(--secondary-text-color);
+	cursor: pointer;
 }
 
 .like-icon:active, .like-icon-clicked:active {

@@ -8,6 +8,7 @@
 .show-main-action-info {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .desc-button, .members-button {

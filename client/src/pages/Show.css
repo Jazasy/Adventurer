@@ -19,6 +19,10 @@
     padding-top: 1rem;
 }
 
+.show-main-grid > * {
+    justify-self: center;
+}
+
 @media screen and (max-width: 1500px) {
     .show-main-grid {
         grid-template-columns: 1fr 3fr 1fr;

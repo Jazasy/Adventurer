@@ -5,14 +5,15 @@ import { useAdventures } from "../contexts/useAdventures";
 import ShowHead from "../components/ShowHead/ShowHead";
 import PostBoard from "../components/PostBoard/PostBoard";
 import "./Show.css";
-import DescriptionCardContainer from "../components/DescriptionCard/DescriptionCardContainer";
+import DescriptionCard from "../components/DescriptionCard/DescriptionCard";
 import ShowMainAction from "../components/ShowMainAction/ShowMainAction";
 import ShowInfoCardContainer from "../components/ShowInfoCard/ShowInfoCardContainer";
+import AdventurersCard from "../components/AdventurersCard/AdventurersCard";
 
 export default function Show() {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { id } = useParams();
-	const [showInfoContainer, setShowInfoContainer] = useState(false);
+	const { showInfo } = useAdventures();
 
 	useEffect(() => {
 		if (!selectedAdventure) {
@@ -23,15 +24,19 @@ export default function Show() {
 	}, [id, selectedAdventure, setSelectedAdventure]);
 
 	useEffect(() => {
+		if (showInfo) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [showInfo]);
+
+	useEffect(() => {
 		window.scrollTo({
 			top: 0,
 			behavior: "auto",
 		});
 	}, []);
-
-	const setInfoVisibility = () => {
-		setShowInfoContainer(oldValue => !oldValue);
-	}
 
 	return (
 		<>
@@ -39,20 +44,21 @@ export default function Show() {
 				<div className="show-container">
 					<ShowHead adventure={selectedAdventure} />
 					<div className="show-main-content">
-						<ShowMainAction adventureId={id} setInfoVisibility={setInfoVisibility}/>
+						<ShowMainAction
+							adventureId={id}
+						/>
 						<section className="show-main-grid">
-							<DescriptionCardContainer
-								description={selectedAdventure.description}
-							/>
+							<section className="description-card-container">
+								<DescriptionCard description={selectedAdventure.description} />
+							</section>
 							<PostBoard adventureId={id} />
-							<DescriptionCardContainer
-								description={selectedAdventure.description}
-							/>
+							<section>
+								<AdventurersCard/>
+							</section>
 						</section>
-						{showInfoContainer ? (
+						{showInfo ? (
 							<ShowInfoCardContainer
 								description={selectedAdventure.description}
-								setVisibility={setInfoVisibility}
 							/>
 						) : null}
 					</div>

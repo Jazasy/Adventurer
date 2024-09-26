@@ -32,12 +32,12 @@
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
-    border-radius: var(--border-radius);
     padding: 0 1rem;
 }
 
 .comments::-webkit-scrollbar {
     width: 0.7rem; 
+    height: 0.7rem;
 }
 
 
@@ -70,13 +70,13 @@
 
 @media screen and (max-width: 1600px) {
     .comment-section {
-        width: 60%;
+        width: 50%;
     }
 }
 
 @media screen and (max-width: 1000px) {
     .comment-section {
-        width: 80%;
+        width: 75%;
     }
 }
 
