@@ -21,7 +21,7 @@ export default function PostBoard({ adventureId }) {
 					<CommentSectionContainer/>
 				</section>
 			) : (
-				<p>Loading...</p>
+				<section className="post-board"></section>
 			)}
 		</>
 	);

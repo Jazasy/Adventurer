@@ -30,7 +30,8 @@ export default function AdventurersCard() {
 			<ul className="adventurers">
 				{adventurersByAdventure && adventurersByAdventure.length > 0 ? (
 					adventurersByAdventure.map((adventurer) => (
-						<li key={adventurer.user._id}>
+						<li className="adventurer" key={adventurer.user._id}>
+							<img className="adv-card-pfp" src={adventurer.user.pfp} alt="profile picture" />
 							{adventurer.user.username}
 							{selectedAdventure.leader._id === adventurer.user._id ? (
 								<i className="fa-solid fa-crown leader-crown"></i>
@@ -38,7 +39,7 @@ export default function AdventurersCard() {
 						</li>
 					))
 				) : (
-					<li>No adventurers found.</li>
+					null
 				)}
 			</ul>
 		</div>

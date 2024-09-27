@@ -1,8 +1,8 @@
 .description-card {
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: var(--shadow-info);
 	background-color: var(--extra-light-gray);
 	padding: 1rem;
-    border: 2px solid var(--secondary-text-color);
+    border: var(--border-info);
 	border-radius: var(--border-radius);
 	text-align: justify;
 	letter-spacing: 0.05em;
@@ -90,6 +90,10 @@
     .description-card {
         width: 97%;
     }
+
+	.description-card p::-webkit-scrollbar {
+		display: none;
+	}
 
 	.desc-x {
 		top: -4rem;

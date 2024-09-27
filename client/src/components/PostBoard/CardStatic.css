@@ -6,6 +6,10 @@
 
 .post-content {
     font-size: 1.2rem;
-    font-weight: 500;
-    line-break: anywhere;
+    font-weight: 400;
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word; 
+    padding: 0.5rem;
+    color: var(--primary-text-color);
 }

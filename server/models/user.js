@@ -6,7 +6,8 @@ const UserSchema = new Schema({
     username: {
         type: String,
         unique: true
-    }, 
+    },
+    pfp: String, 
     email: {
         type: String,
         unique: true

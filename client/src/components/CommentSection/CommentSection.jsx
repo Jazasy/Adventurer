@@ -12,16 +12,19 @@ export default function CommentSection() {
 
 	const getComments = async () => {
 		try {
-			const fetchedComments = await axios.get(`/posts/${postIdForComments}/comments`);
+			const fetchedComments = await axios.get(
+				`/posts/${postIdForComments}/comments`
+			);
 			setComments(fetchedComments.data.reverse());
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
 		}
-	}
+	};
 
-	const addComment = (newComment) => {                                //If I use this instead of getComments, I can skip a request, and make the comment appear instantly
-		setComments(oldComments => [newComment, ...oldComments]);
-	}
+	const addComment = (newComment) => {
+		//If I use this instead of getComments, I can skip a request, and make the comment appear instantly
+		setComments((oldComments) => [newComment, ...oldComments]);
+	};
 
 	useEffect(() => {
 		axios
@@ -43,7 +46,17 @@ export default function CommentSection() {
 			<ul className="comments">
 				{comments.map((comment) => (
 					<li className="comment" key={comment._id}>
-						<span className="comment-author">{comment.author.username}: </span>{comment.content}
+						<div className="comment-head">
+							<img
+								className="comment-pfp"
+								src={comment.author.pfp}
+								alt="profile picture"
+							/>
+							<span className="comment-author">
+								{comment.author.username}:{" "}
+							</span>
+						</div>
+						<p className="comment-content">{comment.content}</p>
 					</li>
 				))}
 			</ul>

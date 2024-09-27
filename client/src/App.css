@@ -8,6 +8,10 @@
   font-family: "Roboto", sans-serif;
 
   --border-radius: 15px;
+  --border-info: 2px solid var(--secondary-text-color);
+  --shadow-info : 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+  --gap-from-bazel: 0.2rem;
 
   --primary-color: rgb(56, 176, 0);
   --primary-color-light:rgba(56, 176, 0, 0.5);

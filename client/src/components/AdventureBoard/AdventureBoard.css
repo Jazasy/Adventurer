@@ -1,6 +1,6 @@
 .adventure-board {
     margin: 0 auto;
-    padding: 0 0.5rem ;
+    padding: 0 var(--gap-from-bazel);
 }
 
 @media screen and (min-width: 400px) {

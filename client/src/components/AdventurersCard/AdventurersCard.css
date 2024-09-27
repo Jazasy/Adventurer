@@ -1,8 +1,8 @@
 .adventurers-card {
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-info);
     background-color: var(--extra-light-gray);
     color: var(--secondary-text-color);
-    border: 2px solid var(--secondary-text-color);
+    border: var(--border-info);
     border-radius: var(--border-radius);
     padding: 1rem;
     letter-spacing: 0.05em;
@@ -19,6 +19,21 @@
 .adventurers {
     overflow: auto;
     padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.adventurer {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    height: 2rem;
+}
+
+.adv-card-pfp {
+    border-radius: 50%;
+    height: 100%;
 }
 
 .leader-crown {
@@ -95,4 +110,8 @@
     .adventurers-card {
         width: 97%;
     }
+
+    .adventurers::-webkit-scrollbar {
+		display: none;
+	}
 }

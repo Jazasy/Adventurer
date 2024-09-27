@@ -219,13 +219,15 @@ const setDatabase = async () => {
         username: "admin",
         password: await hashPassword("admin"),
         email: "admin@gmail.com",
-        role: "admin"
+        role: "admin",
+        pfp: "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg",
     });
     const user = new User({
         username: "user",
         password: await hashPassword("password"),
         email: "user@gmail.com",
-        role: "user"
+        role: "user", 
+        pfp: "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg",
     });
     for (const adventure of adventures) {
         const newAdventure = new Adventure({

@@ -64,7 +64,7 @@ export default function Show() {
 					</div>
 				</div>
 			) : (
-				<p>Loading...</p>
+				null
 			)}
 		</>
 	);

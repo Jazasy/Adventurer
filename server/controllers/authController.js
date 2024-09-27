@@ -30,7 +30,8 @@ const registerUser = async (req, res) => {
     }
     const hashedPassword = await hashPassword(password);
     const role = "user";
-    const newUser = new User({ username, email, password: hashedPassword, role });
+    const tempPFP = "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg";       // I will change this later
+    const newUser = new User({ username, email, password: hashedPassword, role, pfp: tempPFP });
     await newUser.save();
     res.status(201).send();
 }
