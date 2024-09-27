@@ -1,0 +1,28 @@
+.comment {
+    font-size: 1.5rem;
+    color: var(--secondary-text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.comment-head {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    height: 2rem;
+    font-weight: 500;
+}
+
+.comment-content {
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word; 
+    text-align: justify;
+    font-weight: 300;
+}
+
+.comment-pfp {
+    height: 100%;
+    border-radius: 50%;
+}

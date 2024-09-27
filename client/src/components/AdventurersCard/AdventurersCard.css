@@ -24,23 +24,6 @@
     gap: 0.5rem;
 }
 
-.adventurer {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    height: 2rem;
-}
-
-.adv-card-pfp {
-    border-radius: 50%;
-    height: 100%;
-}
-
-.leader-crown {
-    color: gold;
-    margin-left: 0.5rem;
-}
-
 .advs-x {
 	display: none;
 	position: absolute;

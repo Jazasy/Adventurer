@@ -4,6 +4,7 @@ import CommentBar from "./CommentBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import Comment from "./Comment";
 
 export default function CommentSection() {
 	const { postIdForComments, setPostIdForComments } = useAdventures();
@@ -45,19 +46,7 @@ export default function CommentSection() {
 			></i>
 			<ul className="comments">
 				{comments.map((comment) => (
-					<li className="comment" key={comment._id}>
-						<div className="comment-head">
-							<img
-								className="comment-pfp"
-								src={comment.author.pfp}
-								alt="profile picture"
-							/>
-							<span className="comment-author">
-								{comment.author.username}:{" "}
-							</span>
-						</div>
-						<p className="comment-content">{comment.content}</p>
-					</li>
+					<Comment comment={comment} key={comment._id} />
 				))}
 			</ul>
 			<CommentBar action={getComments} />

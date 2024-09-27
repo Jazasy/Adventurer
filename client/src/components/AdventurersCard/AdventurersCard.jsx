@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useAdventures } from "../../contexts/useAdventures";
+import Adventurer from "./Adventurer";
 
 export default function AdventurersCard() {
 	const { setResInfos } = useAdventures();
@@ -30,13 +31,7 @@ export default function AdventurersCard() {
 			<ul className="adventurers">
 				{adventurersByAdventure && adventurersByAdventure.length > 0 ? (
 					adventurersByAdventure.map((adventurer) => (
-						<li className="adventurer" key={adventurer.user._id}>
-							<img className="adv-card-pfp" src={adventurer.user.pfp} alt="profile picture" />
-							{adventurer.user.username}
-							{selectedAdventure.leader._id === adventurer.user._id ? (
-								<i className="fa-solid fa-crown leader-crown"></i>
-							) : null}
-						</li>
+						<Adventurer adventurer={adventurer} key={adventurer._id} />
 					))
 				) : (
 					null
