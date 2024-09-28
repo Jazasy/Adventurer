@@ -9,7 +9,7 @@ export default function Comment({ comment}) {
 					src={comment.author.pfp}
 					alt="profile picture"
 				/>
-				<span className="comment-author">{comment.author.username}: </span>
+				<span className="comment-author">{comment.author.username}</span>
 			</div>
 			<p className="comment-content">{comment.content}</p>
 		</li>

@@ -9,7 +9,7 @@ const givePosts = async (req, res) => {
 
 const givePostsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
-    const foundPosts = await Post.find({ adventure: adventureId });
+    const foundPosts = await Post.find({ adventure: adventureId }).populate("author");
     res.json(foundPosts);
 }
 

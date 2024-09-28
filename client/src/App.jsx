@@ -69,7 +69,7 @@ export default function App() {
 				<Route path="/adventures/:id" element={<Show />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/profile" element={<Profile />} />
+				<Route path="/profiles/:id" element={<Profile />} />
 			</Routes>
 		</>
 	);

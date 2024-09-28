@@ -31,6 +31,7 @@ export default function CardAction({ post }) {
 
 	return (
 		<div className="card-action">
+			<img src={post.author.pfp} alt="post author pfp" />
 			<LikeButton postId={post._id} likeAction={like} unlikeAction={unLike} />
 			<CommentButton postId={post._id}/>
 			<ShareButton />

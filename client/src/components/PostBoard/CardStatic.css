@@ -12,4 +12,10 @@
     overflow-wrap: break-word; 
     padding: 0.5rem;
     color: var(--primary-text-color);
+    display: flex;
+    gap: 1rem;
+}
+
+.post-author {
+    font-weight: 500;
 }

@@ -66,7 +66,7 @@ export default function Navbar() {
 							currentPath === "/profile" ? "nav-item selected" : "nav-item"
 						}
 						onClick={handleClick}
-						path="profile"
+						path={`profiles/${user._id}`}
 					>
 						Profile
 					</li>

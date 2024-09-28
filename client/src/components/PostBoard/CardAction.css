@@ -4,6 +4,12 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    width: 2rem;
+}
+
+.card-action img {
+    width: 100%;
+    border-radius: 50%;;
 }
 
 /* .post-like-icon,
