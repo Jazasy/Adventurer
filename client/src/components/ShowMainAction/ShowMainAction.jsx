@@ -1,8 +1,9 @@
 import "./ShowMainAction.css";
 import Button1 from "../Buttons/Button1";
 import { useAdventures } from "../../contexts/useAdventures";
-import { applyToAdventure } from "./showmainActionHelpers";
+import { applyToAdventure, getIsApplied } from "./showmainActionHelpers";
 import { getAdventurers } from "../AdventurersCard/adventurersCardHelpers";
+import { useState } from "react";
 
 export default function ShowMainAction({ adventureId }) {
 	const { user } = useAdventures();
@@ -10,22 +11,31 @@ export default function ShowMainAction({ adventureId }) {
 	const { setAdventurersByAventure } = useAdventures();
 	const {setRefreshAdvByAdv} = useAdventures();
 	const {setShowInfo} = useAdventures();
+	const [isApplied, setIsApplied] = useState(false);
+
+	
 
 	const userId = user ? user._id : "";
 
 	const clickJoinButton = () => {
 		applyToAdventure(adventureId, userId, setResInfos, setRefreshAdvByAdv);
 		getAdventurers(adventureId, setAdventurersByAventure, setResInfos);
-		
+		getIsApplied(userId, adventureId, setResInfos, setIsApplied);
 	}
+
+
 
 	return (
 		<section className="show-main-action">
-			<Button1
+			{isApplied ? (
+				<Button1 className="btn-fit-content btn-big" text="Post"/>
+			): (
+				<Button1
 				action={clickJoinButton}
 				className="btn-fit-content btn-big"
 				text="Join"
 			/>
+			)}
 			<div className="show-main-action-info">
 				<Button1
 					action={() => setShowInfo("description")}

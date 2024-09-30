@@ -28,9 +28,17 @@ const giveApplications = async (req, res) => {
     res.json(foundApplications);
 }
 
+const isApplied = async (req, res) => {
+    const { adventureId } = req.params;
+    const { userId } = req.query;
+    const foundApplication = await Application.findOne({ user: userId, adventure: adventureId});
+    res.json(foundApplication);
+}
+
 module.exports = {
     giveAdventures,
     giveAdventure,
     applyToAdventure,
     giveApplications,
+    isApplied,
 }

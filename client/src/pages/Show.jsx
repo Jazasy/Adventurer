@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAdventures } from "../contexts/useAdventures";
 import ShowHead from "../components/ShowHead/ShowHead";
