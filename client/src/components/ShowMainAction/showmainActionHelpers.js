@@ -17,8 +17,8 @@ const applyToAdventure = async (adventureId, userId, setResInfos, setRefreshAdvB
 const getIsApplied = async (userId, adventureId, setResInfos, setIsApplied) => {
     try {
         const result = await axios.get(`/adventures/${adventureId}/applications/isApplied`, { params: { userId } });
-        console.log(result.data.setIsApplied);
-        setIsApplied(result.data.setIsApplied);
+        
+        setIsApplied(result.data);
     } catch (error) {
         resInfoError(error.response.data.message, setResInfos);
     }

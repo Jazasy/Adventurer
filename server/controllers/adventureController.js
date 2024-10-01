@@ -32,7 +32,7 @@ const isApplied = async (req, res) => {
     const { adventureId } = req.params;
     const { userId } = req.query;
     const foundApplication = await Application.findOne({ user: userId, adventure: adventureId});
-    res.json(foundApplication);
+    res.json(foundApplication ? true : false);
 }
 
 module.exports = {
