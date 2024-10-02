@@ -6,6 +6,7 @@ import { getAdventurers } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import PostWindow from "./PostWindow";
 
 export default function ShowMainAction({ adventureId }) {
 	const { user } = useAdventures();
@@ -14,27 +15,47 @@ export default function ShowMainAction({ adventureId }) {
 	const { setRefreshAdvByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
 	const [isApplied, setIsApplied] = useState();
+	const [showPostWindow, setShowPostWindow] = useState(false);
 
 	const userId = user ? user._id : null;
 
 	useEffect(() => {
-		if(user){
+		if (user) {
 			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
 		}
 	}, [user]);
 
+	useEffect(() => {
+		if (showPostWindow) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [showPostWindow]);
+
 	const clickJoinButton = async () => {
-		await applyToAdventure(adventureId, userId, setResInfos, setRefreshAdvByAdv);
+		await applyToAdventure(
+			adventureId,
+			userId,
+			setResInfos,
+			setRefreshAdvByAdv
+		);
 		getAdventurers(adventureId, setAdventurersByAventure, setResInfos);
 		getIsApplied(userId, adventureId, setResInfos, setIsApplied);
-	}
+	};
 
-
+	const clickPostButton = async () => {
+		setShowPostWindow(true);
+	};
 
 	return (
 		<section className="show-main-action">
 			{isApplied ? (
-				<Button1 className="btn-fit-content btn-big" text="Post" />
+				<Button1
+					action={clickPostButton}
+					className="btn-fit-content btn-big"
+					text="Post"
+				/>
 			) : (
 				<Button1
 					action={clickJoinButton}
@@ -54,6 +75,9 @@ export default function ShowMainAction({ adventureId }) {
 					text="Adventurers"
 				/>
 			</div>
+			{showPostWindow ? (
+				<PostWindow closeShowPostWindow={() => setShowPostWindow(false)} />
+			) : null}
 		</section>
 	);
 }

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useAdventures } from "../../contexts/useAdventures";
 import Adventurer from "./Adventurer";
+import XButton from "../Buttons/XButton";
 
 export default function AdventurersCard() {
 	const { setResInfos } = useAdventures();
@@ -26,7 +27,7 @@ export default function AdventurersCard() {
 
 	return (
 		<div className="adventurers-card">
-			<i onClick={() => setShowInfo(null)} className="fa-solid fa-xmark advs-x"></i>
+			<XButton action={() => setShowInfo(null)} />
 			<h3>Adventurers</h3>
 			<ul className="adventurers">
 				{adventurersByAdventure && adventurersByAdventure.length > 0 ? (

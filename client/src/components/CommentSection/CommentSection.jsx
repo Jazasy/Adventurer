@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import Comment from "./Comment";
+import XButton from "../Buttons/XButton";
 
 export default function CommentSection() {
 	const { postIdForComments, setPostIdForComments } = useAdventures();
@@ -40,10 +41,7 @@ export default function CommentSection() {
 
 	return (
 		<div className="comment-section">
-			<i
-				onClick={closeCommentSection}
-				className="fa-solid fa-xmark comment-section-x"
-			></i>
+			<XButton action={closeCommentSection} />
 			<ul className="comments">
 				{comments.map((comment) => (
 					<Comment comment={comment} key={comment._id} />
