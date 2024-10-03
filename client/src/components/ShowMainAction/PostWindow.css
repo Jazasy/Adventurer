@@ -6,6 +6,9 @@
     background-color: var(--background-color);
     padding: 1rem;
     border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--standard-gap);
 }
 
 .post-window-container {
@@ -24,6 +27,10 @@
     font-size: 3rem;
     color: white;
     cursor: pointer;
+}
+
+.post-submit-button {
+    align-self: end;
 }
 
 @media screen and (max-width: 700px){

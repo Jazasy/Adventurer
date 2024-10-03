@@ -1,0 +1,23 @@
+.text-area {
+    resize: vertical;
+    height: auto;
+}
+
+.text-area::-webkit-scrollbar {
+    width: 0.7rem; 
+    height: 0.7rem;
+}
+
+
+.text-area::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0); 
+}
+
+.text-area::-webkit-scrollbar-thumb {
+    background: var(--light-gray); 
+    border-radius: 999px; 
+}
+
+.text-area::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}

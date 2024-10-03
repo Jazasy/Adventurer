@@ -1,0 +1,28 @@
+.hiden-file-input {
+    display: none;
+}
+
+.fake-file-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 7rem;
+    padding: 0;
+    overflow: auto;
+}
+
+.post-image-icon {
+    color: var(--secondary-text-color);
+    font-size: 2rem;
+}
+
+.file-input-img {
+    width: 100%;
+}
+
+@media screen and (max-width: 700px){
+    .file-input{
+        flex-grow: 1;
+    }
+}
