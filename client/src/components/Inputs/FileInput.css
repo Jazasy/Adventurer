@@ -1,28 +1,42 @@
 .hiden-file-input {
-    display: none;
+	display: none;
+}
+
+.file-input {
+	height: 100%;
+	min-height: 15rem;
+	display: flex;
 }
 
 .fake-file-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    min-height: 7rem;
-    padding: 0;
-    overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.post-image-icon {
-    color: var(--secondary-text-color);
-    font-size: 2rem;
+.file-preview {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.file-input-img {
-    width: 100%;
+.file-preview img {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: var(--border-radius);
+	object-fit: contain;
 }
 
-@media screen and (max-width: 700px){
-    .file-input{
-        flex-grow: 1;
-    }
+.post-file-x {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	color: var(--danger-color);
+}
+
+.post-file-x:active {
+	transform: scale(0.9);
 }

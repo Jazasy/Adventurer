@@ -1,6 +1,7 @@
 .text-area {
     resize: vertical;
     height: auto;
+    min-height: 10rem;
 }
 
 .text-area::-webkit-scrollbar {

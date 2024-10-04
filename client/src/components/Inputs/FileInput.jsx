@@ -17,15 +17,32 @@ export default function FileInput() {
 		console.log(file);
 	};
 
+	const deleteFile = () => {
+		setFile(null);
+	};
+
 	return (
 		<div className="file-input">
-			<div className="input fake-file-input" onClick={clickFileInput}>
-				{file ? (
-					<img className="file-input-img" src={URL.createObjectURL(file)} alt="picture" />
-				) : (
+			{file ? (
+				<div className="input fake-file-input">
+					<div className="file-preview">
+						<img
+							className="file-input-img"
+							src={URL.createObjectURL(file)}
+							alt="picture"
+						/>
+						<i
+							className="fa-solid fa-circle-xmark post-file-x"
+							onClick={deleteFile}
+						></i>
+					</div>
+				</div>
+			) : (
+				<div className="input fake-file-input" onClick={clickFileInput}>
 					<i className="fa-regular fa-image post-image-icon"></i>
-				)}
-			</div>
+				</div>
+			)}
+
 			<input
 				onChange={handleFileChange}
 				type="file"

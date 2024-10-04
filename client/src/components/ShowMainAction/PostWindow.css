@@ -50,6 +50,7 @@
 @media screen and (min-width: 700px){
     .post-window {
         width: 75%;
+        max-height: 80%;
     }
 }
 
