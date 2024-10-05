@@ -1,24 +1,14 @@
 import "./FileInput.css";
-import React, { useState } from "react";
+import React from "react";
 import "./TextInput.css";
 
-export default function FileInput() {
-	const [file, setFile] = useState();
+export default function FileInput({file, handleChange, deleteFile, name}) {
 
 	const fileInputRef = React.useRef();
 
 	const clickFileInput = () => {
 		fileInputRef.current.click();
-	};
-
-	const handleFileChange = (event) => {
-		const file = event.target.files[0]; //const selectedFiles = Array.from(event.target.files);
-		setFile(file);
-		console.log(file);
-	};
-
-	const deleteFile = () => {
-		setFile(null);
+		fileInputRef.current.value = null;
 	};
 
 	return (
@@ -44,10 +34,11 @@ export default function FileInput() {
 			)}
 
 			<input
-				onChange={handleFileChange}
+				onChange={handleChange}
 				type="file"
 				className="hiden-file-input"
 				ref={fileInputRef}
+				name={name}
 			/>
 		</div>
 	);

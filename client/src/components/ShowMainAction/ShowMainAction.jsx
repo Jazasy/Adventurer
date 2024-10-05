@@ -76,7 +76,7 @@ export default function ShowMainAction({ adventureId }) {
 				/>
 			</div>
 			{showPostWindow ? (
-				<PostWindow closeShowPostWindow={() => setShowPostWindow(false)} />
+				<PostWindow closeShowPostWindow={() => setShowPostWindow(false)} adventureId={adventureId}/>
 			) : null}
 		</section>
 	);

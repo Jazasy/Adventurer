@@ -10,13 +10,21 @@ const givePosts = async (req, res) => {
 const givePostsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
     const foundPosts = await Post.find({ adventure: adventureId }).populate("author");
-    res.json(foundPosts);
+    res.json(foundPosts.reverse());
 }
 
 const givePost = async (req, res) => {
     const { id } = req.params;
     const foundPost = await Post.findById(id).populate("author");
     res.json(foundPost);
+}
+
+const makePost = async (req, res) => {
+    const {adventureId} = req.params;
+    const { userId, content} = req.body;
+    const newPost = new Post({author: userId, adventure: adventureId, content: content, image: req.file.path});
+    await newPost.save();
+    res.status(201).send();
 }
 
 const giveIsliked = async (req, res) => {
@@ -73,4 +81,5 @@ module.exports = {
     unlike,
     comment,
     giveComments,
+    makePost
 }
