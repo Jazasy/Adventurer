@@ -4,18 +4,14 @@ import { useAdventures } from "../../contexts/useAdventures";
 import { applyToAdventure, getIsApplied } from "./showmainActionHelpers";
 import { getAdventurers } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { resInfoError } from "../ResponseInfo/resInfoHelpers";
-import PostWindow from "./PostWindow";
 
-export default function ShowMainAction({ adventureId }) {
+export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const { setAdventurersByAventure } = useAdventures();
 	const { setRefreshAdvByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
 	const [isApplied, setIsApplied] = useState();
-	const [showPostWindow, setShowPostWindow] = useState(false);
 
 	const userId = user ? user._id : null;
 
@@ -24,14 +20,6 @@ export default function ShowMainAction({ adventureId }) {
 			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
 		}
 	}, [user]);
-
-	useEffect(() => {
-		if (showPostWindow) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
-	}, [showPostWindow]);
 
 	const clickJoinButton = async () => {
 		await applyToAdventure(
@@ -44,15 +32,11 @@ export default function ShowMainAction({ adventureId }) {
 		getIsApplied(userId, adventureId, setResInfos, setIsApplied);
 	};
 
-	const clickPostButton = async () => {
-		setShowPostWindow(true);
-	};
-
 	return (
 		<section className="show-main-action">
 			{isApplied ? (
 				<Button1
-					action={clickPostButton}
+					action={openShowPostWindow}
 					className="btn-fit-content btn-big"
 					text="Post"
 				/>
@@ -75,9 +59,6 @@ export default function ShowMainAction({ adventureId }) {
 					text="Adventurers"
 				/>
 			</div>
-			{showPostWindow ? (
-				<PostWindow closeShowPostWindow={() => setShowPostWindow(false)} adventureId={adventureId}/>
-			) : null}
 		</section>
 	);
 }
