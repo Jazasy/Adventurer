@@ -1,4 +1,4 @@
-import "./PostWindow.css";
+import "./CreateWindow.css";
 import TextArea from "../inputs/TextArea";
 import XButton from "../Buttons/XButton";
 import Button1 from "../Buttons/Button1";
@@ -8,25 +8,25 @@ import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 
-export default function PostWindow({ closeShowPostWindow, adventureId }) {
-	const [post, setPost] = useState({ content: "", image: null }); // it is important to call the file image here becase multer will use this keyname
-	const [posted, setPosted] = useState(false);
+export default function CreateWindow({ closeCreateWindow, adventureId }) {
+	const [adv, setAdv] = useState({ content: "", image: null }); // it is important to call the file image here becase multer will use this keyname
+	const [created, setCreated] = useState(false);
 	const { setResInfos } = useAdventures();
 	const { user } = useAdventures();
 
 	const handleChange = (event) => {
 		const { name } = event.target;
 		if (name === "image") {
-			setPost((oldPosts) => {
+			setAdv((oldAdv) => {
 				return {
-					...oldPosts,
+					...oldAdv,
 					[name]: event.target.files[0],
 				};
 			});
 		} else if (name === "content") {
-			setPost((oldPosts) => {
+			setAdv((oldAdv) => {
 				return {
-					...oldPosts,
+					...oldAdv,
 					[name]: event.target.value,
 				};
 			});
@@ -34,21 +34,21 @@ export default function PostWindow({ closeShowPostWindow, adventureId }) {
 	};
 
 	const deleteImageFile = () => {
-		setPost((oldPost) => {
+		setAdv((oldAdv) => {
 			return {
-				...oldPost,
+				...oldAdv,
 				image: null,
 			};
 		});
 	};
 
-	const submitPost = async (event) => {
+	const submitAdv = async (event) => {
 		event.preventDefault();
 		try {
-			setPosted(true);
+			setCreated(true);
 			const formData = new FormData();
-			for (const key in post) {
-				formData.append(key, post[key]);
+			for (const key in adv) {
+				formData.append(key, adv[key]);
 			}
 			formData.append("userId", user._id);
 			await axios.post(`/posts/${adventureId}`, formData, {
@@ -56,10 +56,10 @@ export default function PostWindow({ closeShowPostWindow, adventureId }) {
 					"Content-Type": "multipart/form-data",
 				},
 			});
-			setPost({ content: "", image: null });
-			closeShowPostWindow();
+			setAdv({ content: "", image: null });
+			closeCreateWindow();
 		} catch (error) {
-			setPosted(false);
+			setCreated(false);
 			error.response.data.message
 				? resInfoError(error.response.data.message, setResInfos)
 				: resInfoError("Something went wrong", setResInfos);
@@ -67,26 +67,26 @@ export default function PostWindow({ closeShowPostWindow, adventureId }) {
 	};
 
 	return (
-		<form className="post-window-container" onSubmit={submitPost}>
+		<form className="post-window-container" onSubmit={submitAdv}>
 			<div className="post-window">
-				<XButton action={closeShowPostWindow} />
+				<XButton action={closeCreateWindow} />
 				<TextArea
 					rows={5}
 					handleChange={handleChange}
-					value={post.content}
+					value={adv.content}
 					name="content"
 					placeholder="Put your experiences into words!"
 				/>
 				<FileInput
-					file={post.image}
+					file={adv.image}
 					handleChange={handleChange}
 					deleteFile={deleteImageFile}
 					name="image"
 				/>
 				<Button1
 					text="Post"
-					className={`btn-fit-content btn-big post-submit-button ${posted ? "btn-muted" : ""}`}
-					action={posted ? null : submitPost}
+					className={`btn-fit-content btn-big post-submit-button ${created ? "btn-muted" : ""}`}
+					action={created ? null : submitAdv}
 				/>
 				<button className="fake-submit-button">fake submit</button>
 			</div>

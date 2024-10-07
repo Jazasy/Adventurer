@@ -2,10 +2,14 @@ import Button1 from "../Buttons/Button1";
 import "./HomeHead.css";
 import { useNavigate } from "react-router-dom";
 import { useAdventures } from "../../contexts/useAdventures";
+import { useState } from "react";
+import CreateWindow from "./CreateWindow";
 
 export default function HomeHead() {
-	const navigate = useNavigate();
 	const { user } = useAdventures();
+	const [ showCreateWindow, setShowCreateWindow ] = useState(false);
+
+	const navigate = useNavigate();
 
 	const handleSignUpClick = () => {
 		navigate("/register");
@@ -19,7 +23,8 @@ export default function HomeHead() {
 					<p className="home-paragraph">
 						Take a look at others adventures. You can follow and apply to them. If you want, you can even
 					</p>
-					<Button1 text="Create your own!" />
+					<Button1 text="Create your own!" action={()=>setShowCreateWindow(true)}/>
+					{showCreateWindow ? <CreateWindow closeCreateWindow={()=>setShowCreateWindow(false)} /> : null}
 				</>
 			) : (
 				<>

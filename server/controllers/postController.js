@@ -22,6 +22,8 @@ const givePost = async (req, res) => {
 const makePost = async (req, res) => {
     const {adventureId} = req.params;
     const { userId, content} = req.body;
+    if (!content) return res.status(400).json({ message: "Content can not be empty" });
+    if(!req.file) return res.status(400).json({ message: "You need to upload an image" }); 
     const newPost = new Post({author: userId, adventure: adventureId, content: content, image: req.file.path});
     await newPost.save();
     res.status(201).send();

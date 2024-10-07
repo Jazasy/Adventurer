@@ -23,6 +23,10 @@
     font-size: 1.5rem;
 }
 
+.button1.btn-muted {
+    opacity: 0.5;
+}
+
 .button1.btn-info {
     background-color: var(--extra-light-gray);
     border: var(--border-info);
@@ -44,4 +48,8 @@
 
 .button1:active {
     transform: scale(0.95);
+}
+
+.button1.btn-muted:active {
+    transform: scale(1);
 }
