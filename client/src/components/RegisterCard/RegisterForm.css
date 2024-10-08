@@ -23,6 +23,5 @@
 @media screen and (max-width: 1000px) {
     .passwords {
         flex-direction: column;
-        gap: 0;
     }
 }

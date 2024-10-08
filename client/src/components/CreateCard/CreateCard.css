@@ -1,0 +1,23 @@
+.create-card {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+@media screen and (max-width: 700px) {
+    .create-card {
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .create-card {
+        width: 50vw;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .create-card {
+        width: 35vw;
+    }
+}

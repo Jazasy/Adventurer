@@ -6,6 +6,7 @@ import Show from "./pages/Show";
 import Navbar from "./components/Navbar/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Create from "./pages/Create";
 import ResponseInfoContainer from "./components/ResponseInfo/ResponseInfoContainer";
 import Profile from "./pages/Profile";
 import { useAdventures } from "./contexts/useAdventures";
@@ -67,6 +68,7 @@ export default function App() {
 			<Routes>
 				<Route path="/home" element={<Home />} />
 				<Route path="/adventures/:id" element={<Show />} />
+				<Route path="/adventures/create" element={<Create />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/profiles/:id" element={<Profile />} />
