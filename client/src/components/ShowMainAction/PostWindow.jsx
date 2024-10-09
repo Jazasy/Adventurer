@@ -44,25 +44,27 @@ export default function PostWindow({ closeShowPostWindow, adventureId }) {
 
 	const submitPost = async (event) => {
 		event.preventDefault();
-		try {
-			setPosted(true);
-			const formData = new FormData();
-			for (const key in post) {
-				formData.append(key, post[key]);
+		if (!posted) {
+			try {
+				setPosted(true);
+				const formData = new FormData();
+				for (const key in post) {
+					formData.append(key, post[key]);
+				}
+				formData.append("userId", user._id);
+				await axios.post(`/posts/${adventureId}`, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
+				setPost({ content: "", image: null });
+				closeShowPostWindow();
+			} catch (error) {
+				setPosted(false);
+				error.response.data.message
+					? resInfoError(error.response.data.message, setResInfos)
+					: resInfoError("Something went wrong", setResInfos);
 			}
-			formData.append("userId", user._id);
-			await axios.post(`/posts/${adventureId}`, formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
-			setPost({ content: "", image: null });
-			closeShowPostWindow();
-		} catch (error) {
-			setPosted(false);
-			error.response.data.message
-				? resInfoError(error.response.data.message, setResInfos)
-				: resInfoError("Something went wrong", setResInfos);
 		}
 	};
 
@@ -85,7 +87,9 @@ export default function PostWindow({ closeShowPostWindow, adventureId }) {
 				/>
 				<Button1
 					text="Post"
-					className={`btn-fit-content btn-big post-submit-button ${posted ? "btn-muted" : ""}`}
+					className={`btn-fit-content btn-big post-submit-button ${
+						posted ? "btn-muted" : ""
+					}`}
 					action={posted ? null : submitPost}
 				/>
 				<button className="fake-submit-button">fake submit</button>

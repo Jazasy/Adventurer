@@ -1,19 +1,12 @@
 .register-form {
     display: flex;
     flex-direction: column;
-}
-
-.register-button {
-    margin-top: 1em;
+    gap: var(--standard-gap);
 }
 
 .passwords {
     display: flex;
     gap: 1rem;
-}
-
-.register-button {
-    margin-top: 1em;
 }
 
 .reg-fake-button {

@@ -7,6 +7,14 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
+const adventureStorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: "Adventurer/adventures",
+        allowedFormats: ["jpeg", "png", "jpg"]
+    }
+})
+
 const postStorage = new CloudinaryStorage({
     cloudinary,
     params: {
@@ -18,4 +26,5 @@ const postStorage = new CloudinaryStorage({
 module.exports = {
     cloudinary,
     postStorage,
+    adventureStorage,
 }

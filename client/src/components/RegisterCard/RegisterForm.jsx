@@ -51,15 +51,14 @@ export default function RegisterForm() {
 
 	return (
 		<form className="register-form" onSubmit={handleSubmit}>
+			<h1 className="title2">Create your Account</h1>
 			<TextInput
-				className="mb-1"
 				value={formData.username}
 				handleChange={handleChange}
 				placeholder="Username"
 				name="username"
 			/>
 			<TextInput
-				className="mb-1"
 				value={formData.email}
 				handleChange={handleChange}
 				placeholder="Email address"

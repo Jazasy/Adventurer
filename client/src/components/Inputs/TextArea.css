@@ -1,6 +1,5 @@
 .text-area {
-    resize: vertical;
-    height: auto;
+    resize: none;
     min-height: 10rem;
 }
 

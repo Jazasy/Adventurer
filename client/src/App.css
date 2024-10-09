@@ -7,11 +7,26 @@
 #root {
   font-family: "Roboto", sans-serif;
 
+  .titl1{
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-text-color);
+    text-align: center;
+  }
+
+  .title2{
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-text-color);
+    text-align: center;
+  }
+
   --border-radius: 15px;
   --border-info: 2px solid var(--secondary-text-color);
   --shadow-info : 5px 5px 10px rgba(0, 0, 0, 0.2);
 
   --standard-gap: 1rem;
+  --big-gap: 5rem;
   --gap-from-bazel: 0.2rem;
 
   --primary-color: rgb(56, 176, 0);

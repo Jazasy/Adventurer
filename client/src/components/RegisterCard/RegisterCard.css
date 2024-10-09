@@ -1,5 +1,5 @@
 .register-card {
-    margin-top: 10rem;
+    margin-top: var(--big-gap);
     display: flex;
     flex-direction: column;
     width: 100vw;
