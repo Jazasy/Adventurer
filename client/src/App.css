@@ -1,46 +1,58 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+#root {
+	font-family: "Roboto", sans-serif;
+
+	--standard-font-size: 1rem;
+	--bigger-font-size: 1.5rem;
+	--big-font-size: 2rem;
+	--biggest-font-size: 4rem;
+
+	--thin-font-weight: 400;
+	--standard-font-weight: 500;
+	--bold-font-weight: 700;
+
+	--primary-color: rgb(56, 176, 0);
+	--primary-color-light: rgba(56, 176, 0, 0.5);
+	--primary-text-color: black;
+	--secondary-text-color: rgba(0, 0, 0, 0.5);
+	--light-gray: rgba(0, 0, 0, 0.3);
+	--extra-light-gray: rgba(0, 0, 0, 0.1);
+	--background-color: white;
+	--disabled-background-color: rgba(0, 0, 0, 0.5);
+
+	--danger-color: red;
+	--warning-color: orange;
+	--success-color: green;
+
+	--border-radius: 15px;
+	--border-info: 2px solid var(--secondary-text-color);
+	--shadow-info: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+	--standard-gap: 1rem;
+	--big-gap: 5rem;
+	--gap-from-bazel: 0.2rem;
+
+	.title1 {
+		font-size: var(--biggest-font-size);
+		font-weight: 700;
+		color: var(--primary-text-color);
+		text-align: center;
+	}
+
+	.title2 {
+		font-size: var(--big-font-size);
+		font-weight: 700;
+		color: var(--primary-text-color);
+		text-align: center;
+	}
+
+  
 }
 
-#root {
-  font-family: "Roboto", sans-serif;
-
-  .titl1{
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--primary-text-color);
-    text-align: center;
-  }
-
-  .title2{
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-text-color);
-    text-align: center;
-  }
-
-  --border-radius: 15px;
-  --border-info: 2px solid var(--secondary-text-color);
-  --shadow-info : 5px 5px 10px rgba(0, 0, 0, 0.2);
-
-  --standard-gap: 1rem;
-  --big-gap: 5rem;
-  --gap-from-bazel: 0.2rem;
-
-  --primary-color: rgb(56, 176, 0);
-  --primary-color-light:rgba(56, 176, 0, 0.5);
-  --primary-text-color: black;
-  --secondary-text-color: rgba(0, 0, 0, 0.5);
-  --light-gray: rgba(0,0,0,0.3);
-  --extra-light-gray: rgba(0,0,0,0.1);
-  --background-color: white;
-  --disabled-background-color: rgba(0,0,0,0.5);
-
-  --danger-color: red;
-  --warning-color: orange;
-  --success-color: green;
+/* it was upper the root */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 /* #root {

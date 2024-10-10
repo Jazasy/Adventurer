@@ -45,6 +45,12 @@ const giveApplications = async (req, res) => {
     res.json(foundApplications);
 }
 
+const giveApplicationsByUser = async (req, res) => {
+    const { userId } = req.params;
+    const foundApplications = await Application.find({ user: userId }).populate("adventure");
+    res.json(foundApplications);
+}
+
 const isApplied = async (req, res) => {
     const { adventureId } = req.params;
     const { userId } = req.query;
@@ -59,4 +65,5 @@ module.exports = {
     applyToAdventure,
     giveApplications,
     isApplied,
+    giveApplicationsByUser,
 }

@@ -19,6 +19,8 @@
 .description-card p {
 	overflow: auto;
 	padding: 0 1rem;
+	/* font-size: var(--standard-font-size);
+	font-weight: var(--thin-font-weight); */
 }
 
 .desc-x {

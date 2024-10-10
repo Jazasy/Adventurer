@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useAdventures } from "../contexts/useAdventures";
 import ShowHead from "../components/ShowHead/ShowHead";
@@ -13,15 +13,40 @@ import { useState } from "react";
 import PostWindow from "../components/ShowMainAction/PostWindow";
 import { resInfoError } from "../components/ResponseInfo/resInfoHelpers";
 
-export default function Show() {
+export default function Show({ className }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
-	const { id } = useParams();
+	let { id } = useParams();
 	const { showInfo } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const [showPostWindow, setShowPostWindow] = useState(false);
 
+	!id && selectedAdventure && (id = selectedAdventure._id);
+
+	const showContainerRef = useRef(null);
+	const showHeadRef = useRef(null);
+
+	const updateShowHeadWidth = () => {
+		if (showHeadRef.current && showContainerRef.current) {
+			const newWidth = `${showContainerRef.current.offsetWidth}px`;
+			showHeadRef.current.style.width = newWidth;
+		}
+	};
+
 	useEffect(() => {
-		if (!selectedAdventure) {
+		const handleResize = () => {
+			updateShowHeadWidth();
+		};
+
+		window.addEventListener("resize", handleResize);
+		updateShowHeadWidth();
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (!selectedAdventure && id) {
 			axios
 				.get(`/adventures/${id}`)
 				.then((res) => setSelectedAdventure(res.data))
@@ -57,8 +82,13 @@ export default function Show() {
 	return (
 		<>
 			{selectedAdventure ? (
-				<div className="show-container">
-					<ShowHead adventure={selectedAdventure} />
+				<div className="show-container" ref={showContainerRef}>
+					<ShowHead
+						className={className}
+						adventure={selectedAdventure}
+						updateWidth={updateShowHeadWidth}
+						ref={showHeadRef}
+					/>
 					<div className="show-main-content">
 						<ShowMainAction
 							adventureId={id}

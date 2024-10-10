@@ -1,0 +1,23 @@
+.own-menu {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    padding: var(--standard-gap);
+    background-color: var(--extra-light-gray);
+    color: var(--secondary-text-color);
+    border-radius: var(--border-radius);
+    border: var(--border-info);
+    box-shadow: var(--shadow-info);
+}
+
+.own-menu-titles {
+    font-size: var(--bigger-font-size);
+    font-weight: var(--standard-font-weight);
+}
+
+@media screen and (max-width: 1000px) {
+    .own-menu {
+        width: 100%;
+    }
+}

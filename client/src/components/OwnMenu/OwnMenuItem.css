@@ -1,0 +1,20 @@
+.own-menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--gap-from-bazel) var(--standard-gap);
+    gap: var(--standard-gap);
+}
+
+.own-menu-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--standard-gap);
+    height: 2rem;
+}
+
+.own-menu-chat-icon, .own-menu-page-icon {
+    font-size: 1em;
+}

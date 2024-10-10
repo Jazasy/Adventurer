@@ -63,12 +63,12 @@ export default function Navbar() {
 				{user ? (
 					<li
 						className={
-							currentPath === "/profile" ? "nav-item selected" : "nav-item"
+							currentPath === "/myadventures" ? "nav-item selected" : "nav-item"
 						}
 						onClick={handleClick}
-						path={`profiles/${user._id}`}
+						path={"myadventures"}
 					>
-						Profile
+						My Adventures
 					</li>
 				) : null}
 				{user ? (

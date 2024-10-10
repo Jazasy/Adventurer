@@ -1,5 +1,6 @@
 .show-container {
     --show-head-height: 20vh;
+    width: 100%;
 }
 
 .show-main-content {

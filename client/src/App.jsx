@@ -11,6 +11,7 @@ import ResponseInfoContainer from "./components/ResponseInfo/ResponseInfoContain
 import Profile from "./pages/Profile";
 import { useAdventures } from "./contexts/useAdventures";
 import { useEffect } from "react";
+import Own from "./pages/Own";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -71,6 +72,7 @@ export default function App() {
 				<Route path="/adventures/create" element={<Create />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/myadventures" element={<Own />} />
 				<Route path="/profiles/:id" element={<Profile />} />
 			</Routes>
 		</>

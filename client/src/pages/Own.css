@@ -1,0 +1,6 @@
+.own-container {
+    padding: var(--standard-gap);
+    display: flex;
+    flex-direction: row;
+    gap: var(--standard-gap);
+}
