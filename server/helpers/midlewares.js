@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const redisClient = require("../helpers/redisClient");
+const redisClient = require("../redis/index");
 
 const hasToken = (req, res, next) => {
     try {

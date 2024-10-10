@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const redisClient = require("../helpers/redisClient");
+const redisClient = require("../redis/index");
 
 const { generateAccessToken, generateRefreshToken, hashPassword } = require("../helpers/auth");
 
