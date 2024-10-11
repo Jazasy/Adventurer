@@ -1,5 +1,5 @@
 .x-button {
-	position: absolute; /* This used to be fixed */
+	position: fixed; /* This used to be fixed */
 	top: 0;
 	right: -4rem;
 	font-size: 3rem;
