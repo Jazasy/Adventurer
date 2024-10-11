@@ -5,16 +5,16 @@ import { useAdventures } from "../contexts/useAdventures";
 import { useEffect } from "react";
 
 export default function Own() {
-    const { setSelectedAdventure } = useAdventures();
+	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 
-    useEffect(() => {
-        setSelectedAdventure(null);
-    }, [setSelectedAdventure])
+	useEffect(() => {
+		setSelectedAdventure(null);
+	}, [setSelectedAdventure]);
 
-    return (
-        <main className="own-container">
-            <OwnMenu />
-            <Show className="rounded"/>
-        </main>
-    )
+	return (
+		<main className="own-container">
+			<OwnMenu />
+			<Show className="show-head-rounded show-hiden" />
+		</main>
+	);
 }

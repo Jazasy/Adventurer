@@ -4,13 +4,15 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+    flex-wrap: wrap;
 }
 
 .show-main-action-info {
     display: flex;
+    flex-grow: 1;
     justify-content: end;
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .desc-button, .members-button {

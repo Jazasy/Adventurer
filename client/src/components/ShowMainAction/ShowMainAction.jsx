@@ -4,6 +4,8 @@ import { useAdventures } from "../../contexts/useAdventures";
 import { applyToAdventure, getIsApplied } from "./showmainActionHelpers";
 import { getAdventurers } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
+import ShowOptions from "./ShowOptions";
+import OptionsButton from "../Buttons/OptionsButton";
 
 export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const { user } = useAdventures();
@@ -12,6 +14,7 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const { setRefreshAdvByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
 	const [isApplied, setIsApplied] = useState();
+	const [showOptions, setShowOptions] = useState(false);
 
 	const userId = user ? user._id : null;
 
@@ -20,6 +23,14 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
 		}
 	}, [user]);
+
+	useEffect(() => {
+		if (showOptions) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [showOptions]);
 
 	const clickJoinButton = async () => {
 		await applyToAdventure(
@@ -58,7 +69,13 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 					className="members-button btn-fit-content btn-medium btn-info"
 					text="Adventurers"
 				/>
+				{isApplied ? (
+					<OptionsButton action={() => setShowOptions(true)} />
+				) : null}
 			</div>
+			{showOptions ? (
+				<ShowOptions closeOptions={() => setShowOptions(false)} />
+			) : null}
 		</section>
 	);
 }

@@ -1,0 +1,17 @@
+.show-options-container {
+    background-color: var(--disabled-background-color);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.show-options {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--standard-gap);
+    background-color: var(--background-color);
+}

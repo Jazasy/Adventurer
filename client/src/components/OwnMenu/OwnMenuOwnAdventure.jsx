@@ -1,12 +1,18 @@
 import "./OwnMenuOwnAdventure.css";
 import "./OwnMenuItem.css";
 import { useAdventures } from "../../contexts/useAdventures";
+import { useNavigate } from "react-router-dom";
 
 export default function OwnMenuOwnAdventure({ adventure }) {
     const { setSelectedAdventure } = useAdventures();
 
+	const navigate = useNavigate();
+
     const openAdventure = () => {
         setSelectedAdventure(adventure);
+		if(window.innerWidth < 1000) {
+			navigate(`/adventures/${adventure._id}`);
+		}
     }
 
 	return (

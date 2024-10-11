@@ -56,7 +56,7 @@ export default function Show({ className }) {
 		}
 	}, [id, selectedAdventure, setSelectedAdventure]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (showInfo) {
 			document.body.style.overflow = "hidden";
 		} else {
@@ -70,7 +70,47 @@ export default function Show({ className }) {
 		} else {
 			document.body.style.overflow = "";
 		}
-	}, [showPostWindow]);
+	}, [showPostWindow]); */
+
+	const [initialOverflow, setInitialOverflow] = useState('');
+
+	useEffect(() => {
+		const handleOverflow = (show) => {
+			if (show) {
+				const hasScrollbar = document.body.scrollHeight > window.innerHeight;
+				if (hasScrollbar) {
+					setInitialOverflow(document.body.style.overflow);
+					document.body.style.overflow = "hidden";
+				} else {
+					document.body.style.overflow = "hidden";
+				}
+			} else {
+				document.body.style.overflow = initialOverflow;
+			}
+		};
+
+		handleOverflow(showInfo);
+		return () => handleOverflow(false);
+	}, [showInfo, initialOverflow]);
+
+	useEffect(() => {
+		const handleOverflow = (show) => {
+			if (show) {
+				const hasScrollbar = document.body.scrollHeight > window.innerHeight;
+				if (hasScrollbar) {
+					setInitialOverflow(document.body.style.overflow);
+					document.body.style.overflow = "hidden";
+				} else {
+					document.body.style.overflow = "hidden";
+				}
+			} else {
+				document.body.style.overflow = initialOverflow;
+			}
+		};
+
+		handleOverflow(showPostWindow);
+		return () => handleOverflow(false);
+	}, [showPostWindow, initialOverflow]);
 
 	useEffect(() => {
 		window.scrollTo({
@@ -82,7 +122,7 @@ export default function Show({ className }) {
 	return (
 		<>
 			{selectedAdventure ? (
-				<div className="show-container" ref={showContainerRef}>
+				<div className={`show-container ${className}`} ref={showContainerRef}>
 					<ShowHead
 						className={className}
 						adventure={selectedAdventure}

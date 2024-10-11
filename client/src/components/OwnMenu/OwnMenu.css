@@ -9,6 +9,8 @@
     border-radius: var(--border-radius);
     border: var(--border-info);
     box-shadow: var(--shadow-info);
+    overflow-y: auto;
+    width: 100%;
 }
 
 .own-menu-titles {
