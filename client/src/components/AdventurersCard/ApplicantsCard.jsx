@@ -1,39 +1,43 @@
-import "./AdventurersCard.css";
+import "./ApplicantsCard.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useAdventures } from "../../contexts/useAdventures";
-import Adventurer from "./Adventurer";
 import XButton from "../Buttons/XButton";
+import ApplicantsListItem from "./ApplicantsListItem";
 
-export default function AdventurersCard() {
+export default function ApplicantsCard() {
 	const { setResInfos } = useAdventures();
+	const { applicationsByAdventure, setApplicationsByAdventure } =
+		useAdventures();
 	const { selectedAdventure } = useAdventures();
+	const { refreshAplByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
-	const { refreshAdvByAdv } = useAdventures();
-	const { adventurersByAdventure, setAdventurersByAdventure } = useAdventures();
 
 	const adventureId = selectedAdventure._id;
 
 	useEffect(() => {
 		try {
-			axios.get(`/applications/${adventureId}/accepted`).then((res) => {
-				setAdventurersByAdventure(res.data);
+			axios.get(`/applications/${adventureId}/`).then((res) => {
+				setApplicationsByAdventure(res.data);
 			});
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
 		}
-	}, [setAdventurersByAdventure, setResInfos, adventureId, refreshAdvByAdv]);
+	}, [setApplicationsByAdventure, setResInfos, adventureId, refreshAplByAdv]);
 
 	return (
 		<>
-			{adventurersByAdventure.length > 0 ? (
+			{applicationsByAdventure.length > 0 ? (
 				<div className="adventurers-card">
 					<XButton action={() => setShowInfo(null)} />
-					<h3>Adventurers</h3>
+					<h3>Applicants</h3>
 					<ul className="adventurers">
-						{adventurersByAdventure.map((adventurer) => (
-							<Adventurer adventurer={adventurer} key={adventurer._id} />
+						{applicationsByAdventure.map((application) => (
+							<ApplicantsListItem
+								application={application}
+								key={application._id}
+							/>
 						))}
 					</ul>
 				</div>

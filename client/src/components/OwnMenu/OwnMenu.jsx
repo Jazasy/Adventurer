@@ -14,8 +14,10 @@ export default function OwnMenu({className}) {
 	useEffect(() => {
 		if (user) {
 			axios
-				.get(`/adventures/ownadventures/${user._id}`)
-				.then((res) => setOwnApplications(res.data))
+				.get(`/applications/own/${user._id}`)
+				.then((res) => {
+					setOwnApplications(res.data);
+				})
 				.catch((error) => {
 					if (error.response.data.message) {
 						resInfoError(error.response.data.message, setResInfos);

@@ -12,6 +12,10 @@ const ApplicationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Adventure"
     },
+    accepted: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const ApplicationModel = mongoose.model("Application", ApplicationSchema);

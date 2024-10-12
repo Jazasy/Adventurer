@@ -1,14 +1,14 @@
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 
-const applyToAdventure = async (adventureId, userId, setResInfos, setRefreshAdvByAdv) => {
+const applyToAdventure = async (adventureId, userId, setResInfos, setRefreshAplByAdv) => {
     try {
         const result = await axios.post(
-            `/adventures/${adventureId}/applications`,
+            `/applications/${adventureId}`,
             { user: userId }
         );
         resInfoError(result.data.message, setResInfos);
-        setRefreshAdvByAdv(oldvalue => !oldvalue);
+        setRefreshAplByAdv(oldvalue => !oldvalue);
     } catch (error) {
         resInfoError(error.response.data.message, setResInfos);
     }
@@ -16,8 +16,7 @@ const applyToAdventure = async (adventureId, userId, setResInfos, setRefreshAdvB
 
 const getIsApplied = async (userId, adventureId, setResInfos, setIsApplied) => {
     try {
-        const result = await axios.get(`/adventures/${adventureId}/applications/isApplied`, { params: { userId } });
-        
+        const result = await axios.get(`/applications/${adventureId}/isApplied`, { params: { userId } });
         setIsApplied(result.data);
     } catch (error) {
         resInfoError(error.response.data.message, setResInfos);

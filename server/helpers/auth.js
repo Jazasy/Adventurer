@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt"); 
 
 const generateAccessToken = (data) => {
-    return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60s' })
+    return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '600s' })
 }
 
 const generateRefreshToken = (data) => {

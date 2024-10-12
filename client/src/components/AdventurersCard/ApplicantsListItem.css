@@ -1,0 +1,41 @@
+.applicants-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.applicants-list-action {
+    display: flex;
+    flex-direction: row;
+    gap: var(--standard-gap);
+}
+
+.applicant-list-eye ,.applicants-list-x, .applicants-list-check {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.applicant-list-eye {
+    color: var(--secondary-text-color);
+}
+
+.applicant-list-eye:active {
+    transform: scale(1.1);
+}
+
+.applicants-list-x {
+    color: var(--danger-color);
+}
+
+.applicants-list-x:active {
+    transform: scale(1.1);
+}
+
+.applicants-list-check {
+    color: var(--success-color);
+}
+
+.applicants-list-check:active {
+    transform: scale(1.1);
+}

@@ -1,5 +1,6 @@
 import { useAdventures } from "../../contexts/useAdventures";
 import "./Adventurer.css";
+import { useEffect } from "react";
 
 export default function Adventurer({ adventurer }) {
     const { selectedAdventure } = useAdventures();

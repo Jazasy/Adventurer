@@ -15,12 +15,12 @@
     gap: 1rem;
 }
 
-.desc-button, .members-button {
+.desc-button, .adventurers-button, .applicants-button {
     display: none;
 }
 
 @media screen and (max-width: 1500px) {
-    .desc-button, .members-button {
+    .desc-button, .adventurers-button, .applicants-button {
         display: block;
     }
 }

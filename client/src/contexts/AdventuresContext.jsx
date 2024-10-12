@@ -9,7 +9,9 @@ export const AdventuresProvider = ({ children }) => {
 	const [resInfos, setResInfos] =useState([]);
 	const [user, setUser] = useState(null);
 	const [postIdForComments, setPostIdForComments] = useState(null);
-	const [adventurersByAdventure, setAdventurersByAventure] = useState([]);
+	const [applicationsByAdventure, setApplicationsByAdventure] = useState([]);
+	const [adventurersByAdventure, setAdventurersByAdventure] = useState([]);
+	const [refreshAplByAdv, setRefreshAplByAdv] = useState(true);
 	const [refreshAdvByAdv, setRefreshAdvByAdv] = useState(true);
 	const [showInfo, setShowInfo] = useState(null);
 
@@ -40,8 +42,12 @@ export const AdventuresProvider = ({ children }) => {
 				setUser,
 				postIdForComments,
 				setPostIdForComments,
+				applicationsByAdventure,
+				setApplicationsByAdventure,
 				adventurersByAdventure,
-				setAdventurersByAventure,
+				setAdventurersByAdventure,
+				refreshAplByAdv,
+				setRefreshAplByAdv,
 				refreshAdvByAdv,
 				setRefreshAdvByAdv,
 				showInfo,

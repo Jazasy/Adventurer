@@ -36,15 +36,15 @@ export default function PassInput({
 				ref={passInputRef}
 			/>
 			{show ? (
-				<i className="fa-regular fa-eye-slash" onMouseDown={toggleShow}></i>
+				<i className="fa-regular fa-eye-slash pass-eye-cross" onMouseDown={toggleShow}></i>
 			) : (
-				<i className="fa-regular fa-eye" onMouseDown={toggleShow}></i>
+				<i className="fa-regular fa-eye pass-eye" onMouseDown={toggleShow}></i>
 			)}
 			{className.includes("pass-info pass-info-") ? (
 				<p className={className}>{passInfoWord(className)}</p>
 			) : null}
 			{className.includes("pass-check") ? (
-				<i className="fa-solid fa-check"></i>
+				<i className="fa-solid fa-check pass-check"></i>
 			) : null}
 		</div>
 	);

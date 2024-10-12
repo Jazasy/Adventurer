@@ -9,6 +9,7 @@ const helmet = require("helmet");
 const authRoutes = require("./routes/authRoutes");
 const adventureRoutes = require("./routes/adventureRoutes");
 const postRoutes = require("./routes/postRoutes");
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const User = require("./models/user");
 const catchAsync = require("./helpers/catchAsync");
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use("/", authRoutes);
 app.use("/adventures", adventureRoutes);
 app.use("/posts", postRoutes);
+app.use("/applications", applicationRoutes);
 
 app.get("/test", (req, res) => {
     res.json("server is responsing");

@@ -12,12 +12,14 @@ import AdventurersCard from "../components/AdventurersCard/AdventurersCard";
 import { useState } from "react";
 import PostWindow from "../components/ShowMainAction/PostWindow";
 import { resInfoError } from "../components/ResponseInfo/resInfoHelpers";
+import ApplicantsCard from "../components/AdventurersCard/ApplicantsCard";
 
 export default function Show({ className }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	let { id } = useParams();
 	const { showInfo } = useAdventures();
 	const { setResInfos } = useAdventures();
+	const { setApplicationsByAdventure } = useAdventures();
 	const [showPostWindow, setShowPostWindow] = useState(false);
 
 	!id && selectedAdventure && (id = selectedAdventure._id);
@@ -139,8 +141,9 @@ export default function Show({ className }) {
 								<DescriptionCard description={selectedAdventure.description} />
 							</section>
 							<PostBoard adventureId={id} showPostWindow={showPostWindow} />
-							<section>
+							<section className="show-application-container">
 								<AdventurersCard />
+								<ApplicantsCard />
 							</section>
 						</section>
 						{showInfo ? (

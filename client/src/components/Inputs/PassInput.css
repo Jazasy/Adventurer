@@ -5,7 +5,7 @@
 	width: 100%; 			/* This is some new change */
 }
 
-.pass-info, .fa-solid.fa-check {
+.pass-info, .pass-check {
 	align-self: flex-end;
 	position: absolute;
 	right: 2rem;
@@ -31,8 +31,8 @@
 	color: var(--success-color);
 }
 
-.fa-regular.fa-eye,
-.fa-regular.fa-eye-slash {
+.pass-eye,
+.pass-eye-cross {
 	align-self: flex-end;
 	position: absolute;
 	right: 1rem;
@@ -42,11 +42,11 @@
 	cursor: pointer;
 }
 
-.fa-regular.fa-eye-slash {
+.pass-eye-cross {
     right: 0.91rem;
 }
 
-.fa-solid.fa-check {
+.pass-check {
 	font-size: 1.3rem;
 	top: 2.5rem;
 	color: var(--success-color)

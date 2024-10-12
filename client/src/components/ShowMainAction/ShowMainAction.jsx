@@ -2,7 +2,7 @@ import "./ShowMainAction.css";
 import Button1 from "../Buttons/Button1";
 import { useAdventures } from "../../contexts/useAdventures";
 import { applyToAdventure, getIsApplied } from "./showmainActionHelpers";
-import { getAdventurers } from "../AdventurersCard/adventurersCardHelpers";
+import { getApplicants } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
 import ShowOptions from "./ShowOptions";
 import OptionsButton from "../Buttons/OptionsButton";
@@ -10,8 +10,10 @@ import OptionsButton from "../Buttons/OptionsButton";
 export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
-	const { setAdventurersByAventure } = useAdventures();
-	const { setRefreshAdvByAdv } = useAdventures();
+	const { adventurersByAventure } = useAdventures();
+	const { applicationsByAdventure, setApplicationsByAdventure } =
+		useAdventures();
+	const { setRefreshAplByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
 	const [isApplied, setIsApplied] = useState();
 	const [showOptions, setShowOptions] = useState(false);
@@ -37,9 +39,9 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 			adventureId,
 			userId,
 			setResInfos,
-			setRefreshAdvByAdv
+			setRefreshAplByAdv
 		);
-		getAdventurers(adventureId, setAdventurersByAventure, setResInfos);
+		//getApplicants(adventureId, setApplicationsByAdventure, setResInfos);
 		getIsApplied(userId, adventureId, setResInfos, setIsApplied);
 	};
 
@@ -64,11 +66,20 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 					className="desc-button btn-fit-content btn-medium btn-info "
 					text="Description"
 				/>
-				<Button1
-					action={() => setShowInfo("adventurers")}
-					className="members-button btn-fit-content btn-medium btn-info"
-					text="Adventurers"
-				/>
+				{adventurersByAventure && adventurersByAventure.length > 0 ? (
+					<Button1
+						action={() => setShowInfo("adventurers")}
+						className="adventurers-button btn-fit-content btn-medium btn-info"
+						text="Adventurers"
+					/>
+				) : null}
+				{applicationsByAdventure && applicationsByAdventure.length > 0 ? (
+					<Button1
+						action={() => setShowInfo("applicants")}
+						className="applicants-button btn-fit-content btn-medium btn-info"
+						text="Applicants"
+					/>
+				) : null}
 				{isApplied ? (
 					<OptionsButton action={() => setShowOptions(true)} />
 				) : null}
