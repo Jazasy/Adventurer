@@ -3,12 +3,20 @@ import Post from "./Post";
 import CommentSectionContainer from "../CommentSection/CommentSectionContainer";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useAdventures } from "../../contexts/useAdventures";
 
 export default function PostBoard({ adventureId, showPostWindow }) {
 	const [posts, setPosts] = useState([]);
+	const prevAdventureId = useRef(adventureId);
 	const prevShowPostWindow = useRef(showPostWindow);
 
 	useEffect(() => {
+		//this previous adventureId checking mechanism is for to delete posts when the user changes the adventure. Otherwise, the posts will be kept in the state.
+		if (prevAdventureId.current !== adventureId) {
+			setPosts([]);
+		}
+		prevAdventureId.current = adventureId;
+
 		axios.get(`/posts/${adventureId}`).then((res) => setPosts(res.data));
 	}, [adventureId]);
 

@@ -19,7 +19,6 @@ export default function Show({ className }) {
 	let { id } = useParams();
 	const { showInfo } = useAdventures();
 	const { setResInfos } = useAdventures();
-	const { setApplicationsByAdventure } = useAdventures();
 	const [showPostWindow, setShowPostWindow] = useState(false);
 
 	!id && selectedAdventure && (id = selectedAdventure._id);

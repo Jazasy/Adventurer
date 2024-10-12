@@ -11,8 +11,6 @@ export default function ApplicantsListItem({ application }) {
 	const { selectedAdventure } = useAdventures();
 	const { user } = useAdventures();
 
-	const isLeader = selectedAdventure.leader._id === user._id;
-
 	const acceptApplication = async () => {
 		try {
 			const result = await axios.patch(`/applications/${application._id}`);
@@ -31,7 +29,7 @@ export default function ApplicantsListItem({ application }) {
 			<Adventurer adventurer={application} />
 			<div className="applicants-list-action">
 				<i className="fa-solid fa-eye applicant-list-eye"></i>
-				{isLeader ? (
+				{selectedAdventure && user._id && selectedAdventure.leader._id === user._id ? (
 					<>
 						<i className="fa-solid fa-circle-xmark applicants-list-x"></i>
 						<i

@@ -28,7 +28,7 @@ export default function ApplicantsCard() {
 
 	return (
 		<>
-			{applicationsByAdventure.length > 0 ? (
+			{applicationsByAdventure && applicationsByAdventure.length > 0 ? (
 				<div className="adventurers-card">
 					<XButton action={() => setShowInfo(null)} />
 					<h3>Applicants</h3>

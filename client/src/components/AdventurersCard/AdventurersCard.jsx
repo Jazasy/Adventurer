@@ -27,7 +27,7 @@ export default function AdventurersCard() {
 
 	return (
 		<>
-			{adventurersByAdventure.length > 0 ? (
+			{adventurersByAdventure && adventurersByAdventure.length > 0 ? (
 				<div className="adventurers-card">
 					<XButton action={() => setShowInfo(null)} />
 					<h3>Adventurers</h3>

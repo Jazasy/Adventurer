@@ -5,10 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function OwnMenuOwnAdventure({ adventure }) {
     const { setSelectedAdventure } = useAdventures();
+	const { setApplicationsByAdventure } = useAdventures();
+	const { setAdventurersByAdventure } = useAdventures();
 
 	const navigate = useNavigate();
 
     const openAdventure = () => {
+		//The following two line are necessary to avoid a bug where the applications and adventurers of the previous adventure are shown
+		setApplicationsByAdventure(null);
+		setAdventurersByAdventure(null);
+		setSelectedAdventure(null);
         setSelectedAdventure(adventure);
 		if(window.innerWidth < 1000) {
 			navigate(`/adventures/${adventure._id}`);
