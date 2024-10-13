@@ -1,6 +1,6 @@
 import "./AdventurersCard.css";
 import axios from "axios";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { useAdventures } from "../../contexts/useAdventures";
 import Adventurer from "./Adventurer";
@@ -13,17 +13,23 @@ export default function AdventurersCard() {
 	const { refreshAdvByAdv } = useAdventures();
 	const { adventurersByAdventure, setAdventurersByAdventure } = useAdventures();
 
-	const adventureId = selectedAdventure._id;
-
 	useEffect(() => {
 		try {
-			axios.get(`/applications/${adventureId}/accepted`).then((res) => {
-				setAdventurersByAdventure(res.data);
-			});
+			setAdventurersByAdventure(null); // Clear the previous adventurers
+			axios
+				.get(`/applications/${selectedAdventure._id}/accepted`)
+				.then((res) => {
+					setAdventurersByAdventure(res.data);
+				});
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
 		}
-	}, [setAdventurersByAdventure, setResInfos, adventureId, refreshAdvByAdv]);
+	}, [
+		setAdventurersByAdventure,
+		setResInfos,
+		selectedAdventure,
+		refreshAdvByAdv,
+	]);
 
 	return (
 		<>

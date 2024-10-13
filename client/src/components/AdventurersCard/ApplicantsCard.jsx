@@ -13,17 +13,16 @@ export default function ApplicantsCard() {
 	const { refreshAplByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
 
-	const adventureId = selectedAdventure._id;
-
 	useEffect(() => {
 		try {
-			axios.get(`/applications/${adventureId}`).then((res) => {
+			setApplicationsByAdventure(null);		// Clear the previous applications
+			axios.get(`/applications/${selectedAdventure._id}`).then((res) => {
 				setApplicationsByAdventure(res.data);
 			});
 		} catch (error) {
 			resInfoError(error.response.data.message, setResInfos);
 		}
-	}, [setApplicationsByAdventure, setResInfos, adventureId, refreshAplByAdv]);
+	}, [setApplicationsByAdventure, setResInfos, selectedAdventure, refreshAplByAdv]);
 
 	return (
 		<>

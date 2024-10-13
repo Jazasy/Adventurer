@@ -3,7 +3,7 @@ import { useAdventures } from "../../contexts/useAdventures";
 import CommentSection from "./CommentSection";
 
 export default function CommentSectionContainer() {
-	const { postIdForComments } = useAdventures();;
+	const { postIdForComments } = useAdventures();
 
 	return (
 		<>

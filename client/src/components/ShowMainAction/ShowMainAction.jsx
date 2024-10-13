@@ -23,6 +23,7 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const userId = user ? user._id : null;
 
 	useEffect(() => {
+		setIsAccepted(false);
 		if (user && adventurersByAdventure) {
 			setIsAccepted(getIsAccepted(user._id, adventurersByAdventure));
 			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
