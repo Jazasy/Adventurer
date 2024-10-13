@@ -1,30 +1,33 @@
 import "./ShowMainAction.css";
 import Button1 from "../Buttons/Button1";
 import { useAdventures } from "../../contexts/useAdventures";
-import { applyToAdventure, getIsApplied } from "./showmainActionHelpers";
+import { applyToAdventure, getIsAccepted, getIsApplied } from "./showmainActionHelpers";
 import { getApplicants } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
 import ShowOptions from "./ShowOptions";
 import OptionsButton from "../Buttons/OptionsButton";
+import axios from "axios";
 
 export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
-	const { adventurersByAventure } = useAdventures();
+	const { adventurersByAdventure, setAdventurersByAdventure } = useAdventures();
 	const { applicationsByAdventure, setApplicationsByAdventure } =
 		useAdventures();
 	const { setRefreshAplByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
-	const [isApplied, setIsApplied] = useState();
+	const [isApplied, setIsApplied] = useState(false);
+	const [isAccepted, setIsAccepted] = useState(false);
 	const [showOptions, setShowOptions] = useState(false);
 
 	const userId = user ? user._id : null;
 
 	useEffect(() => {
-		if (user) {
+		if (user && adventurersByAdventure) {
+			setIsAccepted(getIsAccepted(user._id, adventurersByAdventure));
 			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
 		}
-	}, [user]);
+	}, [user, adventurersByAdventure]);
 
 	useEffect(() => {
 		if (showOptions) {
@@ -42,12 +45,12 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 			setRefreshAplByAdv
 		);
 		//getApplicants(adventureId, setApplicationsByAdventure, setResInfos);
-		getIsApplied(userId, adventureId, setResInfos, setIsApplied);
+		//getIsApplied(userId, adventureId, setResInfos, setIsApplied);
 	};
 
 	return (
 		<section className="show-main-action">
-			{isApplied ? (
+			{isAccepted ? (
 				<Button1
 					action={openShowPostWindow}
 					className="btn-fit-content btn-big"
@@ -66,7 +69,7 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 					className="desc-button btn-fit-content btn-medium btn-info "
 					text="Description"
 				/>
-				{adventurersByAventure && adventurersByAventure.length > 0 ? (
+				{adventurersByAdventure && adventurersByAdventure.length > 0 ? (
 					<Button1
 						action={() => setShowInfo("adventurers")}
 						className="adventurers-button btn-fit-content btn-medium btn-info"
@@ -80,7 +83,7 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 						text="Applicants"
 					/>
 				) : null}
-				{isApplied ? (
+				{isAccepted ? (
 					<OptionsButton action={() => setShowOptions(true)} />
 				) : null}
 			</div>

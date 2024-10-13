@@ -16,7 +16,7 @@ import ApplicantsCard from "../components/AdventurersCard/ApplicantsCard";
 
 export default function Show({ className }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
-	let { id } = useParams();
+	let { id } = useParams(); // is means adventureId, I should change all of them in the future
 	const { showInfo } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const [showPostWindow, setShowPostWindow] = useState(false);
@@ -57,23 +57,7 @@ export default function Show({ className }) {
 		}
 	}, [id, selectedAdventure, setSelectedAdventure]);
 
-	/* useEffect(() => {
-		if (showInfo) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
-	}, [showInfo]);
-
-	useEffect(() => {
-		if (showPostWindow) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
-	}, [showPostWindow]); */
-
-	const [initialOverflow, setInitialOverflow] = useState('');
+	const [initialOverflow, setInitialOverflow] = useState("");
 
 	useEffect(() => {
 		const handleOverflow = (show) => {

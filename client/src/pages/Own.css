@@ -9,7 +9,7 @@
     display: grid;
     gap: var(--standard-gap);
     grid-template-columns: 1fr 1fr;
-    padding: var(--standard-gap);
+    padding: 0 var(--standard-gap);
 }
 
 @media screen and (max-width: 1000px) {

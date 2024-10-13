@@ -23,4 +23,10 @@ const getIsApplied = async (userId, adventureId, setResInfos, setIsApplied) => {
     }
 }
 
-export { applyToAdventure, getIsApplied };
+
+// Should I make a request to the server to get a boolean insted?
+const getIsAccepted = (userId, adventurersByAdventure) => {
+    return adventurersByAdventure.some(application => application.user._id === userId);
+}
+
+export { applyToAdventure, getIsApplied, getIsAccepted };

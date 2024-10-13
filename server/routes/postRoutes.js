@@ -8,6 +8,8 @@ const upload = multer({ storage: postStorage });
 
 const router = express.Router();
 
+//:id means postId, its needed to be changed to that in the future
+
 router.post("/:id/comments", hasToken, validateRefreshToken, validateAccessToken, catchAsync(comment));
 
 router.get("/:id/comments", catchAsync(giveComments));

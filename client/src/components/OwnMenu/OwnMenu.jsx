@@ -4,7 +4,7 @@ import { useAdventures } from "../../contexts/useAdventures";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
-import OwnMenuOwnAdventure from "./OwnMenuOwnAdventure";
+import MyAdventures from "./MyAdventures";
 
 export default function OwnMenu({className}) {
 	const { user } = useAdventures();
@@ -32,10 +32,7 @@ export default function OwnMenu({className}) {
 				<div className={`own-menu ${className}`}>
 					<p className="own-menu-titles">My Page</p>
 					<OwnMenuOwnPage />
-					<p className="own-menu-titles">My Adventures</p>
-					{ownApplications.map((ownApplication) => (
-						<OwnMenuOwnAdventure key={ownApplication._id} adventure={ownApplication.adventure} />
-					))}
+					<MyAdventures applications={ownApplications} />
 				</div>
 			) : null}
 		</>

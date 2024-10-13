@@ -1,5 +1,5 @@
 const express = require("express");
-const { giveApplicationsByUser, applyToAdventure, giveApplicationsByAdventure, isApplied, acceptApplication, giveAcceptedApplicationsByUser, giveAcceptedApplicationsByAdventure } = require("../controllers/applicationController");
+const { giveApplicationsByUser, applyToAdventure, giveApplicationsByAdventure, isApplied, acceptApplication, giveAcceptedApplicationsByUser, giveAcceptedApplicationsByAdventure, rejectApplication } = require("../controllers/applicationController");
 const catchAsync = require("../helpers/catchAsync");
 const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 
@@ -18,6 +18,8 @@ router.get("/:adventureId/accepted", catchAsync(giveAcceptedApplicationsByAdvent
 router.post("/:adventureId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(applyToAdventure));
 
 router.patch("/:applicationId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(acceptApplication));
+
+router.delete("/:applicationId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(rejectApplication));
 
 
 module.exports = router;

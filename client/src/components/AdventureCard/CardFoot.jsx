@@ -7,8 +7,12 @@ export default function CardFoot({ adventure }) {
 	const navigate = useNavigate();
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { user } = useAdventures();
+	const { setApplicationsByAdventure } = useAdventures();
+	const { setAdventurersByAdventure } = useAdventures();
 
 	const handleClick = () => {
+		setApplicationsByAdventure(null);
+		setAdventurersByAdventure(null);
 		setSelectedAdventure(adventure);
 		navigate(`/adventures/${adventure._id}`);
 	};

@@ -19,15 +19,12 @@ export default function CommentBar({ action }) {
 
 	const postComment = async (event) => {
 		try {
-            event.preventDefault();
-			await axios.post(`/posts/${postIdForComments}/comments`, {
-				userId,
-				comment,
-			});
-            setComment("");
+			event.preventDefault();
+			await axios.post(`/posts/${postIdForComments}/comments`, { comment });
+			setComment("");
 			action();
 		} catch (error) {
-			if (!error.response) return console.log(error);
+			if (!error.response.data.message) return console.log(error);
 			resInfoError(error.response.data.message, setResInfos);
 		}
 	};

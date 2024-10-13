@@ -1,6 +1,7 @@
-const Post = require('../models/post');
-const Like = require('../models/like');
-const Comment = require('../models/comment');
+const Post = require("../models/post");
+const Like = require("../models/like");
+const Comment = require("../models/comment");
+const Application = require("../models/application")
 
 const givePosts = async (req, res) => {
     const foundPosts = await Post.find();
@@ -20,13 +21,18 @@ const givePost = async (req, res) => {
 }
 
 const makePost = async (req, res) => {
-    const {adventureId} = req.params;
-    const { userId, content} = req.body;
-    if (!content) return res.status(400).json({ message: "Content can not be empty" });
-    if(!req.file) return res.status(400).json({ message: "You need to upload an image" }); 
-    const newPost = new Post({author: userId, adventure: adventureId, content: content, image: req.file.path});
-    await newPost.save();
-    res.status(201).send();
+    const { adventureId } = req.params;
+    const { content } = req.body;
+    const foundApplication = await Application.findOne({ user: req.userId, adventure: adventureId });
+    if ((foundApplication && foundApplication.accepted === true) || req.role === "admin") {
+        if (!content) return res.status(400).json({ message: "Content can not be empty" });
+        if (!req.file) return res.status(400).json({ message: "You need to upload an image" });
+        const newPost = new Post({ author: req.userId, adventure: adventureId, content: content, image: req.file.path });
+        await newPost.save();
+        res.status(201).send();
+    } else {
+        return res.status(403).json({ message: "You do not have permission to post in this adventure" });
+    }
 }
 
 const giveIsliked = async (req, res) => {
@@ -46,23 +52,22 @@ const giveLikeCount = async (req, res) => {
 
 const like = async (req, res) => {
     const { id } = req.params;
-    const newLike = new Like({ user: req.body.userId, post: id });
+    const newLike = new Like({ user: req.userId, post: id });
     await newLike.save();
     res.status(201).send();
 }
 
 const unlike = async (req, res) => {
     const { id } = req.params;
-    const { userId } = req.query;
-    await Like.findOneAndDelete({ user: userId, post: id });
+    await Like.findOneAndDelete({ user: req.userId, post: id });
     res.status(204).send();
 }
 
 const comment = async (req, res) => {
     const { id } = req.params;
-    const { userId, comment } = req.body;
+    const { comment } = req.body;
     if (!comment) return res.status(400).json({ message: "Comment can not be empty" });
-    const newComment = new Comment({ author: userId, content: comment, post: id });
+    const newComment = new Comment({ author: req.userId, content: comment, post: id });
     newComment.save();
     res.status(201).send();
 }

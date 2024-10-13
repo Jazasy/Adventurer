@@ -8,8 +8,7 @@ import ApplicantsListItem from "./ApplicantsListItem";
 
 export default function ApplicantsCard() {
 	const { setResInfos } = useAdventures();
-	const { applicationsByAdventure, setApplicationsByAdventure } =
-		useAdventures();
+	const { applicationsByAdventure, setApplicationsByAdventure } =useAdventures();
 	const { selectedAdventure } = useAdventures();
 	const { refreshAplByAdv } = useAdventures();
 	const { setShowInfo } = useAdventures();
@@ -18,7 +17,7 @@ export default function ApplicantsCard() {
 
 	useEffect(() => {
 		try {
-			axios.get(`/applications/${adventureId}/`).then((res) => {
+			axios.get(`/applications/${adventureId}`).then((res) => {
 				setApplicationsByAdventure(res.data);
 			});
 		} catch (error) {
