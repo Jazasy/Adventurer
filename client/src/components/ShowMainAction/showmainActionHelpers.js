@@ -14,13 +14,60 @@ const applyToAdventure = async (adventureId, userId, setResInfos, setRefreshAplB
     }
 };
 
-const getIsApplied = async (userId, adventureId, setResInfos, setIsApplied) => {
+const abandonAdventure = async (applicationsByAdventure, setRefreshAplByAdv, adventurersByAdventure, setRefreshAdvByAdv, userId, setResInfos) => {
+    try {
+        let applicationType = null;
+
+        let foundApplication = applicationsByAdventure.find(application => application.user._id === userId);
+        if (foundApplication) {
+            applicationType = "application";
+        } else {
+            foundApplication = adventurersByAdventure.find(adventurer => adventurer.user._id === userId);
+            if (foundApplication) {
+                applicationType = "adventurer";
+            }
+        }
+
+        if (foundApplication) {
+            const result = await axios.delete(`/applications/${foundApplication._id}`);
+            if (result.data.message) {
+                resInfoError(result.data.message, setResInfos);
+            } else {
+                resInfoError("Application abandoned", setResInfos);
+            }
+            switch (applicationType) {
+                case "application":
+                    setRefreshAplByAdv(prev => !prev);
+                    break;
+                case "adventurer":
+                    setRefreshAdvByAdv(prev => !prev);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            resInfoError("Your application was not found", setResInfos);
+        }
+    } catch (error) {
+        if (error.response.data.message) {
+            resInfoError(error.response.data.message, setResInfos);
+        } else {
+            resInfoError("Something went wrong", setResInfos);
+        }
+    }
+}
+
+/* const getIsApplied = async (userId, adventureId, setResInfos, setIsApplied) => {
     try {
         const result = await axios.get(`/applications/${adventureId}/isApplied`, { params: { userId } });
         setIsApplied(result.data);
     } catch (error) {
         resInfoError(error.response.data.message, setResInfos);
     }
+} */
+
+const getIsApplied = (userId, applicationsByAdventure) => {
+    return applicationsByAdventure.some(application => application.user._id === userId);
 }
 
 
@@ -29,4 +76,4 @@ const getIsAccepted = (userId, adventurersByAdventure) => {
     return adventurersByAdventure.some(application => application.user._id === userId);
 }
 
-export { applyToAdventure, getIsApplied, getIsAccepted };
+export { applyToAdventure, abandonAdventure, getIsApplied, getIsAccepted };

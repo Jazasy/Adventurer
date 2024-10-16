@@ -1,7 +1,11 @@
 import "./ShowMainAction.css";
 import Button1 from "../Buttons/Button1";
 import { useAdventures } from "../../contexts/useAdventures";
-import { applyToAdventure, getIsAccepted, getIsApplied } from "./showmainActionHelpers";
+import {
+	applyToAdventure,
+	getIsAccepted,
+	getIsApplied,
+} from "./showmainActionHelpers";
 import { getApplicants } from "../AdventurersCard/adventurersCardHelpers";
 import { useEffect, useState } from "react";
 import ShowOptions from "./ShowOptions";
@@ -26,9 +30,13 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 		setIsAccepted(false);
 		if (user && adventurersByAdventure) {
 			setIsAccepted(getIsAccepted(user._id, adventurersByAdventure));
-			getIsApplied(user._id, adventureId, setResInfos, setIsApplied);
 		}
-	}, [user, adventurersByAdventure]);
+
+		setIsApplied(false);
+		if (user && applicationsByAdventure) {
+			setIsApplied(getIsApplied(user._id, applicationsByAdventure));
+		}
+	}, [user, adventurersByAdventure, applicationsByAdventure]);
 
 	useEffect(() => {
 		if (showOptions) {
@@ -45,8 +53,6 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 			setResInfos,
 			setRefreshAplByAdv
 		);
-		//getApplicants(adventureId, setApplicationsByAdventure, setResInfos);
-		//getIsApplied(userId, adventureId, setResInfos, setIsApplied);
 	};
 
 	return (
@@ -57,11 +63,13 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 					className="btn-fit-content btn-big"
 					text="Post"
 				/>
+			) : isApplied ? (
+				<Button1 className="btn-fit-content btn-big btn-muted" text="Applied" />
 			) : (
 				<Button1
 					action={clickJoinButton}
 					className="btn-fit-content btn-big"
-					text="Join"
+					text="Apply"
 				/>
 			)}
 			<div className="show-main-action-info">
@@ -84,7 +92,7 @@ export default function ShowMainAction({ adventureId, openShowPostWindow }) {
 						text="Applicants"
 					/>
 				) : null}
-				{isAccepted ? (
+				{isApplied || isAccepted ? (
 					<OptionsButton action={() => setShowOptions(true)} />
 				) : null}
 			</div>

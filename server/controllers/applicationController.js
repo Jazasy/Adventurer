@@ -32,7 +32,7 @@ const giveAcceptedApplicationsByAdventure = async (req, res) => {
 
 const giveApplicationsByUser = async (req, res) => {
     const { userId } = req.params;
-    const foundApplications = await Application.find({ user: userId }).populate({ path: "adventure", populate: { path: "leader" } });
+    const foundApplications = await Application.find({ user: userId, accepted: false }).populate({ path: "adventure", populate: { path: "leader" } });
     res.json(foundApplications);
 }
 
@@ -65,13 +65,16 @@ const acceptApplication = async (req, res) => {
 
 const rejectApplication = async (req, res) => {
     const { applicationId } = req.params;
-    const foundApplication = await Application.findById(applicationId).populate({path: "adventure", select: "leader"});
-    if(!foundApplication) return res.status(404).json({ message: "Application was not found" });
-    if(foundApplication.adventure.leader.toString() === req.userId || req.role === "admin") {
+    const foundApplication = await Application.findById(applicationId).populate({ path: "adventure", select: "leader" });
+    if (!foundApplication) return res.status(404).json({ message: "Application was not found" });
+    if (foundApplication.user.toString() === req.userId) {
         await Application.findByIdAndDelete(applicationId);
-        res.status(200).json({ message: "Application rejected successfully" });
+        return res.status(200).json({ message: "Adventure abandoned successfully" });
+    } else if (foundApplication.adventure.leader.toString() === req.userId || req.role === "admin") {
+        await Application.findByIdAndDelete(applicationId);
+        return res.status(200).json({ message: "Application rejected successfully" });
     } else {
-        res.status(403).json({ message: "You don't have permission to reject this application" });
+        return res.status(403).json({ message: "You don't have permission to reject this application" });
     }
 }
 

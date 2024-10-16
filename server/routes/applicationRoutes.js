@@ -21,5 +21,7 @@ router.patch("/:applicationId", hasToken, validateRefreshToken, validateAccessTo
 
 router.delete("/:applicationId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(rejectApplication));
 
+router.delete("/:")
+
 
 module.exports = router;

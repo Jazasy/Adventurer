@@ -14,4 +14,41 @@
     transform: translate(-50%, -50%);
     padding: var(--standard-gap);
     background-color: var(--background-color);
+    border-radius: var(--border-radius);
+}
+
+.show-options-item {
+    font-size: var(--bigger-font-size);
+    color: var(--secondary-text-color);
+    cursor: pointer;
+}
+
+.show-options-item-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.show-options-leave-icon {
+    color: var(--danger-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px){
+    .show-options {
+        width: 97%;
+    }
+}
+
+@media screen and (min-width: 700px){
+    .show-options {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .show-options {
+        width: 30%;
+    }
 }
