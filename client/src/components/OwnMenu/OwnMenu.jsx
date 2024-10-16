@@ -6,13 +6,14 @@ import axios from "axios";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import MyApplications from "./MyApplications";
 import MyAcceptedApplications from "./MyAcceptedApplications";
+import Loader from "../Loader/Loader";
 
 export default function OwnMenu({ className }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
-	const [ownApplications, setOwnApplications] = useState([]);
-	const [ownAcceptedApplications, setOwnAcceptedApplications] = useState([]);
-	const [ownAdventures, setOwnAdventures] = useState([]);
+	const [ownApplications, setOwnApplications] = useState(null);
+	const [ownAcceptedApplications, setOwnAcceptedApplications] = useState(null);
+	const [ownAdventures, setOwnAdventures] = useState(null);
 	const { refreshAplByAdv } = useAdventures();
 	const { refreshAdvByAdv } = useAdventures();
 
@@ -22,7 +23,7 @@ export default function OwnMenu({ className }) {
 				.get(`/applications/own/${user._id}`)
 				.then((res) => {
 					setOwnApplications(res.data);
-					return axios.get(`/applications/own/${user._id}/accepted`)
+					return axios.get(`/applications/own/${user._id}/accepted`);
 				})
 				.then((res) => {
 					setOwnAcceptedApplications(res.data);

@@ -1,6 +1,7 @@
 import AdventureBoard from "../components/AdventureBoard/AdventureBoard";
 import "./Home.css";
 import HomeHead from "../components/HomeHead/HomeHead";
+import Loader from "../components/Loader/Loader";
 
 export default function Home() {
 	return (
