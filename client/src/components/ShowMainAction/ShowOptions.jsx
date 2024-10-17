@@ -1,26 +1,38 @@
 import XButton from "../Buttons/XButton";
-import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import "./ShowOptions.css";
 import { useAdventures } from "../../contexts/useAdventures";
-import { abandonAdventure } from "./showmainActionHelpers";
+import { abandonAdventure, deleteAdventure } from "./showmainActionHelpers";
 
 export default function ShowOptions({ closeOptions }) {
 	const { setResInfos } = useAdventures();
 	const { user } = useAdventures();
 	const { applicationsByAdventure } = useAdventures();
 	const { adventurersByAdventure } = useAdventures();
-    const { setRefreshAplByAdv } = useAdventures();
-    const { setRefreshAdvByAdv } = useAdventures();
+	const { setRefreshAplByAdv } = useAdventures();
+	const { setRefreshAdvByAdv } = useAdventures();
+	const { selectedAdventure } = useAdventures();
 
 	const userId = user ? user._id : null;
 
 	const clickAbandonAdventure = () => {
 		abandonAdventure(
 			applicationsByAdventure,
-            setRefreshAplByAdv,
+			setRefreshAplByAdv,
 			adventurersByAdventure,
-            setRefreshAdvByAdv,
+			setRefreshAdvByAdv,
 			userId,
+			setResInfos
+		);
+		closeOptions();
+	};
+
+	const clickDeleteAdventure = async () => {
+		deleteAdventure(
+			applicationsByAdventure,
+			setRefreshAplByAdv,
+			adventurersByAdventure,
+			setRefreshAdvByAdv,
+			selectedAdventure._id,
 			setResInfos
 		);
 		closeOptions();
@@ -32,13 +44,24 @@ export default function ShowOptions({ closeOptions }) {
 				<XButton action={closeOptions} />
 				<li className="show-options-item-with-icon">
 					<p onClick={clickAbandonAdventure} className="show-options-item">
-						abandon adventure
+						Abandon Adventure
 					</p>
 					<i
 						onClick={clickAbandonAdventure}
 						className="fa-solid fa-person-walking-arrow-right show-options-leave-icon"
 					></i>
 				</li>
+				{selectedAdventure.leader._id === userId ? (
+					<li className="show-options-item-with-icon">
+						<p onClick={clickDeleteAdventure} className="show-options-item">
+							Delete Adventure
+						</p>
+						<i
+							onClick={clickDeleteAdventure}
+							className="fa-regular fa-trash-can show-options-trash-icon"
+						></i>
+					</li>
+				) : null}
 			</ul>
 		</main>
 	);

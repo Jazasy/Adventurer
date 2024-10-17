@@ -15,6 +15,9 @@
     padding: var(--standard-gap);
     background-color: var(--background-color);
     border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--standard-gap);
 }
 
 .show-options-item {
@@ -29,10 +32,14 @@
     justify-content: space-between;
 }
 
-.show-options-leave-icon {
+.show-options-leave-icon, .show-options-trash-icon {
     color: var(--danger-color);
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+.show-options-leave-icon:active, .show-options-trash-icon:active {
+    transform: scale(0.9);
 }
 
 @media screen and (max-width: 700px){

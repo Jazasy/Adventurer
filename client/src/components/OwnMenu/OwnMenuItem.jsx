@@ -2,7 +2,7 @@ import "./OwnMenuItem.css";
 import { useAdventures } from "../../contexts/useAdventures";
 import { useNavigate } from "react-router-dom";
 
-export default function OwnMenuOwnAdventure({ adventure, accepted = false }) {
+export default function OwnMenuItem({ adventure, accepted = false }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { setApplicationsByAdventure } = useAdventures();
 	const { setAdventurersByAdventure } = useAdventures();

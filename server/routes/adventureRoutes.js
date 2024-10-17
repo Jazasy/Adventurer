@@ -1,5 +1,5 @@
 const express = require('express');
-const { giveAdventures, giveAdventure, createAdventure } = require('../controllers/adventureController');
+const { giveAdventures, giveAdventure, createAdventure, deleteAdventure } = require('../controllers/adventureController');
 const catchAsync = require("../helpers/catchAsync");
 const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 const multer = require("multer");
@@ -13,5 +13,7 @@ router.get("/", catchAsync(giveAdventures));
 router.post("/", hasToken, validateRefreshToken, validateAccessToken, upload.single("image"), catchAsync(createAdventure));
 
 router.get("/:adventureId", catchAsync(giveAdventure));
+
+router.delete("/:adventureId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(deleteAdventure));
 
 module.exports = router;

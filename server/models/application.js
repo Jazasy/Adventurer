@@ -18,6 +18,14 @@ const ApplicationSchema = new Schema({
     }
 })
 
+ApplicationSchema.post("save", function (doc) {
+    console.log("APPLICATION CREATED", doc);
+})
+
+ApplicationSchema.post("deleteMany", function(doc) {
+    console.log("APPLICATIONS DELETED", doc);
+})
+
 const ApplicationModel = mongoose.model("Application", ApplicationSchema);
 
 module.exports = ApplicationModel;

@@ -14,6 +14,14 @@ const LikeSchema = new Schema({
     }
 })
 
+LikeSchema.post("save", function (doc) {
+    console.log("LIKE CREATED", doc);
+})
+
+LikeSchema.post("deleteMany", function(doc) {
+    console.log("LIKES DELETED", doc);
+})
+
 const LikeModel = mongoose.model("Like", LikeSchema);
 
 module.exports = LikeModel;

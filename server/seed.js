@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const bcrypt = require("bcrypt");
-const { hashPassword } = require("./helpers/auth")
+const { hashPassword } = require("./helpers/auth");
+const { cloudinary } = require("./cloudinary");
 
 const Adventure = require("./models/adventure");
 const User = require("./models/user");
@@ -18,8 +19,8 @@ const adventures = [
     {
         title: "Climbing the K2",
         images: [
-            "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179243/Adventurer/seed/u1h782p5nwafhsw5qwhz.jpg",
         ],
         description: "K2 is the second highest mountain in the world, after Mount Everest, at 8,611 metres (28,251 ft) above sea level. It is located on the China–Pakistan border between Baltistan in the Gilgit-Baltistan region of northern Pakistan, and Dafdar Township in Taxkorgan Tajik Autonomous County of Xinjiang, China.",
         location: "K2, China",
@@ -28,8 +29,8 @@ const adventures = [
     {
         title: "Sailing across the Pacific Ocean",
         images: [
-            "https://images.unsplash.com/photo-1500627964684-141351970a7f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhaWxpbmd8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1664304679616-b35eb168e3e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179318/Adventurer/seed/flhbhapb5lodj51mdn5f.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179334/Adventurer/seed/gc8vljqj7foa7md0s8bg.jpg",
         ],
         description: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean in the south and is bounded by the continents of Asia and Australia in the west and the Americas in the east.",
         location: "Pacific Ocean",
@@ -38,7 +39,7 @@ const adventures = [
     {
         title: "Learn to surf",
         images: [
-            "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179349/Adventurer/seed/gb4uagccgquq6fqb1u4e.jpg",
         ],
         description: "Surfing is a surface water sport in which an individual, a surfer, uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore.",
         location: "Hawaii",
@@ -47,7 +48,7 @@ const adventures = [
     {
         title: "Go China to learn kungfu",
         images: [
-            "https://images.unsplash.com/photo-1617480348565-d60644e43fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGt1bmdmdXxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179362/Adventurer/seed/blpyiekqnurblsyowpiq.jpg",
         ],
         description: "Kung Fu is a Chinese term referring to any study, learning, or practice that requires patience, energy, and time to complete. In its original meaning, kung fu can refer to any discipline or skill achieved through hard work and practice, not necessarily martial arts.",
         location: "China",
@@ -56,8 +57,8 @@ const adventures = [
     {
         title: "Climbing the K2",
         images: [
-            "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179243/Adventurer/seed/u1h782p5nwafhsw5qwhz.jpg",
         ],
         description: "K2 is the second highest mountain in the world, after Mount Everest, at 8,611 metres (28,251 ft) above sea level. It is located on the China–Pakistan border between Baltistan in the Gilgit-Baltistan region of northern Pakistan, and Dafdar Township in Taxkorgan Tajik Autonomous County of Xinjiang, China.",
         location: "K2, China",
@@ -66,8 +67,8 @@ const adventures = [
     {
         title: "Sailing across the Pacific Ocean",
         images: [
-            "https://images.unsplash.com/photo-1500627964684-141351970a7f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhaWxpbmd8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1664304679616-b35eb168e3e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179318/Adventurer/seed/flhbhapb5lodj51mdn5f.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179334/Adventurer/seed/gc8vljqj7foa7md0s8bg.jpg",
         ],
         description: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean in the south and is bounded by the continents of Asia and Australia in the west and the Americas in the east.",
         location: "Pacific Ocean",
@@ -76,7 +77,7 @@ const adventures = [
     {
         title: "Learn to surf",
         images: [
-            "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179349/Adventurer/seed/gb4uagccgquq6fqb1u4e.jpg",
         ],
         description: "Surfing is a surface water sport in which an individual, a surfer, uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore.",
         location: "Hawaii",
@@ -85,7 +86,7 @@ const adventures = [
     {
         title: "Go China to learn kungfu",
         images: [
-            "https://images.unsplash.com/photo-1617480348565-d60644e43fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGt1bmdmdXxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179362/Adventurer/seed/blpyiekqnurblsyowpiq.jpg",
         ],
         description: "Kung Fu is a Chinese term referring to any study, learning, or practice that requires patience, energy, and time to complete. In its original meaning, kung fu can refer to any discipline or skill achieved through hard work and practice, not necessarily martial arts.",
         location: "China",
@@ -94,8 +95,8 @@ const adventures = [
     {
         title: "Climbing the K2",
         images: [
-            "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179243/Adventurer/seed/u1h782p5nwafhsw5qwhz.jpg",
         ],
         description: "K2 is the second highest mountain in the world, after Mount Everest, at 8,611 metres (28,251 ft) above sea level. It is located on the China–Pakistan border between Baltistan in the Gilgit-Baltistan region of northern Pakistan, and Dafdar Township in Taxkorgan Tajik Autonomous County of Xinjiang, China.",
         location: "K2, China",
@@ -104,8 +105,8 @@ const adventures = [
     {
         title: "Sailing across the Pacific Ocean",
         images: [
-            "https://images.unsplash.com/photo-1500627964684-141351970a7f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhaWxpbmd8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1664304679616-b35eb168e3e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179318/Adventurer/seed/flhbhapb5lodj51mdn5f.jpg",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179334/Adventurer/seed/gc8vljqj7foa7md0s8bg.jpg",
         ],
         description: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean in the south and is bounded by the continents of Asia and Australia in the west and the Americas in the east.",
         location: "Pacific Ocean",
@@ -114,7 +115,7 @@ const adventures = [
     {
         title: "Learn to surf",
         images: [
-            "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179349/Adventurer/seed/gb4uagccgquq6fqb1u4e.jpg",
         ],
         description: "Surfing is a surface water sport in which an individual, a surfer, uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore.",
         location: "Hawaii",
@@ -123,89 +124,12 @@ const adventures = [
     {
         title: "Go China to learn kungfu",
         images: [
-            "https://images.unsplash.com/photo-1617480348565-d60644e43fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGt1bmdmdXxlbnwwfHwwfHx8MA%3D%3D",
+            "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179362/Adventurer/seed/blpyiekqnurblsyowpiq.jpg",
         ],
         description: "Kung Fu is a Chinese term referring to any study, learning, or practice that requires patience, energy, and time to complete. In its original meaning, kung fu can refer to any discipline or skill achieved through hard work and practice, not necessarily martial arts.",
         location: "China",
         date: new Date(2024, 6, 1),
     },
-    {
-        title: "Climbing the K2",
-        images: [
-            "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        ],
-        description: "K2 is the second highest mountain in the world, after Mount Everest, at 8,611 metres (28,251 ft) above sea level. It is located on the China–Pakistan border between Baltistan in the Gilgit-Baltistan region of northern Pakistan, and Dafdar Township in Taxkorgan Tajik Autonomous County of Xinjiang, China.",
-        location: "K2, China",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Sailing across the Pacific Ocean",
-        images: [
-            "https://images.unsplash.com/photo-1500627964684-141351970a7f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhaWxpbmd8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1664304679616-b35eb168e3e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        ],
-        description: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean in the south and is bounded by the continents of Asia and Australia in the west and the Americas in the east.",
-        location: "Pacific Ocean",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Learn to surf",
-        images: [
-            "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
-        ],
-        description: "Surfing is a surface water sport in which an individual, a surfer, uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore.",
-        location: "Hawaii",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Go China to learn kungfu",
-        images: [
-            "https://images.unsplash.com/photo-1617480348565-d60644e43fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGt1bmdmdXxlbnwwfHwwfHx8MA%3D%3D",
-        ],
-        description: "Kung Fu is a Chinese term referring to any study, learning, or practice that requires patience, energy, and time to complete. In its original meaning, kung fu can refer to any discipline or skill achieved through hard work and practice, not necessarily martial arts.",
-        location: "China",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Climbing the K2",
-        images: [
-            "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        ],
-        description: "K2 is the second highest mountain in the world, after Mount Everest, at 8,611 metres (28,251 ft) above sea level. It is located on the China–Pakistan border between Baltistan in the Gilgit-Baltistan region of northern Pakistan, and Dafdar Township in Taxkorgan Tajik Autonomous County of Xinjiang, China.",
-        location: "K2, China",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Sailing across the Pacific Ocean",
-        images: [
-            "https://images.unsplash.com/photo-1500627964684-141351970a7f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhaWxpbmd8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1664304679616-b35eb168e3e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        ],
-        description: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean in the south and is bounded by the continents of Asia and Australia in the west and the Americas in the east.",
-        location: "Pacific Ocean",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Learn to surf",
-        images: [
-            "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
-        ],
-        description: "Surfing is a surface water sport in which an individual, a surfer, uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore.",
-        location: "Hawaii",
-        date: new Date(2024, 6, 1),
-    },
-    {
-        title: "Go China to learn kungfu",
-        images: [
-            "https://images.unsplash.com/photo-1617480348565-d60644e43fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGt1bmdmdXxlbnwwfHwwfHx8MA%3D%3D",
-        ],
-        description: "Kung Fu is a Chinese term referring to any study, learning, or practice that requires patience, energy, and time to complete. In its original meaning, kung fu can refer to any discipline or skill achieved through hard work and practice, not necessarily martial arts.",
-        location: "China",
-        date: new Date(2024, 6, 1),
-    },
-
 ];
 
 const setDatabase = async () => {
@@ -215,19 +139,30 @@ const setDatabase = async () => {
     await Post.deleteMany({});
     await Comment.deleteMany({});
     await Application.deleteMany({});
+
+    let prefix = "Adventurer/adventures";
+    await cloudinary.api.delete_resources_by_prefix(prefix, { type: "upload", resource_type: "image" })
+        .then(result => console.log("Cloudinary delete result:", result))
+        .catch(error => console.error("Cloudinary delete error:", error));
+
+    prefix = "Adventurer/posts";
+    await cloudinary.api.delete_resources_by_prefix(prefix, { type: "upload", resource_type: "image" })
+        .then(result => console.log("Cloudinary delete result:", result))
+        .catch(error => console.error("Cloudinary delete error:", error));
+
     const admin = new User({
         username: "admin",
         password: await hashPassword("admin"),
         email: "admin@gmail.com",
         role: "admin",
-        pfp: "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg",
+        pfp: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg",
     });
     const user = new User({
         username: "user",
         password: await hashPassword("password"),
         email: "user@gmail.com",
-        role: "user", 
-        pfp: "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg",
+        role: "user",
+        pfp: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg",
     });
     for (const adventure of adventures) {
         const newAdventure = new Adventure({
@@ -238,21 +173,21 @@ const setDatabase = async () => {
             author: admin._id,
             adventure: newAdventure._id,
             content: "This is a sample post",
-            image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
 
         })
         const newPost1 = new Post({
             author: admin._id,
             adventure: newAdventure._id,
             content: "This is a sample post",
-            image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
 
         })
         const newPost2 = new Post({
             author: admin._id,
             adventure: newAdventure._id,
             content: "This is a sample post",
-            image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179201/Adventurer/seed/i7onlcnzonv2xgf0umwq.jpg",
 
         })
         await newPost.save();

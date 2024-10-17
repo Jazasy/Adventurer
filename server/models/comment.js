@@ -18,6 +18,14 @@ const CommentSchema = new Schema({
     }
 })
 
+CommentSchema.post("save", function (doc) {
+    console.log("COMMENT CREATED", doc);
+})
+
+CommentSchema.post("deleteMany", function(doc) {
+    console.log("COMMENTS DELETED", doc);
+})
+
 const CommentModel = mongoose.model("Comment", CommentSchema);
 
 module.exports = CommentModel;

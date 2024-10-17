@@ -20,6 +20,14 @@ const PostSchema = new Schema({
     }
 });
 
+PostSchema.post("save", function (doc) {
+    console.log("POST CREATED", doc);
+})
+
+PostSchema.post("deleteMany", function(doc) {
+    console.log("POSTS DELETED", doc);
+})
+
 const PostModel = mongoose.model("Post", PostSchema);
 
 module.exports = PostModel;
