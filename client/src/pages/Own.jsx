@@ -3,6 +3,7 @@ import "./Own.css";
 import Show from "./Show";
 import { useAdventures } from "../contexts/useAdventures";
 import { useEffect } from "react";
+import Profile from "./Profile";
 
 export default function Own() {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
@@ -11,12 +12,20 @@ export default function Own() {
 
 	useEffect(() => {
 		setSelectedAdventure(null);
-	}, [setSelectedAdventure, setApplicationsByAdventure, setAdventurersByAdventure]);
+	}, [
+		setSelectedAdventure,
+		setApplicationsByAdventure,
+		setAdventurersByAdventure,
+	]);
 
 	return (
 		<main className="own-container">
 			<OwnMenu />
-			<Show className="show-head-rounded show-hiden show-own" />
+			{selectedAdventure ? (
+				<Show className="show-head-rounded show-hiden show-own" />
+			) : (
+				<Profile className="profile-hiden"/>
+			)}
 		</main>
 	);
 }

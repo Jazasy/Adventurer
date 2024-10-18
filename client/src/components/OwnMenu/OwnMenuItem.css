@@ -5,6 +5,7 @@
     align-items: center;
     padding: var(--gap-from-bazel) var(--standard-gap);
     gap: var(--standard-gap);
+    width: 100%;
 }
 
 .own-menu-actions {

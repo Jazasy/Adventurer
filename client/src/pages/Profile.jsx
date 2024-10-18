@@ -1,11 +1,11 @@
 import { useAdventures } from "../contexts/useAdventures";
 import "./Profile.css";
 
-export default function Profile() {
+export default function Profile({ className }) {
 	const { user } = useAdventures();
 
 	return (
-		<div>
+		<div className={className}>
 			<h1>Profile</h1>
 			{user ? (
 				<ul>
