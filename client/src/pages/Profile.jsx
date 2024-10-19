@@ -1,23 +1,14 @@
+import PostBoard from "../components/PostBoard/PostBoard";
 import { useAdventures } from "../contexts/useAdventures";
 import "./Profile.css";
 
 export default function Profile({ className }) {
 	const { user } = useAdventures();
+	const userId = user ? user._id : null;
 
 	return (
 		<div className={className}>
-			<h1>Profile</h1>
-			{user ? (
-				<ul>
-					{Object.entries(user).map(([key, value]) => {
-						return (
-							<li key={key}>
-								{key}: {value}
-							</li>
-						);
-					})}
-				</ul>
-			) : null}
+			<PostBoard userId={userId}/>
 		</div>
 	);
 }

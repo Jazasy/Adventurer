@@ -10,13 +10,19 @@ const givePosts = async (req, res) => {
 
 const givePostsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
-    const foundPosts = await Post.find({ adventure: adventureId }).populate("author");
+    const foundPosts = await Post.find({ adventure: adventureId }).populate({path: "author", select: "username pfp"});
+    res.json(foundPosts.reverse());
+}
+
+const givePostsByUser = async (req, res) => {
+    const {userId} = req.params;
+    const foundPosts = await Post.find({author: userId}).populate({path: "author", select: "username pfp"});
     res.json(foundPosts.reverse());
 }
 
 const givePost = async (req, res) => {
     const { id } = req.params;
-    const foundPost = await Post.findById(id).populate("author");
+    const foundPost = await Post.findById(id).populate({path: "author", select: "username pfp"});
     res.json(foundPost);
 }
 
@@ -74,13 +80,14 @@ const comment = async (req, res) => {
 
 const giveComments = async (req, res) => {
     const { id } = req.params;
-    const foundComments = await Comment.find({ post: id }).populate("author");
+    const foundComments = await Comment.find({ post: id }).populate({path: "author", select: "username pfp"});
     res.json(foundComments);
 }
 
 module.exports = {
     givePosts,
     givePostsByAdventure,
+    givePostsByUser,
     givePost,
     giveIsliked,
     giveLikeCount,
