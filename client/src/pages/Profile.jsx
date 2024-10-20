@@ -7,8 +7,10 @@ export default function Profile({ className }) {
 	const userId = user ? user._id : null;
 
 	return (
-		<div className={className}>
-			<PostBoard userId={userId}/>
+		<div className={`profile ${className}`}>
+			<div className="profile-main">
+				<PostBoard userId={userId} />
+			</div>
 		</div>
 	);
 }

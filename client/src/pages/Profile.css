@@ -1,5 +1,25 @@
+.profile-main {
+	margin: auto;
+}
+
 @media screen and (max-width: 1000px) {
 	.profile-hiden {
 		display: none;
+	}
+
+	.profile-main {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	.profile-main {
+		width: 70%;
+	}
+}
+
+@media screen and (min-width: 2000px) {
+	.profile-main {
+		width: 40%;
 	}
 }
