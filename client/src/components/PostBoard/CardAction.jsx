@@ -5,6 +5,7 @@ import "./CardAction.css";
 import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import DeleteButton from "../Buttons/DeleteButton";
 
 export default function CardAction({ post }) {
 	const { user } = useAdventures();
@@ -29,12 +30,27 @@ export default function CardAction({ post }) {
 		}
 	};
 
+	const deletePost = async () => {
+		try {
+			const result = await axios.delete(`/posts/${post._id}`);
+
+			if (result.data.message) {
+				resInfoError(result.data.message, setResInfos);
+			}
+		} catch (error) {
+			if (error.response.data.message) {
+				resInfoError(error.response.data.message, setResInfos);
+			}
+		}
+	}
+
 	return (
 		<div className="card-action">
 			<img src={post.author.pfp} alt="post author pfp" />
 			<LikeButton postId={post._id} likeAction={like} unlikeAction={unLike} />
-			<CommentButton postId={post._id}/>
-			<ShareButton />
+			<CommentButton postId={post._id} />
+			{post.author._id === userId ? <DeleteButton action={deletePost} /> : null}
+			{/* <ShareButton /> */}
 		</div>
 	);
 }

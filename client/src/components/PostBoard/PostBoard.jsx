@@ -41,7 +41,7 @@ export default function PostBoard({ adventureId, userId, showPostWindow }) {
 				posts.length > 0 ? (
 					<section className="post-board">
 						{posts.map((post) => {
-							return <Post key={post._id} post={post} />;
+							return <Post key={post._id} post={post}/>;
 						})}
 						<CommentSectionContainer />
 					</section>

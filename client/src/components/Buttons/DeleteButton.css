@@ -1,0 +1,9 @@
+.delete-button{
+    font-size: 2rem;
+    text-align: center;
+    color: var(--danger-color);
+}
+
+.delete-button:active{
+    scale: 1.1;
+}

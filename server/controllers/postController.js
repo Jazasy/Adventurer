@@ -10,19 +10,19 @@ const givePosts = async (req, res) => {
 
 const givePostsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
-    const foundPosts = await Post.find({ adventure: adventureId }).populate({path: "author", select: "username pfp"});
+    const foundPosts = await Post.find({ adventure: adventureId }).populate({ path: "author", select: "username pfp" });
     res.json(foundPosts.reverse());
 }
 
 const givePostsByUser = async (req, res) => {
-    const {userId} = req.params;
-    const foundPosts = await Post.find({author: userId}).populate({path: "author", select: "username pfp"});
+    const { userId } = req.params;
+    const foundPosts = await Post.find({ author: userId }).populate({ path: "author", select: "username pfp" });
     res.json(foundPosts.reverse());
 }
 
 const givePost = async (req, res) => {
     const { id } = req.params;
-    const foundPost = await Post.findById(id).populate({path: "author", select: "username pfp"});
+    const foundPost = await Post.findById(id).populate({ path: "author", select: "username pfp" });
     res.json(foundPost);
 }
 
@@ -39,6 +39,17 @@ const makePost = async (req, res) => {
     } else {
         return res.status(403).json({ message: "You do not have permission to post in this adventure" });
     }
+}
+
+const deletePost = async (req, res) => {
+    const { id } = req.params;
+    const foundPost = await Post.findById(id);
+    if (!foundPost) return res.status(404).json({ message: "Post not found" });
+    if (foundPost.author.toString() === req.userId || req.role === "admin") {
+        await Post.findByIdAndDelete(id);
+        return res.status(200).json({ message: "Post deleted successfully" });
+    }
+    return res.status(403).json({ message: "You do not have permission to delete this post" });
 }
 
 const giveIsliked = async (req, res) => {
@@ -80,7 +91,7 @@ const comment = async (req, res) => {
 
 const giveComments = async (req, res) => {
     const { id } = req.params;
-    const foundComments = await Comment.find({ post: id }).populate({path: "author", select: "username pfp"});
+    const foundComments = await Comment.find({ post: id }).populate({ path: "author", select: "username pfp" });
     res.json(foundComments);
 }
 
@@ -95,5 +106,6 @@ module.exports = {
     unlike,
     comment,
     giveComments,
-    makePost
+    makePost, 
+    deletePost,
 }

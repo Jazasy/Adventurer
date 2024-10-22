@@ -66,6 +66,10 @@
         padding: 0 var(--gap-from-bazel);
     }
 
+    .show-main-content {
+        padding: 0 var(--gap-from-bazel);
+    }
+
     .show-hiden {
         display: none;
     }

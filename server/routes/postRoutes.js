@@ -1,6 +1,6 @@
 const express = require("express");
 const catchAsync = require("../helpers/catchAsync");
-const { giveIsliked, giveLikeCount, like, unlike, givePostsByAdventure, givePosts, givePost, comment, giveComments, makePost, givePostsByUser } = require("../controllers/postController");
+const { giveIsliked, giveLikeCount, like, unlike, givePostsByAdventure, givePosts, givePost, comment, giveComments, makePost, givePostsByUser, deletePost } = require("../controllers/postController");
 const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 const multer = require("multer");
 const { postStorage } = require("../cloudinary");
@@ -23,6 +23,8 @@ router.get("/:adventureId", catchAsync(givePostsByAdventure));
 router.get("/users/:userId", catchAsync(givePostsByUser));
 
 router.get("/:id", catchAsync(givePost));
+
+router.delete("/:id", hasToken, validateRefreshToken, validateAccessToken, catchAsync(deletePost));
 
 router.get("/:id/:userId", hasToken, validateRefreshToken, validateAccessToken, catchAsync(giveIsliked));
 
