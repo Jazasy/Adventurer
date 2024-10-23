@@ -4,10 +4,10 @@ import CommentSectionContainer from "../CommentSection/CommentSectionContainer";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Loader from "../Loader/Loader";
-import { useAdventures } from "../../contexts/useAdventures";
 
 export default function PostBoard({ adventureId, userId, showPostWindow }) {
 	const [posts, setPosts] = useState(null);
+	const [refreshPosts, setRefreshPosts] = useState(false);
 	const prevAdventureId = useRef(adventureId);
 	const prevShowPostWindow = useRef(showPostWindow);
 
@@ -25,7 +25,7 @@ export default function PostBoard({ adventureId, userId, showPostWindow }) {
 			setPosts(null);
 			axios.get(`/posts/users/${userId}`).then((res) => setPosts(res.data));
 		}
-	}, [adventureId, userId]);
+	}, [adventureId, userId, refreshPosts]);
 
 	useEffect(() => {
 		// Its the same as the previous useEffect, but it will only run if showPostWindow changes to false
@@ -41,7 +41,7 @@ export default function PostBoard({ adventureId, userId, showPostWindow }) {
 				posts.length > 0 ? (
 					<section className="post-board">
 						{posts.map((post) => {
-							return <Post key={post._id} post={post}/>;
+							return <Post key={post._id} post={post} setRefreshPosts={setRefreshPosts}/>;
 						})}
 						<CommentSectionContainer />
 					</section>

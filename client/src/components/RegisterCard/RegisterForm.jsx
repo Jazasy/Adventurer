@@ -9,6 +9,7 @@ import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import { passCheck, passStrength } from "./registerHelpers";
 import { loginUser } from "../LoginCard/loginHelpers";
 import { useNavigate } from "react-router-dom";
+import PfpInput from "../inputs/PfpInput";
 
 export default function RegisterForm() {
 	const [formData, setFormData] = useState({
@@ -52,6 +53,7 @@ export default function RegisterForm() {
 	return (
 		<form className="register-form" onSubmit={handleSubmit}>
 			<h1 className="title2">Create your Account</h1>
+			<PfpInput className="register-pfp-input"/>
 			<TextInput
 				value={formData.username}
 				handleChange={handleChange}

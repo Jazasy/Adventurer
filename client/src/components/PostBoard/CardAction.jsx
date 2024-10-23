@@ -1,13 +1,12 @@
 import CommentButton from "../Buttons/CommentButton";
 import LikeButton from "../Buttons/LikeButton";
-import ShareButton from "../Buttons/ShareButton";
 import "./CardAction.css";
 import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
 import DeleteButton from "../Buttons/DeleteButton";
 
-export default function CardAction({ post }) {
+export default function CardAction({ post, setRefreshPosts={setRefreshPosts} }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const userId = user ? user._id : "";
@@ -33,7 +32,7 @@ export default function CardAction({ post }) {
 	const deletePost = async () => {
 		try {
 			const result = await axios.delete(`/posts/${post._id}`);
-
+			setRefreshPosts(prev => !prev);
 			if (result.data.message) {
 				resInfoError(result.data.message, setResInfos);
 			}
