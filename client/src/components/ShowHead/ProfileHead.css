@@ -1,6 +1,7 @@
 .profile-head {
-    position: relative;
+    position: fixed;
     height: var(--page-head-height);
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

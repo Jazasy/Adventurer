@@ -7,6 +7,7 @@ import Loader from "../components/Loader/Loader";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../components/ResponseInfo/resInfoHelpers";
+import { useRef } from "react";
 
 export default function Profile({ className }) {
 	const { user } = useAdventures();
@@ -27,15 +28,49 @@ export default function Profile({ className }) {
 				});
 	}, [userId, setResInfos]);
 
+	const profileContainerRef = useRef(null);
+	const profileHeadRef = useRef(null);
+
+	const updateProfileHeadWidth = () => {
+		if (profileHeadRef.current && profileContainerRef.current) {
+			const newWidth = `${profileContainerRef.current.offsetWidth}px`;
+			profileHeadRef.current.style.width = newWidth;
+		}
+	};
+
+	useEffect(() => {
+		const handleResize = () => {
+			updateProfileHeadWidth();
+		};
+
+		window.addEventListener("resize", handleResize);
+		updateProfileHeadWidth();
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
 	return (
 		<>
 			{fetchedUser ? (
-				<div className={`profile ${className}`}>
-					<ProfileHead className={className} fetchedUser={fetchedUser} />
-					<div className="profile-main">
-						<img className="profile-page-pfp" src={fetchedUser.pfp} alt="profile picture" />
-						<PostBoard userId={fetchedUser._id} />
-					</div>
+				<div className={`profile ${className}`} ref={profileContainerRef}>
+					<ProfileHead
+						className={className}
+						fetchedUser={fetchedUser}
+						ref={profileHeadRef}
+						updateWidth={updateProfileHeadWidth}
+					/>
+					<section className="profile-main-wrapper">
+						<main className="profile-main">
+							<img
+								className="profile-page-pfp"
+								src={fetchedUser.pfp}
+								alt="profile picture"
+							/>
+							<PostBoard userId={fetchedUser._id} />
+						</main>
+					</section>
 				</div>
 			) : (
 				<Loader className="loader-bigger" />

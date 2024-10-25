@@ -1,9 +1,14 @@
+.profile-main-wrapper {
+	width: 100%;
+	background-color: var(--background-color);
+	position: relative;
+}
+
 .profile-main {
 	--profile-page-pfp-size: 15rem;
 
-	margin: auto;
-	position: relative;
-	padding-top: calc(var(--profile-page-pfp-size) / 2 + var(--standard-gap));
+	padding-top: calc(var(--profile-page-pfp-size) / 2);
+	margin: 0 auto;
 	margin-top: var(--page-head-height);
 }
 
@@ -32,7 +37,7 @@
 
 @media screen and (min-width: 1000px) {
 	.profile-main {
-		width: 70%;
+		width:70%;
 	}
 }
 
