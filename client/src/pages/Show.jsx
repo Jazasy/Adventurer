@@ -16,7 +16,7 @@ import ApplicantsCard from "../components/AdventurersCard/ApplicantsCard";
 
 export default function Show({ className }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
-	let { id } = useParams(); // is means adventureId, I should change all of them in the future
+	let { id } = useParams(); // id means adventureId, I should change all of them in the future
 	const { showInfo } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const [showPostWindow, setShowPostWindow] = useState(false);

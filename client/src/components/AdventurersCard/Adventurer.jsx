@@ -1,12 +1,18 @@
 import { useAdventures } from "../../contexts/useAdventures";
 import "./Adventurer.css";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Adventurer({ adventurer }) {
-    const { selectedAdventure } = useAdventures();
+	const { selectedAdventure } = useAdventures();
+
+	const navigate = useNavigate();
 
 	return (
-		<li className="adventurer" key={adventurer.user._id}>
+		<li
+			onClick={()=>navigate(`/profiles/${adventurer.user._id}`)}
+			className="adventurer"
+			key={adventurer.user._id}
+		>
 			<img
 				className="adv-card-pfp"
 				src={adventurer.user.pfp}

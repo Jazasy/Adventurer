@@ -91,6 +91,14 @@ const giveNewToken = async (req, res) => {
 
 const giveUser = async (req, res) => {
     const foundUser = await User.findById(req.userId).lean();
+    !foundUser && res.status(404).json({ message: "User not found" });
+    delete foundUser.password;
+    res.json(foundUser);
+}
+
+const giveUserById = async (req, res) => {
+    const foundUser = await User.findById(req.params.userId).lean();
+    !foundUser && res.status(404).json({ message: "User not found" });
     delete foundUser.password;
     res.json(foundUser);
 }
@@ -101,4 +109,5 @@ module.exports = {
     logoutUser,
     giveNewToken,
     giveUser,
+    giveUserById,
 }

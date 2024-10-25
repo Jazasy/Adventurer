@@ -1,76 +1,74 @@
 .show-container {
-    --show-head-height: 20vh;
-    width: 100%;
+	width: 100%;
 }
 
 .show-main-content {
-    background-color: white;
-    width: 100%;
-    padding: 0 var(--standard-gap); /* var(--gap-from-bazel);  it might look good with thin bazel, or might not*/
-    /* box-shadow: 0 -10px 30px -17px rgba(0, 0, 0, 0.25); */
-    scroll-behavior: smooth;
-    position: relative;
-    top: var(--show-head-height); 
-    display: flex;
-    flex-direction: column;
-    gap: var(--standard-gap);
+	background-color: white;
+	width: 100%;
+	padding: 0 var(--standard-gap); /* var(--gap-from-bazel);  it might look good with thin bazel, or might not*/
+	/* box-shadow: 0 -10px 30px -17px rgba(0, 0, 0, 0.25); */
+	scroll-behavior: smooth;
+	position: relative;
+	top: var(--page-head-height);
+	display: flex;
+	flex-direction: column;
+	gap: var(--standard-gap);
 }
 
 .show-main-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 2fr 1fr;
-    
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr 2fr 1fr;
 }
 
 .show-main-grid > * {
-    justify-self: center;
+	justify-self: center;
 }
 
 .show-application-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--standard-gap);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--standard-gap);
 }
 
 .show-own {
-    .show-main-content {
-        padding: 0;
-    }
+	.show-main-content {
+		padding: 0;
+	}
 }
 
 @media screen and (max-width: 1500px) {
-    .show-main-grid {
-        grid-template-columns: 1fr 3fr 1fr;
-        padding: 0;
-    }
+	.show-main-grid {
+		grid-template-columns: 1fr 3fr 1fr;
+		padding: 0;
+	}
 }
 
 @media screen and (max-width: 1500px) {
-    .show-main-grid {
-        grid-template-columns: 1fr; 
-        width: 70%;
-        margin: 0 auto;
-    }
+	.show-main-grid {
+		grid-template-columns: 1fr;
+		width: 70%;
+		margin: 0 auto;
+	}
 
-    .show-main-grid > :nth-child(1),
-    .show-main-grid > :nth-child(3) {
-        display: none; 
-    }   
+	.show-main-grid > :nth-child(1),
+	.show-main-grid > :nth-child(3) {
+		display: none;
+	}
 }
 
-@media screen and (max-width: 1000px){
-    .show-main-grid {
-        width: 100%;
-        padding: 0 var(--gap-from-bazel);
-    }
+@media screen and (max-width: 1000px) {
+	.show-main-grid {
+		width: 100%;
+		padding: 0 var(--gap-from-bazel);
+	}
 
-    .show-main-content {
-        padding: 0 var(--gap-from-bazel);
-    }
+	.show-main-content {
+		padding: 0 var(--gap-from-bazel);
+	}
 
-    .show-hiden {
-        display: none;
-    }
-} 
+	.show-hiden {
+		display: none;
+	}
+}

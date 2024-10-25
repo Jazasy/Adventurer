@@ -3,6 +3,7 @@
     gap: 1rem;
     align-items: center;
     height: 2rem;
+    cursor: pointer;
 }
 
 .adv-card-pfp {

@@ -30,6 +30,7 @@
 	--standard-gap: 1rem;
 	--big-gap: 5rem;
 	--gap-from-bazel: 0.2rem;
+	--page-head-height: 20vh;
 
 	.title1 {
 		font-size: var(--biggest-font-size);

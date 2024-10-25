@@ -1,7 +1,7 @@
 const express = require("express");
-const { registerUser, loginUser, giveNewToken, logoutUser, giveUser } = require("../controllers/authController");
+const { registerUser, loginUser, giveNewToken, logoutUser, giveUser, giveUserById } = require("../controllers/authController");
 const catchAsync = require("../helpers/catchAsync");
-const { hasToken, validateRefreshToken, validateAccessToken, refreshAccessToken, validateRegister } = require("../helpers/midlewares");
+const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 const multer = require("multer");
 const { userStorage } = require("../cloudinary");
 const upload = multer({ storage: userStorage });
@@ -23,5 +23,7 @@ router.get("/user",
     validateRefreshToken,
     validateAccessToken,
     catchAsync(giveUser));
+
+router.get("/users/:userId", catchAsync(giveUserById));
 
 module.exports = router;

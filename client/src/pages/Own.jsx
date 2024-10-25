@@ -24,7 +24,7 @@ export default function Own() {
 			{selectedAdventure ? (
 				<Show className="show-head-rounded show-hiden show-own" />
 			) : (
-				<Profile className="profile-hiden"/>
+				<Profile className="profile-hiden profile-head-rounded"/>
 			)}
 		</main>
 	);
