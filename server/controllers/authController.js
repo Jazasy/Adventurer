@@ -30,10 +30,10 @@ const registerUser = async (req, res) => {
     }
     const hashedPassword = await hashPassword(password);
     const role = "user";
-    const tempPFP = "https://cdn.vectorstock.com/i/500p/62/59/default-avatar-photo-placeholder-profile-icon-vector-21666259.jpg";       // I will change this later
-    const newUser = new User({ username, email, password: hashedPassword, role, pfp: tempPFP });
+    const pfpUrl = req.file ? req.file.path : "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg";       // I will change this later
+    const newUser = new User({ username, email, password: hashedPassword, role, pfp: pfpUrl });
     await newUser.save();
-    res.status(201).send();
+    res.status(201).json({ message: "Account created successfully" });
 }
 
 const loginUser = async (req, res) => {

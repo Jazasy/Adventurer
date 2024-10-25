@@ -8,6 +8,8 @@
 .adv-card-pfp {
     border-radius: 50%;
     height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .leader-crown {

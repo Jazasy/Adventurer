@@ -23,10 +23,10 @@ const postStorage = new CloudinaryStorage({
     }
 })
 
-const profileStorage = new CloudinaryStorage({
+const userStorage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: "Adventurer/profiles",
+        folder: "Adventurer/users",
         allowedFormats: ["jpeg", "png", "jpg"]
     }
 })
@@ -35,5 +35,5 @@ module.exports = {
     cloudinary,
     postStorage,
     adventureStorage,
-    profileStorage
+    userStorage
 }

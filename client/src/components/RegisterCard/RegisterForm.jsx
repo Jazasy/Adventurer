@@ -17,43 +17,62 @@ export default function RegisterForm() {
 		email: "",
 		password: "",
 		verifyPassword: "",
+		pfp: "",
 	});
 	const { setResInfos } = useAdventures();
 	const { setUser } = useAdventures();
+	const [submitted, setSubmitted] = useState(false);
 
 	const navigate = useNavigate();
 
 	const handleChange = (event) => {
 		setFormData((oldFormData) => {
-			return { ...oldFormData, [event.target.name]: event.target.value };
+			return {
+				...oldFormData,
+				[event.target.name]:
+					event.target.type === "file"
+						? event.target.files[0]
+						: event.target.value,
+			};
 		});
 	};
 
 	const handleSubmit = async (event) => {
-		try {
-			event.preventDefault();
+		if (!submitted) {
+			try {
+				event.preventDefault();
+				setSubmitted(true);
 
-			await axios.post("/register", {
-				username: formData.username,
-				email: formData.email,
-				password: formData.password,
-			});
+				const submitFormData = new FormData();
+				for (const key in formData) {
+					submitFormData.append(key, formData[key]);
+				}
 
-			setResInfos((oldResInfos) => [
-				...oldResInfos,
-				"Your account has been created!",
-			]);
+				const result = await axios.post("/register", submitFormData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
 
-			loginUser(formData, setResInfos, navigate, setUser);
-		} catch (error) {
-			resInfoError(error.response.data.message, setResInfos);
+				setSubmitted(false);
+				result.data.message && resInfoError(result.data.message, setResInfos);
+
+				loginUser(formData, setResInfos, navigate, setUser);
+			} catch (error) {
+				resInfoError(error.response.data.message, setResInfos);
+				setSubmitted(false);
+			}
 		}
 	};
 
 	return (
 		<form className="register-form" onSubmit={handleSubmit}>
 			<h1 className="title2">Create your Account</h1>
-			<PfpInput className="register-pfp-input"/>
+			<PfpInput
+				className="register-pfp-input"
+				handleChange={handleChange}
+				file={formData.pfp}
+			/>
 			<TextInput
 				value={formData.username}
 				handleChange={handleChange}
@@ -94,7 +113,9 @@ export default function RegisterForm() {
 				submit
 			</button>
 			<Button1
-				className="register-button btn-fit-content btn-big"
+				className={`register-button btn-fit-content btn-big ${
+					submitted && "btn-muted"
+				}`}
 				text="Sign up"
 				action={handleSubmit}
 			/>
