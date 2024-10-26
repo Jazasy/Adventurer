@@ -1,7 +1,15 @@
+.profile-container {
+	width: 100%;
+}
+
 .profile-main-wrapper {
 	width: 100%;
 	background-color: var(--background-color);
 	position: relative;
+	top: var(--page-head-height);
+	display: flex;
+	flex-direction: column;
+	gap: var(--standard-gap);
 }
 
 .profile-main {
@@ -9,7 +17,6 @@
 
 	padding-top: calc(var(--profile-page-pfp-size) / 2);
 	margin: 0 auto;
-	margin-top: var(--page-head-height);
 }
 
 .profile-page-pfp {

@@ -6,10 +6,28 @@ import { useEffect } from "react";
 const ProfileHead = forwardRef(
 	({ className, fetchedUser, updateWidth }, ref) => {
 		useEffect(() => {
-			updateWidth();
-			/*  window.addEventListener('resize', updateWidth);
-        return () => window.removeEventListener('resize', updateWidth); */
-		}, [updateWidth]);
+            const handleResize = () => {
+                updateWidth();
+            };
+
+            // Frissítés az oldal betöltésekor
+            updateWidth();
+
+            // ResizeObserver létrehozása
+            const resizeObserver = new ResizeObserver(handleResize);
+
+            // Figyeljük a konténer méretének változását
+            if (ref.current) {
+                resizeObserver.observe(ref.current);
+            }
+
+            // Eseményfigyelő eltávolítása a komponens unmountolásakor
+            return () => {
+                if (ref.current) {
+                    resizeObserver.unobserve(ref.current);
+                }
+            };
+        }, [updateWidth, ref]);
 
 		return (
 			<header className="profile-head" ref={ref}>

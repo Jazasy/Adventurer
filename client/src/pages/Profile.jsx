@@ -39,22 +39,37 @@ export default function Profile({ className }) {
 	};
 
 	useEffect(() => {
-		const handleResize = () => {
-			updateProfileHeadWidth();
-		};
+        const handleResize = () => {
+            updateProfileHeadWidth();
+        };
 
-		window.addEventListener("resize", handleResize);
-		updateProfileHeadWidth();
+        // ResizeObserver létrehozása
+        const resizeObserver = new ResizeObserver(handleResize);
 
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
-	}, []);
+        // Figyeljük a konténer méretének változását
+        if (profileContainerRef.current) {
+            resizeObserver.observe(profileContainerRef.current);
+        }
+
+        // Window resize esemény figyelése
+        window.addEventListener('resize', handleResize);
+
+        // Frissítés az oldal betöltésekor
+        handleResize();
+
+        // Eseményfigyelők eltávolítása a komponens unmountolásakor
+        return () => {
+            if (profileContainerRef.current) {
+                resizeObserver.unobserve(profileContainerRef.current);
+            }
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
 	return (
 		<>
 			{fetchedUser ? (
-				<div className={`profile ${className}`} ref={profileContainerRef}>
+				<div className={`profile-container ${className}`} ref={profileContainerRef}>
 					<ProfileHead
 						className={className}
 						fetchedUser={fetchedUser}
