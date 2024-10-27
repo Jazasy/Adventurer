@@ -19,18 +19,6 @@
 	margin: 0 auto;
 }
 
-.profile-page-pfp {
-	width: 15rem;
-	aspect-ratio: 1/1;
-	object-fit: cover;
-	border-radius: 50%;
-	position: absolute;
-	left: 50%;
-	top: calc(var(--profile-page-pfp-size) * -0.5);
-	transform: translateX(-50%);
-	border: var(--standard-gap) solid white;
-}
-
 @media screen and (max-width: 1000px) {
 	.profile-hiden {
 		display: none;
@@ -39,6 +27,7 @@
 	.profile-main {
 		width: 100%;
 		padding: 0 var(--gap-from-bazel);
+		padding-top: calc(var(--profile-page-pfp-size) / 2);
 	}
 }
 

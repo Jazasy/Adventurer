@@ -7,13 +7,14 @@ const UserSchema = new Schema({
         type: String,
         unique: true
     },
-    pfp: String, 
+    pfp: String,
+    cover: String,
     email: {
         type: String,
         unique: true
     },
     password: String,
-    role: String, 
+    role: String,
 })
 
 const UserModel = mongoose.model("User", UserSchema);

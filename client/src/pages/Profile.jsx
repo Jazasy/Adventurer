@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { resInfoError } from "../components/ResponseInfo/resInfoHelpers";
 import { useRef } from "react";
+import ProfileHeadPfp from "../components/ProfileHead/ProfileHeadPfp";
 
 export default function Profile({ className }) {
 	const { user } = useAdventures();
@@ -78,11 +79,7 @@ export default function Profile({ className }) {
 					/>
 					<section className="profile-main-wrapper">
 						<main className="profile-main">
-							<img
-								className="profile-page-pfp"
-								src={fetchedUser.pfp}
-								alt="profile picture"
-							/>
+							<ProfileHeadPfp fetchedUser={fetchedUser} />
 							<PostBoard userId={fetchedUser._id} />
 						</main>
 					</section>

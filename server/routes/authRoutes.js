@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, loginUser, giveNewToken, logoutUser, giveUser, giveUserById } = require("../controllers/authController");
+const { registerUser, loginUser, giveNewToken, logoutUser, giveUser, giveUserById, changePfp, changeCover } = require("../controllers/authController");
 const catchAsync = require("../helpers/catchAsync");
 const { hasToken, validateRefreshToken, validateAccessToken } = require("../helpers/midlewares");
 const multer = require("multer");
@@ -11,6 +11,10 @@ const router = express.Router();
 router.use(express.json());
 
 router.post("/register", upload.single("pfp"), catchAsync(registerUser));
+
+router.patch("/:userId/pfp", hasToken, validateRefreshToken, validateAccessToken, upload.single("pfp"), catchAsync(changePfp));
+
+router.patch("/:userId/cover", hasToken, validateRefreshToken, validateAccessToken, upload.single("cover"), catchAsync(changeCover));
 
 router.post('/token', catchAsync(giveNewToken));
 

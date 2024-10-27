@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
 
         const accessToken = generateAccessToken({ role: foundUser.role });
         refreshToken = generateRefreshToken({ userId: foundUser._id });
-        
+
         await redisClient.set(refreshToken, "valid", {
             EX: 7 * 24 * 60 * 60 // expires in 7 days
         });
@@ -80,7 +80,7 @@ const giveNewToken = async (req, res) => {
 
     const storedRefreshToken = await redisClient.get(refreshToken);
     if (storedRefreshToken !== "valid") return res.sendStatus(403);         // instead of valid I could use a secret and put it in .env
-    
+
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, data) => {
         if (err) return res.sendStatus(403);
         const foundUser = await User.findById(data.userId);
@@ -103,6 +103,18 @@ const giveUserById = async (req, res) => {
     res.json(foundUser);
 }
 
+const changePfp = async (req, res) => {
+    const foundUser = await User.findByIdAndUpdate(req.userId, { pfp: req.file.path });
+    !foundUser && res.status(404).json({ message: "User not found" });
+    res.status(201).json({ message: "Profile picture changed successfully" });
+}
+
+const changeCover = async (req, res) => {
+    const foundUser = await User.findByIdAndUpdate(req.userId, { cover: req.file.path });
+    !foundUser && res.status(404).json({ message: "User not found" });
+    res.status(201).json({ message: "Cover changed successfully" });
+}
+
 module.exports = {
     registerUser,
     loginUser,
@@ -110,4 +122,6 @@ module.exports = {
     giveNewToken,
     giveUser,
     giveUserById,
+    changePfp,
+    changeCover,
 }
