@@ -11,9 +11,6 @@ const adventureRoutes = require("./routes/adventureRoutes");
 const postRoutes = require("./routes/postRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 
-const User = require("./models/user");
-const catchAsync = require("./helpers/catchAsync");
-
 const app = express();
 
 app.use(helmet());
@@ -39,35 +36,6 @@ app.use("/applications", applicationRoutes);
 app.get("/test", (req, res) => {
     res.json("server is responsing");
 })
-
-app.get("/user", (req, res, next) => {
-    try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) return res.sendStatus(401);
-
-        const accessToken = authHeader.split(' ')[1];
-        if (!accessToken) return res.sendStatus(401);
-
-        const refreshToken = req.cookies.refreshToken;
-        if (!refreshToken) return res.sendStatus(403);
-
-        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, refreshData) => {
-            if (err) return res.sendStatus(403);
-
-            jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, accessData) => {
-                if (err) return res.sendStatus(403);
-
-                if (accessData.role !== "admin") return res.status(403).json({ message: "You need to be an admin" });
-
-                const foundUser = await User.findById(refreshData.userId);
-                if (!foundUser) return res.status(404).json({ message: "User not found" });
-                res.json(foundUser);
-            });
-        });
-    } catch (error) {
-        next(error);
-    }
-});
 
 app.use((err, req, res, next) => {
     console.error("*************************ERROR*************************");
