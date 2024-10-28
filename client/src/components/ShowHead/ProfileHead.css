@@ -28,3 +28,7 @@
     object-fit: cover;
     filter: brightness(50%);
 }
+
+.fake-cover-input {
+    display: none;
+}

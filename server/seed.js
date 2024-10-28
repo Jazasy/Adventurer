@@ -194,6 +194,7 @@ const setDatabase = async () => {
         email: "admin@gmail.com",
         role: "admin",
         pfp: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg",
+        cover: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1730127889/Adventurer/seed/d4tqb92f700882oqokwm.jpg",
     });
     const user = new User({
         username: "user",
@@ -201,6 +202,7 @@ const setDatabase = async () => {
         email: "user@gmail.com",
         role: "user",
         pfp: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg",
+        cover: "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1730127889/Adventurer/seed/d4tqb92f700882oqokwm.jpg",
     });
     for (const adventure of adventures) {
         const newAdventure = new Adventure({

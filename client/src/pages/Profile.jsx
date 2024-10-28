@@ -15,6 +15,7 @@ export default function Profile({ className }) {
 	const { id } = useParams();
 	const { setResInfos } = useAdventures();
 	const [fetchedUser, setFetchedUser] = useState(null);
+	const [refreshFetchedUser, setRefreshFetchedUser] = useState(false);
 
 	const userId = id || (user && user._id) || null;
 
@@ -27,7 +28,7 @@ export default function Profile({ className }) {
 					error.response.data.message &&
 						resInfoError(error.response.data.message, setResInfos);
 				});
-	}, [userId, setResInfos]);
+	}, [userId, setResInfos, refreshFetchedUser]);
 
 	const profileContainerRef = useRef(null);
 	const profileHeadRef = useRef(null);
@@ -40,46 +41,53 @@ export default function Profile({ className }) {
 	};
 
 	useEffect(() => {
-        const handleResize = () => {
-            updateProfileHeadWidth();
-        };
+		const handleResize = () => {
+			updateProfileHeadWidth();
+		};
 
-        // ResizeObserver létrehozása
-        const resizeObserver = new ResizeObserver(handleResize);
+		// ResizeObserver létrehozása
+		const resizeObserver = new ResizeObserver(handleResize);
 
-        // Figyeljük a konténer méretének változását
-        if (profileContainerRef.current) {
-            resizeObserver.observe(profileContainerRef.current);
-        }
+		// Figyeljük a konténer méretének változását
+		if (profileContainerRef.current) {
+			resizeObserver.observe(profileContainerRef.current);
+		}
 
-        // Window resize esemény figyelése
-        window.addEventListener('resize', handleResize);
+		// Window resize esemény figyelése
+		window.addEventListener("resize", handleResize);
 
-        // Frissítés az oldal betöltésekor
-        handleResize();
+		// Frissítés az oldal betöltésekor
+		handleResize();
 
-        // Eseményfigyelők eltávolítása a komponens unmountolásakor
-        return () => {
-            if (profileContainerRef.current) {
-                resizeObserver.unobserve(profileContainerRef.current);
-            }
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+		// Eseményfigyelők eltávolítása a komponens unmountolásakor
+		return () => {
+			if (profileContainerRef.current) {
+				resizeObserver.unobserve(profileContainerRef.current);
+			}
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	return (
 		<>
 			{fetchedUser ? (
-				<div className={`profile-container ${className}`} ref={profileContainerRef}>
+				<div
+					className={`profile-container ${className}`}
+					ref={profileContainerRef}
+				>
 					<ProfileHead
 						className={className}
 						fetchedUser={fetchedUser}
+						setRefreshFetchedUser={setRefreshFetchedUser}
 						ref={profileHeadRef}
 						updateWidth={updateProfileHeadWidth}
 					/>
 					<section className="profile-main-wrapper">
 						<main className="profile-main">
-							<ProfileHeadPfp fetchedUser={fetchedUser} />
+							<ProfileHeadPfp
+								fetchedUser={fetchedUser}
+								setRefreshFetchedUser={setRefreshFetchedUser}
+							/>
 							<PostBoard userId={fetchedUser._id} />
 						</main>
 					</section>

@@ -31,7 +31,8 @@ const registerUser = async (req, res) => {
     const hashedPassword = await hashPassword(password);
     const role = "user";
     const pfpUrl = req.file ? req.file.path : "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1729179548/Adventurer/seed/uiwuefdckhu8spiqb4pa.jpg";       // I will change this later
-    const newUser = new User({ username, email, password: hashedPassword, role, pfp: pfpUrl });
+    const coverUrl = "https://res.cloudinary.com/dp2xr7jgj/image/upload/v1730127889/Adventurer/seed/d4tqb92f700882oqokwm.jpg";       // I will change this later
+    const newUser = new User({ username, email, password: hashedPassword, role, pfp: pfpUrl, cover: coverUrl });
     await newUser.save();
     res.status(201).json({ message: "Account created successfully" });
 }
@@ -104,12 +105,14 @@ const giveUserById = async (req, res) => {
 }
 
 const changePfp = async (req, res) => {
+    !req.file.path && res.status(400).json({ message: "No file uploaded" });
     const foundUser = await User.findByIdAndUpdate(req.userId, { pfp: req.file.path });
     !foundUser && res.status(404).json({ message: "User not found" });
     res.status(201).json({ message: "Profile picture changed successfully" });
 }
 
 const changeCover = async (req, res) => {
+    !req.file.path && res.status(400).json({ message: "No file uploaded" });
     const foundUser = await User.findByIdAndUpdate(req.userId, { cover: req.file.path });
     !foundUser && res.status(404).json({ message: "User not found" });
     res.status(201).json({ message: "Cover changed successfully" });

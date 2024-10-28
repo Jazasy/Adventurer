@@ -3,14 +3,15 @@ import { useRef } from "react";
 import axios from "axios";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import Loader from "../Loader/Loader";
 
-export default function ProfileHeadPfp({ fetchedUser }) {
-	const { user } = useAdventures();
+export default function ProfileHeadPfp({ fetchedUser, setRefreshFetchedUser }) {
+	const { user, setUser } = useAdventures();
 	const { setResInfos } = useAdventures();
 	const profilePfpInputRef = useRef();
 
 	const handleClick = () => {
-		profilePfpInputRef.current.click();
+		user && user._id === fetchedUser._id && profilePfpInputRef.current.click();
 	};
 
 	const handleChange = async (event) => {
@@ -18,12 +19,17 @@ export default function ProfileHeadPfp({ fetchedUser }) {
 			const file = event.target.files[0];
 			const formData = new FormData();
 			formData.append("pfp", file);
-			const result = await axios.patch(`/${user._id}/pfp`, formData, {
+			let result = await axios.patch(`/${user._id}/pfp`, formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
 			});
 			result.data.message && resInfoError(result.data.message, setResInfos);
+
+			result = axios.get("/user");
+			result && setUser(result.data);
+			setRefreshFetchedUser((prev) => !prev);
+			//window.location.reload();
 		} catch (error) {
 			if (error.response.data.message) {
 				resInfoError(error.response.data.message, setResInfos);
