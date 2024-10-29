@@ -20,11 +20,13 @@
 }
 
 @media screen and (max-width: 1000px) {
+
 	.profile-hiden {
 		display: none;
 	}
 
 	.profile-main {
+		--profile-page-pfp-size: 10rem;
 		width: 100%;
 		padding: 0 var(--gap-from-bazel);
 		padding-top: calc(var(--profile-page-pfp-size) / 2);
@@ -33,7 +35,7 @@
 
 @media screen and (min-width: 1000px) {
 	.profile-main {
-		width:70%;
+		width: 70%;
 	}
 }
 

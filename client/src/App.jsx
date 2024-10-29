@@ -12,8 +12,9 @@ import Profile from "./pages/Profile";
 import { useAdventures } from "./contexts/useAdventures";
 import { useEffect } from "react";
 import Own from "./pages/Own";
+import Message from "./pages/Message";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(
@@ -52,13 +53,14 @@ axios.interceptors.response.use(
 );
 
 export default function App() {
-	const {user, setUser} = useAdventures();
+	const { user, setUser } = useAdventures();
 
 	useEffect(() => {
-		if(!user) {
-			axios.get("user")
-				.then(res => setUser(res.data))
-				.catch(err => console.error(err));
+		if (!user) {
+			axios
+				.get("user")
+				.then((res) => setUser(res.data))
+				.catch((err) => console.error(err));
 		}
 	}, [user, setUser]);
 
@@ -74,6 +76,7 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/myadventures" element={<Own />} />
 				<Route path="/profiles/:id" element={<Profile />} />
+				<Route path="/messages" element={<Message />} />
 			</Routes>
 		</>
 	);

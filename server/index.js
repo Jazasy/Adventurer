@@ -5,13 +5,16 @@ const dotenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
+const http = require("http");
 
 const authRoutes = require("./routes/authRoutes");
 const adventureRoutes = require("./routes/adventureRoutes");
 const postRoutes = require("./routes/postRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const initialiseSocket = require("./socket.io");
 
 const app = express();
+const server = http.createServer(app);
 
 app.use(helmet());
 
@@ -21,7 +24,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:5173"
+    origin: process.env.CLIENT_URL
 }));
 
 app.use(express.json());
@@ -44,6 +47,8 @@ app.use((err, req, res, next) => {
 });
 
 
+initialiseSocket(server);
+
 const port = 8000;
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+server.listen(port, () => console.log(`Server is running on port ${port}`));
