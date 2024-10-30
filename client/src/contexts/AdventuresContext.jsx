@@ -14,6 +14,7 @@ export const AdventuresProvider = ({ children }) => {
 	const [refreshAplByAdv, setRefreshAplByAdv] = useState(true);
 	const [refreshAdvByAdv, setRefreshAdvByAdv] = useState(true);
 	const [showInfo, setShowInfo] = useState(null);
+	const [showMessages, setShowMessages] = useState(false);
 
 	const location = useLocation();
 
@@ -52,6 +53,8 @@ export const AdventuresProvider = ({ children }) => {
 				setRefreshAdvByAdv,
 				showInfo,
 				setShowInfo,
+				showMessages,
+				setShowMessages
 			}}
 		>
 			{children}

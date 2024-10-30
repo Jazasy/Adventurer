@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.own-menu-item  p{
+    cursor: pointer;
+}
+
 .own-menu-actions {
     display: flex;
     flex-direction: row;
@@ -18,4 +22,5 @@
 
 .own-menu-chat-icon, .own-menu-page-icon {
     font-size: 1em;
+    cursor: pointer;
 }

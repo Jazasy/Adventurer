@@ -6,6 +6,7 @@ export default function OwnMenuItem({ adventure, accepted = false }) {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { setApplicationsByAdventure } = useAdventures();
 	const { setAdventurersByAdventure } = useAdventures();
+	const { setShowMessages } = useAdventures();
 
 	const navigate = useNavigate();
 
@@ -17,17 +18,30 @@ export default function OwnMenuItem({ adventure, accepted = false }) {
 		}
 
 		setSelectedAdventure(adventure);
+		setShowMessages(false);
 		if (window.innerWidth < 1000) {
 			navigate(`/adventures/${adventure._id}`);
 		}
 	};
 
+	const openChat = () => {
+		setSelectedAdventure(adventure);
+		if (window.innerWidth < 1000) {
+			navigate("/messages");
+		} else {
+			setShowMessages(true);
+		}
+	};
+
 	return (
 		<div className="own-menu-item">
-			<p>{adventure.title}</p>
+			<p onClick={openAdventure}>{adventure.title}</p>
 			<div className="own-menu-actions">
 				{accepted ? (
-					<i className="fa-regular fa-comments own-menu-chat-icon"></i>
+					<i
+						onClick={openChat}
+						className="fa-regular fa-comments own-menu-chat-icon"
+					></i>
 				) : null}
 				<i
 					className="fa-solid fa-pager own-menu-page-icon"

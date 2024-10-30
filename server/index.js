@@ -11,6 +11,8 @@ const authRoutes = require("./routes/authRoutes");
 const adventureRoutes = require("./routes/adventureRoutes");
 const postRoutes = require("./routes/postRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const messageRoutes = require("./routes/messageRoutes");
+
 const initialiseSocket = require("./socket.io");
 
 const app = express();
@@ -35,6 +37,7 @@ app.use("/", authRoutes);
 app.use("/adventures", adventureRoutes);
 app.use("/posts", postRoutes);
 app.use("/applications", applicationRoutes);
+app.use("/messages", messageRoutes);
 
 app.get("/test", (req, res) => {
     res.json("server is responsing");

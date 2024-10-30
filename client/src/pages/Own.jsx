@@ -4,11 +4,13 @@ import Show from "./Show";
 import { useAdventures } from "../contexts/useAdventures";
 import { useEffect } from "react";
 import Profile from "./Profile";
+import Message from "./Message";
 
 export default function Own() {
 	const { selectedAdventure, setSelectedAdventure } = useAdventures();
 	const { setApplicationsByAdventure } = useAdventures();
 	const { setAdventurersByAdventure } = useAdventures();
+	const { showMessages } = useAdventures();
 
 	useEffect(() => {
 		setSelectedAdventure(null);
@@ -22,9 +24,13 @@ export default function Own() {
 		<main className="own-container">
 			<OwnMenu />
 			{selectedAdventure ? (
-				<Show className="show-head-rounded show-hiden show-own" />
+				showMessages ? (
+					<Message className="message-hiden" adventureId={selectedAdventure._id} />
+				) : (
+					<Show className="show-head-rounded show-hiden show-own" />
+				)
 			) : (
-				<Profile className="profile-hiden profile-head-rounded"/>
+				<Profile className="profile-hiden profile-head-rounded" />
 			)}
 		</main>
 	);

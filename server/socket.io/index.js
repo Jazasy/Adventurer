@@ -1,5 +1,6 @@
 const { Server } = require("socket.io");
 const cors = require("cors");
+const Message = require("../models/message");
 
 const initialiseSocket = server => {
     const io = new Server(server, {
@@ -10,8 +11,13 @@ const initialiseSocket = server => {
     })
 
     io.on("connection", (socket) => {
+        socket.on("join_room", data => {
+            socket.join(data);
+        })
+
         socket.on("send_message", (data) => {
-            socket.broadcast.emit("receive_message", data);
+            socket.to(data.adventureId).emit("receive_message", data);
+            console.log(data);
         })
     })
 
