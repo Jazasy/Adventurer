@@ -13,7 +13,7 @@ const applyToAdventure = async (req, res) => {
 
 const giveApplicationsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
-    const foundApplications = await Application.find({ adventure: adventureId, accepted: false }).populate("user");
+    const foundApplications = await Application.find({ adventure: adventureId, accepted: false }).populate({path: "user", select: "username pfp _id"});
     foundApplications && res.json(foundApplications);
     /* const foundAdventure = await Adventure.findById(adventureId);
     const userId = req.userId;                                          // I need to valiate the user for this
@@ -26,7 +26,7 @@ const giveApplicationsByAdventure = async (req, res) => {
 
 const giveAcceptedApplicationsByAdventure = async (req, res) => {
     const { adventureId } = req.params;
-    const foundApplications = await Application.find({ adventure: adventureId, accepted: true }).populate("user");
+    const foundApplications = await Application.find({ adventure: adventureId, accepted: true }).populate({path: "user", select: "username pfp _id"});
     res.json(foundApplications);
 }
 

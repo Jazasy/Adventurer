@@ -10,6 +10,7 @@ const Post = require("./models/post");
 const Like = require("./models/like");
 const Comment = require("./models/comment");
 const Application = require("./models/application");
+const Message = require("./models/message");
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Database Connected"))
@@ -177,6 +178,7 @@ const setDatabase = async () => {
     await Post.deleteMany({});
     await Comment.deleteMany({});
     await Application.deleteMany({});
+    await Message.deleteMany({});
 
     let prefix = "Adventurer/adventures";
     await cloudinary.api.delete_resources_by_prefix(prefix, { type: "upload", resource_type: "image" })

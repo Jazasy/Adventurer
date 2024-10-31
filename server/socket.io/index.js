@@ -11,13 +11,20 @@ const initialiseSocket = server => {
     })
 
     io.on("connection", (socket) => {
+        console.log("User Connected");
+
         socket.on("join_room", data => {
+            console.log(`User Joined Room: ${data}`);
             socket.join(data);
         })
 
         socket.on("send_message", (data) => {
-            socket.to(data.adventureId).emit("receive_message", data);
+            io.to(data.adventureId).emit("receive_message", data);
             console.log(data);
+        })
+
+        socket.on("disconnect", () => {
+            console.log("User Disconnected");
         })
     })
 

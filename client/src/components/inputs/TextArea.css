@@ -3,6 +3,10 @@
     min-height: 10rem;
 }
 
+.text-area-messages {
+    min-height: 0;
+}
+
 .text-area::-webkit-scrollbar {
     width: 0.7rem; 
     height: 0.7rem;
