@@ -1,10 +1,17 @@
 import "./MessageForm.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextArea from "../inputs/TextArea";
 import Button1 from "../Buttons/Button1";
 
 export default function MessageForm({ socket, adventureId, user }) {
 	const [message, setMessage] = useState("");
+
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter" && !event.shiftKey) {
+			event.preventDefault();
+			sendMessage(event);
+		}
+	};
 
 	const sendMessage = (event) => {
 		event.preventDefault();
@@ -30,6 +37,7 @@ export default function MessageForm({ socket, adventureId, user }) {
 				id="messageInput"
 				value={message}
 				handleChange={(event) => setMessage(event.target.value)}
+				handleKeyDown={handleKeyDown}
 			/>
 			<Button1 action={sendMessage} text="send" className="btn-fit-content" />
 		</form>
