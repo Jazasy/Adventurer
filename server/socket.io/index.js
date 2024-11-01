@@ -18,6 +18,11 @@ const initialiseSocket = server => {
             socket.join(data);
         })
 
+        socket.on("leave_room", data => {
+            console.log(`User Left Room: ${data}`);
+            socket.leave(data);
+        })
+
         socket.on("send_message", (data) => {
             io.to(data.adventureId).emit("receive_message", data);
             console.log(data);

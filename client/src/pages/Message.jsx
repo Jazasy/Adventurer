@@ -16,6 +16,8 @@ export default function Message({ adventureId, className }) {
 	const { setResInfos } = useAdventures();
 	const { selectedAdventure } = useAdventures();
 	const [messages, setMessages] = useState([]);
+	const prevAdventureIdRef = useRef();
+
 	const messageContainerRef = useRef(null);
 
 	!adventureId && (adventureId = selectedAdventure._id);
@@ -26,7 +28,14 @@ export default function Message({ adventureId, className }) {
 		const navbar = document.querySelector(".navbar");
 		messageContainerRef.current.style.height = `calc(100vh - ${navbar.clientHeight}px)`;
 
-		adventureId && socket.emit("join_room", adventureId);
+		if (prevAdventureIdRef.current) {
+			socket.emit("leave_room", prevAdventureIdRef.current);
+		}
+
+		if (adventureId) {
+			socket.emit("join_room", adventureId);
+			prevAdventureIdRef.current = adventureId;
+		}
 
 		socket.on("receive_message", (data) => {
 			console.log(data);
