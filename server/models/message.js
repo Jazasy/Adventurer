@@ -20,6 +20,10 @@ const MessageSchema = new Schema({
     }
 })
 
+MessageSchema.post("save", function(doc) {
+    console.log("MESSAGE CREATED", doc);
+})
+
 const MessageModel = mongoose.model("Message", MessageSchema);
 
 module.exports = MessageModel;

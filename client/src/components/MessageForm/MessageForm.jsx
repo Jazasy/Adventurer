@@ -1,9 +1,13 @@
 import "./MessageForm.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TextArea from "../inputs/TextArea";
 import Button1 from "../Buttons/Button1";
+import axios from "axios";
+import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import { useAdventures } from "../../contexts/useAdventures";
 
 export default function MessageForm({ socket, adventureId, user }) {
+	const { setResInfos } = useAdventures();
 	const [message, setMessage] = useState("");
 
 	const handleKeyDown = (event) => {
@@ -23,6 +27,14 @@ export default function MessageForm({ socket, adventureId, user }) {
 				username: user.username,
 				pfp: user.pfp,
 			});
+
+			axios
+				.post(`/messages/${adventureId}`, { content: message })
+				.catch((error) => {
+					error.response.data.message &&
+						resInfoError(error.response.data.message, setResInfos);
+				});
+
 			setMessage("");
 		}
 	};

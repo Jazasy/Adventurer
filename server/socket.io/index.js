@@ -11,25 +11,33 @@ const initialiseSocket = server => {
     })
 
     io.on("connection", (socket) => {
-        console.log("User Connected");
+        console.log("User Connected to Socket");
 
         socket.on("join_room", data => {
-            console.log(`User Joined Room: ${data}`);
+            console.log(`User Joined Socket Room: ${data}`);
             socket.join(data);
         })
 
         socket.on("leave_room", data => {
-            console.log(`User Left Room: ${data}`);
+            console.log(`User Left Socket Room: ${data}`);
             socket.leave(data);
         })
 
         socket.on("send_message", (data) => {
-            io.to(data.adventureId).emit("receive_message", data);
+            io.to(data.adventureId).emit("receive_message", {
+                content: data.content,
+                adventureId: data.adventureId,
+                user: {
+                    username: data.username,
+                    pfp: data.pfp,
+                    userId: data.userId
+                }
+            });
             console.log(data);
         })
 
         socket.on("disconnect", () => {
-            console.log("User Disconnected");
+            console.log("User Disconnected from Socket");
         })
     })
 

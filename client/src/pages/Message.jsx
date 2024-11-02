@@ -8,6 +8,7 @@ import Adventurer from "../components/AdventurersCard/Adventurer";
 import TextArea from "../components/inputs/TextArea";
 import Button1 from "../components/Buttons/Button1";
 import MessageForm from "../components/MessageForm/MessageForm";
+import Messages from "../components/MessageForm/Messages";
 
 const socket = io.connect(import.meta.env.VITE_SERVER_URL);
 
@@ -25,6 +26,17 @@ export default function Message({ adventureId, className }) {
 	useEffect(() => {
 		setMessages([]);
 
+		adventureId &&
+			axios
+				.get(`/messages/${adventureId}`)
+				.then((res) => {
+					setMessages(res.data);
+				})
+				.catch((error) => {
+					error.response.data.message &&
+						resInfoError(error.response.data.message, setResInfos);
+				});
+
 		const navbar = document.querySelector(".navbar");
 		messageContainerRef.current.style.height = `calc(100vh - ${navbar.clientHeight}px)`;
 
@@ -38,14 +50,13 @@ export default function Message({ adventureId, className }) {
 		}
 
 		socket.on("receive_message", (data) => {
-			console.log(data);
 			setMessages((oldMessages) => [...oldMessages, data]);
 		});
 
 		return () => {
 			socket.off("receive_message");
 		};
-	}, [adventureId]);
+	}, [adventureId, setResInfos]);
 
 	return (
 		<main
@@ -53,14 +64,7 @@ export default function Message({ adventureId, className }) {
 			ref={messageContainerRef}
 		>
 			<h1>{selectedAdventure.title}</h1>
-			<ul>
-				{messages.map((message, index) => (
-					<li key={index}>
-						<span>{message.username}</span>
-						{message.content}
-					</li>
-				))}
-			</ul>
+			<Messages messages={messages} />
 			<MessageForm socket={socket} adventureId={adventureId} user={user} />
 		</main>
 	);
