@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./Messages.css";
+import { useAdventures } from "../../contexts/useAdventures";
 
 export default function Messages({ messages }) {
+	const { user } = useAdventures();
+
 	const messagesRef = useRef(null);
 
 	useEffect(() => {
@@ -13,9 +16,29 @@ export default function Messages({ messages }) {
 	return (
 		<ul className="messages" ref={messagesRef}>
 			{messages.map((message, index) => (
-				<li key={index}>
-					<span style={{ marginRight: "1rem" }}>{message.user.username}</span>
-					{message.content}
+				<li
+					className={`message ${
+						message.user._id === user._id ? "message-own" : ""
+					}`}
+					key={index}
+				>
+					<img className="message-pfp" src={message.user.pfp} alt="user pfp" />
+					<div className="message-text">
+						<p
+							className={`message-name ${
+								message.user._id === user._id ? "message-name-own" : ""
+							}`}
+						>
+							{message.user.username}
+						</p>
+						<p
+							className={`message-content ${
+								message.user._id === user._id ? "message-content-own" : ""
+							}`}
+						>
+							{message.content}
+						</p>
+					</div>
 				</li>
 			))}
 		</ul>

@@ -30,10 +30,9 @@ const initialiseSocket = server => {
                 user: {
                     username: data.username,
                     pfp: data.pfp,
-                    userId: data.userId
+                    _id: data.userId
                 }
             });
-            console.log(data);
         })
 
         socket.on("disconnect", () => {
