@@ -7,6 +7,16 @@ export default function Messages({ messages }) {
 
 	const messagesRef = useRef(null);
 
+	const formatMessageContent = (content) => {
+		console.log(content.split("\n"));
+		return content.split("\n").map((line, index) => (
+			<span key={index}>
+				{line}
+				<br />
+			</span>
+		));
+	};
+
 	useEffect(() => {
 		if (messagesRef.current) {
 			messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -36,7 +46,7 @@ export default function Messages({ messages }) {
 								message.user._id === user._id ? "message-content-own" : ""
 							}`}
 						>
-							{message.content}
+							{formatMessageContent(message.content)}
 						</p>
 					</div>
 				</li>

@@ -34,7 +34,7 @@
 }
 
 .message-name {
-
+    color: var(--secondary-text-color);
 }
 
 .message-name-own {
@@ -42,13 +42,14 @@
 }
 
 .message-content {
-    display: flex;
     width: 100%;
     align-items: center;
     padding: var(--standard-gap);
     border-radius: var(--border-radius);
     background-color: var(--extra-light-gray);
     /* color: var(--secondary-text-color); */
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .message-content-own {
