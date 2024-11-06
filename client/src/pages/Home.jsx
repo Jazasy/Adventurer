@@ -2,6 +2,7 @@ import AdventureBoard from "../components/AdventureBoard/AdventureBoard";
 import "./Home.css";
 import HomeHead from "../components/HomeHead/HomeHead";
 import Loader from "../components/Loader/Loader";
+import HomeFoot from "../components/HomeFoot/HomeFoot";
 
 export default function Home() {
 	return (
@@ -10,7 +11,7 @@ export default function Home() {
 			<section className="main-content">
 				<AdventureBoard />
 			</section>
-			<h1>footer</h1>
+			<HomeFoot />
 		</div>
 	);
 }

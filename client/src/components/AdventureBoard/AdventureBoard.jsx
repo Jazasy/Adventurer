@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useAdventures } from "../../contexts/useAdventures";
 import { resInfoError } from "../ResponseInfo/resInfoHelpers";
+import Loader from "../Loader/Loader";
 
 export default function AdventureBoard() {
 	const { adventures, setAdventures } = useAdventures();
@@ -11,7 +12,7 @@ export default function AdventureBoard() {
 
 	useEffect(() => {
 		try {
-			axios.get("/adventures").then((res) => {
+			axios.get("/adventures/randoms").then((res) => {
 				setAdventures(res.data);
 			});
 		} catch (error) {
@@ -22,10 +23,16 @@ export default function AdventureBoard() {
 	}, [setAdventures, setResInfos]);
 
 	return (
-		<div className="adventure-board">
-			{adventures.map((adventure, index) => {
-				return <AdventureCard key={index} adventure={adventure} />;
-			})}
-		</div>
+		<>
+			{adventures ? (
+				<div className="adventure-board">
+				{adventures.map((adventure, index) => {
+					return <AdventureCard key={index} adventure={adventure} />;
+				})}
+			</div>
+			) : (
+				<Loader className="loader-big loader-center"/>
+			)}
+		</>
 	);
 }

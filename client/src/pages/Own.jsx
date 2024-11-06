@@ -7,17 +7,20 @@ import Profile from "./Profile";
 import Message from "./Message";
 
 export default function Own() {
-	const { selectedAdventure, setSelectedAdventure } = useAdventures();
+	const { selectedAdventure, setSelectedAdventure } = useAdventures(null);
 	const { setApplicationsByAdventure } = useAdventures();
 	const { setAdventurersByAdventure } = useAdventures();
-	const { showMessages } = useAdventures();
+	const { showMessages, setShowMessages } = useAdventures();
 
 	useEffect(() => {
 		setSelectedAdventure(null);
+		setShowMessages(false);
+		console.log("useEffect Own");
 	}, [
 		setSelectedAdventure,
 		setApplicationsByAdventure,
 		setAdventurersByAdventure,
+		setShowMessages,
 	]);
 
 	return (

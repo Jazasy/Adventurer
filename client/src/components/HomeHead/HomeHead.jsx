@@ -14,11 +14,11 @@ export default function HomeHead() {
 
 	return (
 		<header className="home-head">
-			<h1 className="home-title">Your Jurney begins here!</h1>
+			<h1 className="home-title">Your Adventure begins here!</h1>
 			{user ? (
 				<>
 					<p className="home-paragraph">
-						Take a look at others adventures. You can follow and apply to them. If you want, you can even
+						Take a look at others adventures. You can apply to them. If you want, you can even
 					</p>
 					<Button1 text="Create your own!" action={()=>navigate("/adventures/create")}/>
 				</>

@@ -5,6 +5,12 @@ const giveAdventures = async (req, res) => {
     res.json(adventures.reverse());
 }
 
+const giveRandomAdventures = async (req, res) => {
+    const adventures = await Adventure.find().populate("leader");
+    const randomAdventures = adventures.sort(() => Math.random() -0.5).slice(0, 11);
+    res.json(randomAdventures);
+}
+
 const giveAdventure = async (req, res) => {
     const { adventureId } = req.params;
     const foundAdventure = await Adventure.findById(adventureId).populate("leader");
@@ -46,6 +52,7 @@ const deleteAdventure = async (req, res) => {
 
 module.exports = {
     giveAdventures,
+    giveRandomAdventures,
     giveAdventure,
     createAdventure,
     deleteAdventure,

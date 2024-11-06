@@ -8,7 +8,6 @@ export default function Messages({ messages }) {
 	const messagesRef = useRef(null);
 
 	const formatMessageContent = (content) => {
-		console.log(content.split("\n"));
 		return content.split("\n").map((line, index) => (
 			<span key={index}>
 				{line}

@@ -76,7 +76,7 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/myadventures" element={<Own />} />
 				<Route path="/profiles/:id" element={<Profile />} />
-				<Route path="/messages" element={<Message />} />
+				<Route path="/messages/:id" element={<Message />} />
 			</Routes>
 		</>
 	);

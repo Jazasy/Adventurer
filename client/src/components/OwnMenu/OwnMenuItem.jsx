@@ -27,7 +27,7 @@ export default function OwnMenuItem({ adventure, accepted = false }) {
 	const openChat = () => {
 		setSelectedAdventure(adventure);
 		if (window.innerWidth < 1000) {
-			navigate("/messages");
+			navigate(`/messages/${adventure._id}`);
 		} else {
 			setShowMessages(true);
 		}

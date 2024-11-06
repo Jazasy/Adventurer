@@ -4,24 +4,38 @@ import { useState, useEffect, useRef } from "react";
 import { useAdventures } from "../contexts/useAdventures";
 import axios from "axios";
 import { resInfoError } from "../components/ResponseInfo/resInfoHelpers";
-import Adventurer from "../components/AdventurersCard/Adventurer";
-import TextArea from "../components/inputs/TextArea";
-import Button1 from "../components/Buttons/Button1";
 import MessageForm from "../components/MessageForm/MessageForm";
 import Messages from "../components/MessageForm/Messages";
+import MessageHead from "../components/MessageHead/MessageHead";
+import { useParams } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 
 const socket = io.connect(import.meta.env.VITE_SERVER_URL);
 
 export default function Message({ adventureId, className }) {
 	const { user } = useAdventures();
 	const { setResInfos } = useAdventures();
-	const { selectedAdventure } = useAdventures();
-	const [messages, setMessages] = useState([]);
+	const [adventure, setAdventure] = useState(null);
+	const [messages, setMessages] = useState(null);
 	const prevAdventureIdRef = useRef();
 
 	const messageContainerRef = useRef(null);
 
-	!adventureId && (adventureId = selectedAdventure._id);
+	const { id } = useParams();
+	!adventureId && (adventureId = id);
+
+	useEffect(() => {
+		setAdventure(null);
+		axios
+			.get(`/adventures/${adventureId}`)
+			.then((res) => {
+				setAdventure(res.data);
+			})
+			.catch((error) => {
+				error.response.data.message &&
+					resInfoError(error.response.data.message, setResInfos);
+			});
+	}, [adventureId, setAdventure, setResInfos]);
 
 	useEffect(() => {
 		setMessages([]);
@@ -63,8 +77,16 @@ export default function Message({ adventureId, className }) {
 			className={`message-container ${className}`}
 			ref={messageContainerRef}
 		>
-			<h1>{selectedAdventure.title}</h1>
-			<Messages messages={messages} />
+			{adventure ? (
+				<MessageHead title={adventure.title} />
+			) : (
+				<Loader className="loader-smaller" />
+			)}
+			{user && messages ? (
+				<Messages messages={messages} />
+			) : (
+				<Loader className="loader-big" />
+			)}
 			<MessageForm socket={socket} adventureId={adventureId} user={user} />
 		</main>
 	);

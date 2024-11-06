@@ -1,0 +1,8 @@
+.home-foot {
+    position: relative;
+    top: var(--page-head-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--standard-gap);
+}

@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 export const AdventuresContext = createContext();
 
 export const AdventuresProvider = ({ children }) => {
-	const [adventures, setAdventures] = useState([]);
+	const [adventures, setAdventures] = useState(null);
 	const [selectedAdventure, setSelectedAdventure] = useState(null);
 	const [resInfos, setResInfos] =useState([]);
 	const [user, setUser] = useState(null);
