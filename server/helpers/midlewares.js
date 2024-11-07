@@ -6,9 +6,6 @@ const hasToken = (req, res, next) => {
     try {
         const accessToken = req.headers.authorization;
         const refreshToken = req.cookies.refreshToken;
-        console.log("accessToken: ", accessToken);
-        console.log("refreshToken ", refreshToken);
-        console.log("req.cookies: ", req.cookies);
         if (!accessToken || !refreshToken) return res.status(401).json({ message: "You need to be logged in" });
         next();
     } catch (error) {
