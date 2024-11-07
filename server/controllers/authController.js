@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
             httpOnly: true,
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 7 days
-            sameSite: 'Strict'
+            sameSite: 'None'    //It was 'Strict' before
         }).json({ accessToken });
     } else {
         res.status(401).json({ message: "Invalid password" })
@@ -71,7 +71,7 @@ const logoutUser = async (req, res) => {
         httpOnly: true,
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 7 days
-        sameSite: 'Strict'
+        sameSite: 'None'    //It was 'Strict' before
     }).send();
 }
 
