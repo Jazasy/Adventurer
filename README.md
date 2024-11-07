@@ -1,1 +1,1 @@
-https://adventurer-g6jg.onrender.com
+https://adventurer-g6jg.onrender.com/home
