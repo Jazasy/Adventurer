@@ -10,7 +10,7 @@ import MessageHead from "../components/MessageHead/MessageHead";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
 
-const socket = io.connect(import.meta.env.VITE_SERVER_URL);
+const socket = io(import.meta.env.VITE_SERVER_URL, {withCredentials: true});
 
 export default function Message({ adventureId, className }) {
 	const { user } = useAdventures();
