@@ -1,4 +1,4 @@
-https://project-adventurer.onrender.com/home
+https://www.project-adventurer.xyz/home
 (first load might take longer time)
 
 Welcome to Adventurer
